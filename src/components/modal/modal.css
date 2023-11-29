@@ -1,0 +1,31 @@
+.modal-background {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vw;
+  padding-top: 100px;
+  -webkit-transition: 0.5s;
+  overflow: auto;
+  transition: all 0.3s linear;
+  background-color: rbga(0, 0, 0, 0.9);
+}
+
+.modal-body {
+  margin: auto;
+  padding: 20px;
+  border-radius: 30px;
+  max-width: 350px;
+  height: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-form-container {
+  height: 100%;
+  width: 100%;
+}/*# sourceMappingURL=modal.css.map */

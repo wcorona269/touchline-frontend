@@ -1,0 +1,203 @@
+.league-home-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 60vw;
+}
+
+.league-home-dashboard {
+  margin-top: 1rem;
+}
+
+.home-paper th {
+  padding: 0.1rem;
+}
+.home-paper th:first-child {
+  padding-left: 1rem;
+}
+
+.league-home-dashboard > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.home-paper {
+  border-radius: 0.5rem !important;
+  margin-bottom: 1rem;
+  transition: height 0.5s ease-in-out;
+}
+
+.home-paper > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-paper ul {
+  margin-bottom: 1rem;
+}
+
+.home-fixture-li-container {
+  border-bottom: 2px solid var(--gray);
+}
+
+.home-fixture-li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.home-fixture-li > div {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-fixture-li p {
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100% !important;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-family: "Ubuntu", sans-serif !important;
+}
+
+.home-fixture-li img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.home-paper .new-date-heading {
+  padding: 0.1rem;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0px;
+}
+.home-paper .new-date-heading:first-child {
+  margin-top: 0;
+}
+
+.home-fixture-li #time-element {
+  color: var(--darkgray);
+  font-family: "Ubuntu", sans-serif;
+}
+
+#sticky-paper {
+  position: sticky !important;
+  display: block;
+  top: 4rem !important;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 40rem;
+  overflow: hidden;
+}
+
+.home-fixture-li #goal-display {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+}
+
+#league-home-news ul {
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 80vw;
+  overflow: hidden;
+}
+
+#league-home-news img {
+  display: flex;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+}
+
+.news-item-title {
+  display: flex;
+  align-items: center;
+}
+
+.news-item-title h6 {
+  line-height: 1.25 !important;
+  font-family: "Ubuntu", sans-serif !important;
+}
+
+.league-home-news-item {
+  border-bottom: 2px solid var(--gray);
+}
+
+.league-home-news-item > div {
+  height: 6rem;
+}
+
+#league-home-news a {
+  text-decoration: none !important;
+  z-index: 100;
+}
+#league-home-news a:hover {
+  text-decoration: underline;
+}
+
+#league-home-table {
+  height: -moz-fit-content;
+  height: fit-content;
+  transition: height 0.3s ease-in-out;
+}
+
+#league-home-table img {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 2px;
+}
+
+#league-home-table table {
+  width: 90%;
+}
+
+#league-home-table #team-name {
+  font-family: "Ubuntu", sans-serif !important;
+  width: 180px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#league-home-table .show-more-button {
+  width: 100%;
+  color: var(--darkgray);
+}
+
+.league-home-stats-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: sticky;
+  top: 4rem !important;
+}
+
+.league-home-stats-column > div:last-child {
+  margin-top: 0px;
+}
+
+#league-home-fixture-ul {
+  overflow: scroll;
+  max-height: 100%;
+}
+
+#league-home-fixture-ul a {
+  text-decoration: none;
+}
+#league-home-fixture-ul a:hover {
+  text-decoration: underline;
+}/*# sourceMappingURL=league-home.css.map */

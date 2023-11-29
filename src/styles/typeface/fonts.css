@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Ubuntu";
+  /* Give your font a name */
+  src: url("./Ubuntu/Ubuntu-Regular.ttf") format("truetype");
+  /* Add other font formats here if needed */
+}
+@font-face {
+  font-family: "Ubuntu-Bold";
+  /* Give your font a name */
+  src: url("./Ubuntu/Ubuntu-Bold.ttf") format("truetype");
+  /* Add other font formats here if needed */
+}
+@font-face {
+  font-family: "Ubuntu-Regular";
+  /* Give your font a name */
+  src: url("./Ubuntu/Ubuntu-Regular.ttf") format("truetype");
+  /* Add other font formats here if needed */
+}
+@font-face {
+  font-family: "Ubuntu-Light";
+  /* Give your font a name */
+  src: url("./Ubuntu/Ubuntu-Light.ttf") format("truetype");
+  /* Add other font formats here if needed */
+}
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.inner-body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+button {
+  font-family: "Ubuntu-Bold", sans-serif;
+}/*# sourceMappingURL=fonts.css.map */
