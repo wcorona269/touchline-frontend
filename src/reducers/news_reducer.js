@@ -22,10 +22,11 @@ const newsReducer = (state = initialState, action) => {
 		case FETCH_NEWS_SUCCESS:
 			return { ...nextState, news: action.payload, isLoading: false, error: null };
 		case FETCH_TOP_STORIES_SUCCESS:
-			return { ...nextState, top_stories: action.payload, isLoading: false, error: null }
+			return { ...nextState, top_stories: action.payload['news'], isLoading: false, error: null }
 		case FETCH_NEWS_FAILURE:
-		case FETCH_TOP_STORIES_FAILURE:
 			return { ...nextState, isLoading: false, error: action.payload };
+		case FETCH_TOP_STORIES_FAILURE:
+			return { ...nextState, isLoading: false, error: action.payload['error'] };
 		default:
 			return nextState;
 	}

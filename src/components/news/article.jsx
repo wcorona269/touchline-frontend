@@ -10,12 +10,13 @@ const Article = ({article, idx}) => {
 			<ListItemButton
 				sx={{height: 125}}
 				component="a"  // Set the component prop to 'a' to make it act like an anchor tag
-				href={`https://${article.link}`} // Specify the URL of the article
+				// href={`https://${article.link}`} // URL for when using 'get_news' in backend
+				href={`${article.link}`} // URL for using 'search' in backend
 				target="_blank" // Open the link in a new tab
 				rel="noopener noreferrer" // Recommended for security to add rel attribute
 			>
 				<Grid container>
-					<Grid item xs={9}>
+					<Grid item xs={12}>
 						<Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
 							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
 								{article.media}
@@ -28,9 +29,9 @@ const Article = ({article, idx}) => {
 							</Typography>
 						</Box>
 					</Grid>
-					<Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+					{/* <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 						<img alt='' src={article.img} style={{ width: '60%', margin: 'auto' }} />
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</ListItemButton>
 		</ListItem>

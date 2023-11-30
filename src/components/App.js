@@ -19,7 +19,7 @@ import MatchShowPage from './match/match-show-page';
 import { createTheme, ThemeProvider, Container, Box } from '@mui/material';
 import Notifications from './home/home-notifications';
 import PostsTimeline from './home/posts-column';
-import HomeNews from './home/home-news';
+import NewsIndex from './home/home-news';
 import PostShowPage from './post/post-show-page';
 import UserShowPage from './user/user-show-page';
 import UserUpdatePage from './user/user-update-page';
@@ -65,7 +65,7 @@ function App() {
               <Route path='/notifications' element={<Notifications/>} />
               <Route path='/matches' element={<MatchFeed/>} />
               <Route path='/explore' element={<LeagueIndex/>} />
-              <Route path='/news' element={<HomeNews/>} />
+              <Route path='/news' element={<NewsIndex/>} />
               <Route path='/match/:id' element={<MatchShowPage/>} />
               <Route path='/user/:username' element={<UserShowPage/>}/>
               <Route path='/club/:id' element={<ClubShowPage/>} />

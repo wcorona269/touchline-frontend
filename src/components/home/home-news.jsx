@@ -9,7 +9,7 @@ import HomeFixturesColumn from './home-fixtures-column';
 import Article from '../news/article';
 import Title from '../util/title-util';
 
-const HomeNews = () => {
+const NewsIndex = () => {
 	const dispatch = useDispatch();
 	const news = useSelector(state => state.news?.news || []);
 	const favorites = useSelector(state => state.favorites?.favorites) || [];
@@ -90,4 +90,4 @@ const HomeNews = () => {
 	)
 	}
 
-export default HomeNews;
+export default NewsIndex;
