@@ -29,7 +29,11 @@ const LeagueShowPage = () => {
 	const fixtures = leagues['fixtures'];
 	const news = leagues['news'];
 
-	fixtures?.sort((a, b) => new Date(a.fixture.date) - new Date(b.fixture.date))
+	fixtures?.sort((a, b) => {
+		const dateA = new Date(a?.fixture?.date ?? 0);
+		const dateB = new Date(b?.fixture?.date ?? 0);
+		return dateA - dateB;
+	});
 	const uniqueDates = [...new Set(fixtures?.map(fixture => fixture.fixture.date.split('T')[0]))];
 
 	useEffect(() => {
