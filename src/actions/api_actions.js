@@ -1,5 +1,4 @@
 // Action creators for making backend calls to the API-football API from API-Sports.
-
 import axiosInstance from './axios_instance.js';
 
 // Action types
