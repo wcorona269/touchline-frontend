@@ -5,10 +5,9 @@ import LoadingMessage from '../util/loading/loading-screen';
 import { fetchMatches } from '../../actions/api_actions';
 import NoDataMessage from '../util/no-data/no-data-message';
 import { Grid } from '@mui/material';
-import HomeFixturesColumn from '../home/home-fixtures-column';
 import TopStories from '../home/top-stories';
 
-const MatchFeedContainer = ({apiKey}) => {
+const MatchFeedContainer = () => {
 	const dispatch = useDispatch();
 	const matches = useSelector(state => state.matches.matches);
 	const competitions = new Set();

@@ -10,10 +10,10 @@ const HomeFixturesColumn = () => {
 	const matches = useSelector(state => state.matches?.live);
 	const isLoading = useSelector(state => state.matches.isLoading);
 	useEffect(() => {
-		if (!isLoading && !matches) {
+		if (!matches && !isLoading) {
 			dispatch(fetchLiveMatches())
 		}
-	}, [matches, isLoading])
+	}, [])
 
 	return (
 		<Paper elevation={1} id='home-fixtures-paper' sx={{position: 'sticky !important', top: '2rem !important'}}>

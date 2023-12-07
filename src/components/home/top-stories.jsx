@@ -28,7 +28,7 @@ const TopStories = () => {
 			let title = story.title;
 			let title_words = title.split(' ')
 			if (title_words.length > 10) {
-				title = title_words.slice(0, 10).join(' ') + ' ...'
+				title = title_words.slice(0, 9).join(' ') + ' ...'
 			}
 			if (result.length > 5) break;
 			result.push(
@@ -42,7 +42,7 @@ const TopStories = () => {
 							rel="noopener noreferrer"
 						>
 							<Box sx={{display: 'flex', flexDirection: 'column', gap: 1, justifyContent: 'center'}}>
-								<Typography underline='hover' sx={{fontSize: 14, lineHeight: '1.2', color: theme.palette.primary.main }}>
+								<Typography underline='hover' sx={{ fontFamily: theme.typography.bold, fontSize: 13, lineHeight: '1.2', color: theme.palette.primary.main }}>
 									{title}
 								</Typography>
 								<Typography sx={{color: theme.palette.text.secondary, fontSize: 10}} variant='caption'>

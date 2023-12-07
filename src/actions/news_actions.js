@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from './axios_instance.js';
 
 // Action types
 // Fetch news
@@ -10,7 +10,7 @@ export const FETCH_NEWS_FAILURE = 'FETCH_NEWS_FAILURE';
 export const fetchNews = (favorites) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_NEWS_REQUEST });
-		return axios.post (`/news/all`, { favNames: favorites })
+		return axiosInstance.post (`/news/all`, { favNames: favorites })
 		.then((response) => {
 			dispatch({ type: FETCH_NEWS_SUCCESS, payload: response.data });
 		})
@@ -29,7 +29,7 @@ export const FETCH_TOP_STORIES_FAILURE = 'FETCH_TOP_STORIES_FAILURE';
 export const fetchTopStories = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_TOP_STORIES_REQUEST });
-		return axios.post(`/news/top`)
+		return axiosInstance.post(`/news/top`)
 		.then((response) => {
 			dispatch({ type: FETCH_TOP_STORIES_SUCCESS, payload: response.data });
 		})

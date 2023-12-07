@@ -20,7 +20,7 @@ const newsReducer = (state = initialState, action) => {
 		case FETCH_TOP_STORIES_REQUEST:
 			return { ...nextState, isLoading: true, error: null };
 		case FETCH_NEWS_SUCCESS:
-			return { ...nextState, news: action.payload, isLoading: false, error: null };
+			return { ...nextState, news: action.payload['news'], isLoading: false, error: null };
 		case FETCH_TOP_STORIES_SUCCESS:
 			return { ...nextState, top_stories: action.payload['news'], isLoading: false, error: null }
 		case FETCH_NEWS_FAILURE:

@@ -1,6 +1,6 @@
 // Action creators for making backend calls to the API-football API from API-Sports.
 
-import axios from 'axios';
+import axiosInstance from './axios_instance.js';
 
 // Action types
 
@@ -37,7 +37,7 @@ export const FETCH_PLAYER_FAILURE = 'FETCH_PLAYER_FAILURE';
 export const fetchMatch = (matchId) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_MATCH_REQUEST });
-		return axios.get(`/match/${matchId}`)
+		return axiosInstance.get(`/match/${matchId}`)
 			.then((response) => {
 				dispatch({ type: FETCH_MATCH_SUCCESS, payload: response.data });
 			})
@@ -50,7 +50,7 @@ export const fetchMatch = (matchId) => {
 export const fetchMatches = (date) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_MATCHES_REQUEST });
-		return axios.get(`/matches/${date}`)
+		return axiosInstance.get(`/matches/${date}`)
 		.then((response) => {
 			dispatch({ type: FETCH_MATCHES_SUCCESS, payload: response.data })
 		})
@@ -69,7 +69,7 @@ export const FETCH_LIVE_MATCHES_FAILURE = 'FETCH_LIVE_MATCHES_FAILURE';
 export const fetchLiveMatches = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_LIVE_MATCHES_REQUEST });
-		return axios.get(`/matches/live`)
+		return axiosInstance.get(`/matches/live`)
 			.then((response) => {
 				dispatch({ type: FETCH_LIVE_MATCHES_SUCCESS, payload: response.data })
 			})
@@ -87,7 +87,7 @@ export const FETCH_LEAGUES_INDEX_FAILURE = 'FETCH_LEAGUES_INDEX_FAILURE'
 export const fetchLeaguesIndex = (leagueId, season) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_LEAGUES_INDEX_REQUEST });
-		return axios.get(`/leagues/index`)
+		return axiosInstance.get(`/leagues/index`)
 		.then((response) => {
 			dispatch({ type: FETCH_LEAGUES_INDEX_SUCCESS, payload: response.data })
 		})
@@ -100,7 +100,7 @@ export const fetchLeaguesIndex = (leagueId, season) => {
 export const fetchCompetition = (leagueId, season) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_LEAGUE_REQUEST });
-		return axios.get(`/leagues/${leagueId}/${season}`)
+		return axiosInstance.get(`/leagues/${leagueId}/${season}`)
 		.then((response) => {
 			dispatch({ type: FETCH_LEAGUE_SUCCESS, payload: response.data })
 		})
@@ -120,7 +120,7 @@ export const removeCompetition = () => {
 export const fetchClub = (clubId, season) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_CLUB_REQUEST });
-		return axios.get(`/clubs/info/${clubId}/${season}`)
+		return axiosInstance.get(`/clubs/info/${clubId}/${season}`)
 		.then((response) => {
 			dispatch({ type: FETCH_CLUB_SUCCESS, payload: response.data })
 		})
@@ -141,7 +141,7 @@ export const removeClub = () => {
 export const fetchPlayer = (playerId) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_PLAYER_REQUEST });
-		return axios.get(`/players/${playerId}`)
+		return axiosInstance.get(`/players/${playerId}`)
 		.then((response) => {
 			dispatch({ type: FETCH_PLAYER_SUCCESS, payload: response.data })
 		})

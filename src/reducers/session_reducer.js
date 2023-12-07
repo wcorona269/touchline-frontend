@@ -29,10 +29,11 @@ const sessionReducer = (state = initialState, action) => {
 		case FETCH_USER_SUCCESS:
 			return { ...nextState, user: action.payload['user'], isLoading: false, error: null };
 		case LOGIN_USER_SUCCESS:
-			return { ...nextState, user: action.payload, isLoading: false, error: null };
+			return { ...nextState, user: action.payload['user'], isLoading: false, error: null };
 		case LOGOUT_USER_SUCCESS:
 			return { ...nextState, user: null, isLoading: false, error: null };
 		case FETCH_USER_FAILURE:
+			return { ...nextState, isLoading: false, error: action.payload };
 		case LOGIN_USER_FAILURE:
 		case LOGOUT_USER_FAILURE:
 			return { ...nextState, isLoading: false, error: action.payload };

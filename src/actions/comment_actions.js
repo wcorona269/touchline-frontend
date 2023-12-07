@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from './axios_instance.js'
 
 // create comment
 export const CREATE_COMMENT_REQUEST = 'CREATE_COMMENT_REQUEST'
@@ -8,7 +8,7 @@ export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS'
 export const createComment = (commentData) => {
 	return (dispatch) => {
 		dispatch({ type: CREATE_COMMENT_REQUEST });
-		return axios.post('/comments/create', commentData)  // Assuming your backend endpoint for creating posts is '/posts/create'
+		return axiosInstance.post('/comments/create', commentData)  // Assuming your backend endpoint for creating posts is '/posts/create'
 			.then((response) => {
 				dispatch({ type: CREATE_COMMENT_SUCCESS, payload: response.data });
 			})
@@ -26,7 +26,7 @@ export const CREATE_COMMENT_LIKE_FAILURE = 'CREATE_COMMENT_LIKE_FAILURE';
 export const createCommentLike = (likeData) => {
 	return (dispatch) => {
 		dispatch({ type: CREATE_COMMENT_LIKE_REQUEST });
-		return axios.post('/likes/create', likeData)
+		return axiosInstance.post('/likes/create', likeData)
 			.then((response) => {
 				dispatch({ type: CREATE_COMMENT_LIKE_SUCCESS, payload: response.data });
 			})

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from './axios_instance.js';
 import { loginUser } from './session_actions';
 import { closeModal } from './modal_actions';
 
@@ -16,7 +16,7 @@ export const removeUserErrors = () => ({
 export const registerUser = (userData) => {
 	return (dispatch) => {
 		dispatch({ type: REGISTER_USER_REQUEST });
-		return axios.post('/auth/register', userData)
+		return axiosInstance.post('/auth/register', userData)
 			.then((response) => {
 				dispatch({ type: REGISTER_USER_SUCCESS, payload: response.data });
 				// Login user after successful registration
@@ -37,7 +37,7 @@ export const FETCH_USER_INFO_FAILURE = 'FETCH_USER_INFO_FAILURE';
 export const fetchUserInfo = (username) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_USER_INFO_REQUEST });
-		axios.get(`/users/info/${username}`)
+		axiosInstance.get(`/users/info/${username}`)
 			.then((response) => {
 				dispatch({ type: FETCH_USER_INFO_SUCCESS, payload: response.data });
 			})
@@ -54,7 +54,7 @@ export const UPDATE_AVATAR_FAILURE = 'UPDATE_AVATAR_FAILURE'
 export const updateAvatar = (username, formData) => {
   return (dispatch) => {
     dispatch({ type: UPDATE_AVATAR_REQUEST });
-    axios.post(`/users/update-avatar/${username}`, formData, {
+    axiosInstance.post(`/users/update-avatar/${username}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -10,7 +10,6 @@ import Footer from './footer/footer'
 import ModalContainer from './modal/modal';
 import Welcome from './home/welcome'
 import LeagueIndex from './home/league-index';
-import axios from 'axios'
 import MatchFeed from './matches/match-feed';
 import ClubShowPage from './club/club-show-page';
 import LeagueShowPage from './league/league-show-page';
@@ -19,7 +18,7 @@ import MatchShowPage from './match/match-show-page';
 import { createTheme, ThemeProvider, Container, Box } from '@mui/material';
 import Notifications from './home/home-notifications';
 import PostsTimeline from './home/posts-column';
-import NewsIndex from './home/home-news';
+import NewsIndex from './home/news-index';
 import PostShowPage from './post/post-show-page';
 import UserShowPage from './user/user-show-page';
 import UserUpdatePage from './user/user-update-page';

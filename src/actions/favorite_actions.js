@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from './axios_instance.js'
 
 // Fetch favorites for current user
 export const FETCH_FAVORITES_REQUEST = 'FETCH_FAVORITES_REQUEST'
@@ -8,7 +8,7 @@ export const FETCH_FAVORITES_FAILURE = 'FETCH_FAVORITES_FAILURE'
 export const fetchFavorites = (userId) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_FAVORITES_REQUEST });
-		axios.get(`/favorite/fetch/${userId}`)
+		axiosInstance.get(`/favorite/fetch/${userId}`)
 			.then((response) => {
 				dispatch({ type: FETCH_FAVORITES_SUCCESS, payload: response.data })
 			})
@@ -26,7 +26,7 @@ export const CREATE_FAVORITE_FAILURE = 'CREATE_FAVORITE_FAILURE';
 export const createFavorite = (favInfo) => {
 	return (dispatch) => {
 		dispatch({ type: CREATE_FAVORITE_REQUEST, favInfo: favInfo });
-		axios.post(`/favorite/create`, favInfo)
+		axiosInstance.post(`/favorite/create`, favInfo)
 			.then((response) => {
 				dispatch({ type: CREATE_FAVORITE_SUCCESS, payload: response.data });
 			})
@@ -44,7 +44,7 @@ export const DELETE_FAVORITE_FAILURE = 'DELETE_FAVORITE_FAILURE';
 export const deleteFavorite = (favId) => {
 	return (dispatch) => {
 		dispatch({ type: DELETE_FAVORITE_REQUEST, favId: favId });
-		axios.delete(`/favorite/delete/${favId}`)
+		axiosInstance.delete(`/favorite/delete/${favId}`)
 			.then((response) => {
 				dispatch({ type: DELETE_FAVORITE_SUCCESS, payload: response.data });
 			})
