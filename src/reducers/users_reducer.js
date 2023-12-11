@@ -7,7 +7,8 @@ import {
 	FETCH_USER_INFO_REQUEST,
 	FETCH_USER_INFO_SUCCESS,
 	UPDATE_AVATAR_REQUEST,
-	UPDATE_AVATAR_SUCCESS
+	UPDATE_AVATAR_SUCCESS,
+	UPDATE_AVATAR_FAILURE
 } from '../actions/user_actions';
 
 const initialState = {
@@ -28,14 +29,19 @@ const usersReducer = (state = initialState, action) => {
 			return { ...nextState, isLoading: false, error: null };
 		case REGISTER_USER_FAILURE:
 		case FETCH_USER_INFO_FAILURE:
+		case UPDATE_AVATAR_FAILURE:
 			return { ...nextState, isLoading: false, error: action.payload };
 		case REMOVE_USER_ERRORS:
 			return { ...nextState, isLoading: false, error: null };
 		case FETCH_USER_INFO_REQUEST:
 			return { ...nextState, isLoading: true, error: null };
 		case FETCH_USER_INFO_SUCCESS:
-		case UPDATE_AVATAR_SUCCESS:
 			return { ...nextState, isLoading: false, users: action.payload }; 
+		case UPDATE_AVATAR_SUCCESS:
+			return { ...nextState, isLoading: false, users: {
+				...nextState['users'],
+				user: action.payload['user_info']
+			}};
 		default:
 			return nextState;
 	}

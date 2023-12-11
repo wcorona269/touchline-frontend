@@ -18,7 +18,6 @@ const UploadPhoto = () => {
 			formData.append('file', file)
 			if (idx === 0) {
 				dispatch(updateAvatar(username, formData))
-				window.location.reload()
 			}
 		});
 	};
