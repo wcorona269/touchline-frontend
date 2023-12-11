@@ -1,4 +1,4 @@
-import { Box, Divider, Link, List, ListItem, ListItemButton, Paper, Typography, useTheme } from '@mui/material';
+import { Box, Divider, Link, List, ListItem, ListItemButton, Paper, Skeleton, Typography, useTheme } from '@mui/material';
 import React, { useEffect } from 'react'
 import Title from '../util/title-util';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,37 +21,45 @@ const TopStories = () => {
 	const displayTopStories = () => {
 		let result = [];
 		
-
-		if (!top_stories.length) return result;
-		for (let i = 0; i < top_stories.length; i++) {
-			const story = top_stories[i];
-			let title = story.title;
-			let title_words = title.split(' ')
-			if (title_words.length > 10) {
-				title = title_words.slice(0, 9).join(' ') + ' ...'
+		for (let i = 0; i < 5; i++) {
+			const story = top_stories?.[i] ?? undefined
+			const story_list_item = [];
+			debugger;
+			if (story === undefined) {
+				story_list_item.push(
+					<Skeleton height={75} width={"100%"}/>
+				)
+			} else {
+				let title = story?.title;
+				let title_words = title.split(' ')
+				if (title_words.length > 10) {
+					title = title_words.slice(0, 9).join(' ') + ' ...'
+				}
+				story_list_item.push(
+					<Box sx={{display: 'flex', flexDirection: 'column', gap: 1, justifyContent: 'center'}}>
+						<Typography underline='hover' sx={{ fontFamily: theme.typography.bold, fontSize: 13, lineHeight: '1.2', color: theme.palette.primary.main }}>
+							{title}
+						</Typography>
+						<Typography sx={{color: theme.palette.text.secondary, fontSize: 10}} variant='caption'>
+							{story.media}
+						</Typography>
+					</Box>
+				)
 			}
-			if (result.length > 5) break;
 			result.push(
 				<>
 					<ListItem disablePadding key={i}>
 						<ListItemButton
 							sx={{ m: 0, maxHeight: 75 }}
 							component='a'
-							href={`https://${story.link}`} 
-							target="_blank" 
+							href={`https://${story?.link}`}
+							target="_blank"
 							rel="noopener noreferrer"
 						>
-							<Box sx={{display: 'flex', flexDirection: 'column', gap: 1, justifyContent: 'center'}}>
-								<Typography underline='hover' sx={{ fontFamily: theme.typography.bold, fontSize: 13, lineHeight: '1.2', color: theme.palette.primary.main }}>
-									{title}
-								</Typography>
-								<Typography sx={{color: theme.palette.text.secondary, fontSize: 10}} variant='caption'>
-									{story.media}
-								</Typography>
-							</Box>
+							{story_list_item}
 						</ListItemButton>
 					</ListItem>
-					<Divider/>
+					<Divider />
 				</>
 			)
 		}
