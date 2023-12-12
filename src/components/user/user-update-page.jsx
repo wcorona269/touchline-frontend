@@ -6,7 +6,7 @@ import HomeFixturesColumn from '../home/home-fixtures-column';
 import Title from '../util/title-util';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { updateUser } from '../../actions/session_actions';
+import { updateUser } from '../../actions/user_actions';
 import { useNavigate } from 'react-router-dom';
 
 const UserUpdatePage = () => {

@@ -17,8 +17,8 @@ const LeagueShowPage = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
-	const leagues = useSelector(state => state.leagues);
-	const isLoading = useSelector(state => state.leagues.isLoading);
+	const leagues = useSelector(state => state?.leagues);
+	const isLoading = useSelector(state => state?.leagues?.isLoading !== undefined ? state.leagues.isLoading : false);
 
 	const season = '2023/24';
 	const [selectedTab, setSelectedTab] = useState(0);
@@ -38,7 +38,9 @@ const LeagueShowPage = () => {
 
 	useEffect(() => {
 		let selectedSeason = season.split('/')[0];
-		dispatch(fetchCompetition(id, selectedSeason))
+		if (!isLoading) {
+			dispatch(fetchCompetition(id, selectedSeason))
+		}
 	}, [id]);
 
 	useEffect(() => {

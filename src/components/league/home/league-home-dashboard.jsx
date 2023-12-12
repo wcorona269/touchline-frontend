@@ -1,16 +1,16 @@
 import './league-home.scss'
 import { Grid } from '@mui/material';
 import HomeFixturesComponent from './league-home-fixtures';
-import LeagueHomeNews from './league-home-news';
 import LeagueHomeStats from './league-home-stats';
 import LeagueHomeTable from './league-home-table';
 import React from 'react';
+import NewsIndex from '../../news/news-index';
 
 const LeagueHomeDashboard = ({ name, logo, news, fixtures, uniqueDates, table, top_scorers }) => {
 	return (
 		<Grid container spacing={2}>
 			<Grid item xs={8}>
-				<LeagueHomeNews news={news} table={table} name={name} logo={logo} />
+				<NewsIndex news={news} title={`${name} News`} logo={logo} variant='h6' />
 			</Grid>
 			<Grid item xs>
 				<LeagueHomeTable table={table} />

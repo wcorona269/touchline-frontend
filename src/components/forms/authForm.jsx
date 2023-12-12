@@ -3,22 +3,31 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelIcon from '@mui/icons-material/Cancel';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeSessionErrors } from '../../actions/session_actions';
 
 const AuthForm = ({fields, type, onSubmit}) => {
 	const theme = useTheme();
+	const dispatch = useDispatch();
 	const [formState, setFormState] = useState({});
 	const [isValid, setIsValid] = useState(true);
 	const [errors, setErrors] = useState([]);
-	const flask_errors = useSelector(state => state.session.errors)
+	const flask_error = useSelector(state => state.session.error);
 	const [showPassword, setShowPassword] = React.useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
-	const handleChange = (e) => {
+	const handleChange = (e) => {		
 		const { name, value } = e.target;
 		setFormState((prevState) => ({ ...prevState, [ name ]: value }));
 	}
+
+	useEffect(() => {
+		console.log(flask_error)
+		if (!!flask_error) {
+			dispatch(removeSessionErrors())
+		}
+	}, [formState])
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -71,7 +80,6 @@ const AuthForm = ({fields, type, onSubmit}) => {
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
-	console.log(formState)
 
 	return (
 		<form onSubmit={handleSubmit} style={{width: 'fit-content', display: 'flex', flexDirection: 'column', gap: 15}} >
@@ -153,6 +161,13 @@ const AuthForm = ({fields, type, onSubmit}) => {
 				</Typography>
 			))}	
 		</Box>
+		{flask_error &&
+			<Box className='auth-error-message'>
+				<Typography variant='body2' sx={{ width: 250, color: theme.palette.error.main, typography: theme.typography.bold }} key={'error'}>
+					{flask_error}
+				</Typography>
+			</Box>
+		}
 		<Button
 			sx={{width: '100%'}}
 			variant='contained'

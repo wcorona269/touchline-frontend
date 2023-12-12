@@ -13,7 +13,7 @@ const LoginForm = (props) => {
 	const fields = ['username', 'password'];
 
 	const onSubmit = (formData) => {
-		dispatch(loginUser(formData)).then(() => {navigate('/home')})
+		dispatch(loginUser(formData))
 	}
 
 	const changeFormType = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { setAsRead } from '../../actions/notification_actions';
 import { Avatar, ListItem, ListItemAvatar, ListItemButton, Typography, useTheme } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,6 @@ const NotificationContainer = ({notif, idx}) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const theme = useTheme();
-	const [isRead, setIsRead] = useState(notif.read);
 
 	const determineMessage = (notification) => {
 		switch (notification.target_type) {
@@ -26,17 +25,16 @@ const NotificationContainer = ({notif, idx}) => {
 	}
 
 	const handleClick = () => {
-		if (isRead === false) {
-			dispatch(setAsRead(notif.id))
-			setIsRead(true);
+		if (notif?.read === false) {
+			dispatch(setAsRead(notif?.id))
 		}
-		if (notif.target_type === 'post_like' || notif.target_type === 'post_comment' || notif.target_type === 'repost') {
-			navigate(`/post/${notif.target_id}`)
+		if (notif?.target_type === 'post_like' || notif?.target_type === 'post_comment' || notif?.target_type === 'repost') {
+			navigate(`/post/${notif?.target_id}`)
 		}
 	}
 
 	return (
-		<ListItem disablePadding divider alignItems='flex-start' key={idx} sx={{ backgroundColor: isRead ? '' : theme.palette.action.hover }} onClick={handleClick}>
+		<ListItem disablePadding divider alignItems='flex-start' key={idx} sx={{ backgroundColor: notif?.read ? '' : theme.palette.action.hover }} onClick={handleClick}>
 			<ListItemButton  >
 				<ListItemAvatar>
 					<Avatar>

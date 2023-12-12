@@ -2,7 +2,8 @@ import { FETCH_STANDINGS_REQUEST, FETCH_STANDINGS_SUCCESS, FETCH_STANDINGS_FAILU
 
 const initialState = {
 	isLoading: false,
-	error: null
+	error: null,
+	standings: null,
 };
 
 const standingsReducer = (state = initialState, action) => {
@@ -14,12 +15,12 @@ const standingsReducer = (state = initialState, action) => {
 		case FETCH_STANDINGS_SUCCESS:
 			return {
 				...nextState,
-				standings: action.payload,
+				standings: action.payload['standings'],
 				isLoading: false,
 				error: null
 			};
 		case FETCH_STANDINGS_FAILURE:
-			return { ...nextState, isLoading: false, error: action.payload };
+			return { ...nextState, isLoading: false, error: action.payload['error'] };
 		default:
 			return nextState;
 	}

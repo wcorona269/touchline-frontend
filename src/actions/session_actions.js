@@ -16,6 +16,32 @@ export const removeSessionErrors = () => ({
 	type: REMOVE_SESSION_ERRORS
 });
 
+// Action types
+export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
+export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
+
+// Action creators
+export const registerUser = (userData) => {
+	return (dispatch) => {
+		dispatch({ type: REGISTER_USER_REQUEST });
+		return axiosInstance.post('/auth/register', userData)
+			.then((response) => {
+				dispatch({ type: REGISTER_USER_SUCCESS, payload: response.data });
+				// Login user after successful registration
+				dispatch(loginUser(userData));
+				dispatch(closeModal());
+			})
+			.catch((error) => {
+				if (!!error?.response?.data?.message) {
+					dispatch({ type: REGISTER_USER_FAILURE, payload: error.response.data.message });
+				} else {
+					dispatch({ type: REGISTER_USER_FAILURE, payload: 'Unknown error, please try again.' });
+				}
+    	});
+	};
+};
+
 // Action creators
 export const loginUser = (userData) => {
 	return (dispatch) => {
@@ -26,11 +52,11 @@ export const loginUser = (userData) => {
 				dispatch(closeModal());
 			})
 			.catch((error) => {
-			if (error.response && error.response.data && error.response.data.message) {
-				dispatch({ type: LOGIN_USER_FAILURE, payload: error.response.data.message });
-			} else {
-				dispatch({ type: LOGIN_USER_FAILURE, payload: error.message });
-		}});
+				if (!!error?.response?.data?.message) {
+					dispatch({ type: LOGIN_USER_FAILURE, payload: error.response.data.message });
+				} else {
+					dispatch({ type: LOGIN_USER_FAILURE, payload: error.message });
+			}});
 	};
 };
 
@@ -46,24 +72,6 @@ export const logoutUser = (data) => {
 			});
 	};
 };
-
-// update User
-export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
-export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
-export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
-
-export const updateUser = (userInfo) => {
-	return (dispatch) => {
-		dispatch({ type: UPDATE_USER_REQUEST, userData: userInfo });
-		axiosInstance.post(`/auth/update`, userInfo)
-			.then((response) => {
-				dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
-			})
-			.catch((error) => {
-				dispatch({ type: UPDATE_USER_FAILURE, payload: error.message });
-			});
-	};
-}
 
 export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';

@@ -14,7 +14,7 @@ import Title from '../util/title-util';
 const ClubShowPage = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const isLoading = useSelector(state => state.club.isLoading);
+	const isLoading = useSelector(state => state?.club?.isLoading !== undefined ? state.leagues.isLoading : false);
 	const [selectedTab, setSelectedTab] = useState(0);
 	const club = useSelector(state => state.club.club);
 	const fixtures = useSelector(state => state.club.fixtures);

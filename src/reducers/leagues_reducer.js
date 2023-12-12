@@ -9,7 +9,7 @@ import {
 
 const initialState = {
 	isLoading: false,
-	error: null,
+	error: null
 };
 
 const leaguesReducer = (state = initialState, action) => {
