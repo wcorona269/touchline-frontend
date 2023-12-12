@@ -1,11 +1,20 @@
 import React, { useEffect } from 'react'
 import {  Typography, Container, useTheme, Divider, Button, Stack } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '../../actions/modal_actions';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const currentUser = useSelector(state => state.session.user)
+
+	useEffect(() => {
+		if (currentUser !== null) {
+			navigate('/home')
+		}
+	}, [currentUser])
 
 	const loginModal = (e) => {
 		dispatch(showModal('login'))

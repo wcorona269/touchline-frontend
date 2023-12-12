@@ -10,7 +10,7 @@ const LoginForm = (props) => {
 	const theme = useTheme();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const fields = ['email', 'password'];
+	const fields = ['username', 'password'];
 
 	const onSubmit = (formData) => {
 		dispatch(loginUser(formData)).then(() => {navigate('/home')})

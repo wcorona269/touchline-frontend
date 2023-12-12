@@ -20,10 +20,10 @@ const NewsIndex = () => {
 	const [isLoadingMore, setIsLoadingMore] = useState(false)
 
 	useEffect(() => {
-		if (articleCount > news.length) {
+		if (!!news.length && articleCount > news.length) {
 			setShowButton(false)
 		}
-	}, [articleCount]);
+	}, [articleCount, news]);
 
 	useEffect(() => {
 		let favNames = favorites.map(favorite => favorite.name)

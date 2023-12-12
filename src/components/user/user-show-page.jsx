@@ -65,7 +65,7 @@ const UserShowPage = () => {
 					isLoading ? 
 						<Skeleton
 							animation="wave"
-							height={100}
+							height={500}
 							width='100%'
 						/>
 						:

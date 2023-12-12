@@ -10,8 +10,8 @@ const Article = ({article, idx}) => {
 			<ListItemButton
 				sx={{height: 125}}
 				component="a"  // Set the component prop to 'a' to make it act like an anchor tag
-				// href={`https://${article.link}`} // URL for when using 'get_news' in backend
-				href={`${article.link}`} // URL for using 'search' in backend
+				href={`https://${article.link}`} // URL for when using 'get_news' in backend
+				// href={`${article.link}`} // URL for using 'search' in backend
 				target="_blank" // Open the link in a new tab
 				rel="noopener noreferrer" // Recommended for security to add rel attribute
 			>

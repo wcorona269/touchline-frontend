@@ -11,7 +11,7 @@ const SignupForm = () => {
 	const currentUser = useSelector(state => state.session.user);
 	const errorMessage = useSelector(state => state.users.error);
 
-	const fields = ['username', 'email', 'password', 'confirmPassword'];
+	const fields = ['username', 'password', 'confirmPassword'];
 	
 	const onSubmit = (formData) => {
 		dispatch(registerUser(formData));

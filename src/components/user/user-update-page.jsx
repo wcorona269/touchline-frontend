@@ -7,39 +7,48 @@ import Title from '../util/title-util';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { updateUser } from '../../actions/session_actions';
+import { useNavigate } from 'react-router-dom';
 
 const UserUpdatePage = () => {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.users.isLoading);
 	const currentUsername = useSelector(state => state.session?.user?.username);
 	const [open, setOpen] = useState(false)
 
 	const [password, setPassword] = useState('');
+	const [bio, setBio] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const isMatching = password === confirmPassword;
-	const isValidLength = password.length > 7;
-	let error_message;
+	const isValidLength = (password.length === 0 || password.length > 7);
+	const isValidBio = bio.length > 0 && bio.length < 200
+	let password_error;
+	let bio_error;
 
-	if (!isValidLength) error_message = 'Password must be at least 8 characters'
-	if (!isMatching) error_message = 'Passwords Must Match';
-	if (isValidLength && isMatching) error_message=''
+	if (!isValidLength) password_error = 'Password must be at least 8 characters'
+	if (!isMatching) password_error = 'Passwords Must Match';
+	if (isValidLength && isMatching) password_error=''
+	!isValidBio ? bio_error = 'Bio must be between 1 and 200 characters' : bio_error = ''
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		if (name === 'password') setPassword(value);
 		if (name === 'confirm') setConfirmPassword(value);
+		if (name === 'bio') setBio(value);
 	}
 
 	const handleSubmit = () => {
 		let userInfo = {
 			'username': currentUsername,
-			'password': password
+			'password': password,
+			'bio': bio
 		}
 		dispatch(updateUser(userInfo));
 		setOpen(true);
+		navigate(`/user/${currentUsername}`)
 	}
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -66,6 +75,19 @@ const UserUpdatePage = () => {
 								<Title variant='h6' content='Edit Profile' />
 								<Box sx={{ p: '1rem' }}>
 									<Stack spacing={2} sx={{paddingTop: 2}}>
+										<InputLabel>Bio (200 characters max)</InputLabel>
+										<OutlinedInput
+											id="outlined-adornment-password"
+											type={'text'}
+											multiline={'true'}
+											minRows={2}
+											name='bio'
+											onChange={handleChange}
+											helperText="Tell users about yourself"
+										/>
+										<Box sx={{ margin: 5, height: 10, color: theme.palette.error.main, fontFamily: theme.typography.bold }}>
+											{bio_error}
+										</Box>
 										<InputLabel>New Password</InputLabel>
 										<OutlinedInput
 											id="outlined-adornment-password"
@@ -109,10 +131,10 @@ const UserUpdatePage = () => {
 											}
 										/>
 										<Box sx={{margin: 5, height: 10, color: theme.palette.error.main, fontFamily: theme.typography.bold }}>
-											{error_message}
+											{password_error}
 										</Box>
-										<Button variant='contained' disabled={!isMatching || !isValidLength} onClick={handleSubmit} >
-											Update Password
+										<Button variant='contained' disabled={!isMatching || !isValidLength || !isValidBio} onClick={handleSubmit} >
+											Update Profile
 										</Button>
 									</Stack>
 								</Box>
@@ -125,7 +147,7 @@ const UserUpdatePage = () => {
 			</Grid>
 			<Snackbar open={open} autoHideDuration={6000}>
 				<Alert severity="success" sx={{ width: '100%' }}>
-					Password updated successfully
+					Info updated successfully
 				</Alert>
 			</Snackbar>
 		</>
