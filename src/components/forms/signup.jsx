@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, removeUserErrors } from '../../actions/user_actions';
 import { showModal, closeModal } from '../../actions/modal_actions';
 import AuthForm from './authForm';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Link, Typography, useTheme } from '@mui/material';
 
 const SignupForm = () => {
 	const dispatch = useDispatch();
@@ -31,9 +31,12 @@ const SignupForm = () => {
 			</Typography>
 			<AuthForm
 				fields={fields}
+				type={'signup'}
 				onSubmit={onSubmit}
 			/>
-			<Typography variant='body2' sx={{ marginTop: 2, color: theme.palette.text.secondary}} onClick={() => changeFormType()}>Already have an account? Log in.</Typography>
+			<Link underline='hover' variant='body2' sx={{ marginTop: 2, color: theme.palette.text.secondary}} onClick={() => changeFormType()}>
+				Already have an account? Log in.
+			</Link>
 		</Box>
 	)
 }

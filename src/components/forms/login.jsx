@@ -4,7 +4,7 @@ import { loginUser } from '../../actions/session_actions';
 import AuthForm from './authForm';
 import { showModal, closeModal } from '../../actions/modal_actions';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Link, Typography, useTheme } from '@mui/material';
 
 const LoginForm = (props) => {
 	const theme = useTheme();
@@ -30,9 +30,12 @@ const LoginForm = (props) => {
 			</Typography>
 			<AuthForm
 				fields={fields}
+				type={'login'}
 				onSubmit={onSubmit}
 			/>
-			<Typography variant='body2' sx={{ marginTop: 2, color: theme.palette.text.secondary }} onClick={() => changeFormType()}>Don't have an account? Sign up.</Typography>
+			<Link underline='hover' variant='body2' sx={{ marginTop: 2, color: theme.palette.text.secondary }} onClick={() => changeFormType()}>
+				Don't have an account? Sign up.
+			</Link>
 		</Box>
 	);
 }
