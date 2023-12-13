@@ -72,7 +72,7 @@ const AboutMenu = ({ lightMode, setLightMode }) => {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				<Paper elevation={10} sx={{padding: 2, maxWidth: 250, height: 'fit-content' }}>
+				<Paper elevation={0} sx={{padding: 2, maxWidth: 250, height: 'fit-content', border: `1px solid ${theme.palette.divider}`}} >
 					<Typography variant='body2' sx={{lineHeight: '1.5'}}>
 						My name is Will Corona and I am a graduate of the full-stack software engineering program at 
 						<span style={{color: theme.palette.error.main, fontFamily: theme.typography.bold, marginLeft: '4px'}}>
