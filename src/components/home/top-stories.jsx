@@ -24,16 +24,19 @@ const TopStories = () => {
 		for (let i = 0; i < 5; i++) {
 			const story = top_stories?.[i] ?? undefined
 			const story_list_item = [];
-			debugger;
 			if (story === undefined) {
 				story_list_item.push(
 					<Skeleton height={75} width={"100%"}/>
 				)
 			} else {
 				let title = story?.title;
-				let title_words = title.split(' ')
-				if (title_words.length > 10) {
+				let error_words = title.split('More')?.[1]
+				let title_words = !!error_words ? error_words.split(' ') : title.split(' ')
+
+				if (title_words?.length && title_words?.length > 10) {
 					title = title_words.slice(0, 9).join(' ') + ' ...'
+				} else {
+					title = title_words.join(' ')
 				}
 				story_list_item.push(
 					<Box sx={{display: 'flex', flexDirection: 'column', gap: 1, justifyContent: 'center'}}>

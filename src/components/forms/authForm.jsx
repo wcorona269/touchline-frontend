@@ -23,7 +23,6 @@ const AuthForm = ({fields, type, onSubmit}) => {
 	}
 
 	useEffect(() => {
-		console.log(flask_error)
 		if (!!flask_error) {
 			dispatch(removeSessionErrors())
 		}

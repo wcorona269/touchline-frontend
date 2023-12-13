@@ -55,7 +55,6 @@ export const fetchUserPosts = (userId) => {
 	}
 }
 
-
 // create post
 export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST';
 export const CREATE_POST_FAILURE = 'CREATE_POST_FAILURE';
@@ -63,6 +62,7 @@ export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 
 export const createPost = (postData) => {
 	return (dispatch) => {
+		debugger;
 		dispatch({ type: CREATE_POST_REQUEST });
 		return axiosInstance.post('/posts/create', postData)
 			.then((response) => {
@@ -136,7 +136,6 @@ export const createRepost = (repostData) => {
 	};
 }
 
-
 // delete repost
 export const DELETE_REPOST_REQUEST = 'DELETE_REPOST_REQUEST'
 export const DELETE_REPOST_SUCCESS =  'DELETE_REPOST_SUCCESS'
@@ -156,7 +155,6 @@ export const deleteRepost = (repostData) => {
 			});
 	};
 }
-
 
 // delete repost
 export const FETCH_ALL_REPOSTS_REQUEST = 'FETCH_ALL_REPOSTS_REQUEST';

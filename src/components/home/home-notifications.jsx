@@ -8,23 +8,10 @@ import NotificationContainer from './home-notification-container';
 
 const Notifications = () => {
 	const theme = useTheme();
-	const [unreadCount, setUnreadCount] = useState();
 	const notifications = useSelector(state => state.notifications?.notifications)
 	const isLoading = useSelector(state => state.notifications?.isLoading)
-
-	useEffect(() => {
-		let count = 0;
-		if (!notifications || typeof notifications !== 'object') return;
-		let notifs = Object.values(notifications)
-		if (notifications) {
-			for (let notif of notifs) {
-				if (notif.read === false) count += 1;
-			}
-		}
-		setUnreadCount(count)
-	}, [notifications])
-
-	useEffect(() => {}, [notifications, isLoading, unreadCount])
+	useEffect(() => {}, [notifications, isLoading])
+	
 	const noNotifsMessage = (
 		<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 			<Typography variant='h6' sx={{ margin: 'auto', marginTop: '5rem', textAlign: 'center', height: '100%', color: theme.palette.text.disabled }}>

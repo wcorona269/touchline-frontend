@@ -5,6 +5,11 @@ import { ListItem, ListItemButton, Grid, Box, Typography } from '@mui/material';
 const Article = ({article, idx}) => {
 	const theme = useTheme()
 	
+	const displayTitle = (title) => {
+		let error_words = title.split('More')?.[1]
+		return !!error_words ? error_words : title
+	}
+
 	return (
 		<ListItem divider disablePadding key={idx}>
 			<ListItemButton
@@ -22,7 +27,7 @@ const Article = ({article, idx}) => {
 								{article.media}
 							</Typography>
 							<Typography variant='subtitle1' className='home-article-title'>
-								{article.title}
+								{displayTitle(article.title)}
 							</Typography>
 							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
 								{article.date}

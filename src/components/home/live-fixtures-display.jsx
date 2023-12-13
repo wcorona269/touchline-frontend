@@ -1,6 +1,7 @@
 import { Box, Grid, List, ListItem, ListItemButton, Typography, useTheme } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+export const top_leagues = new Set([1, 2, 3, 4, 5, 9, 15, 17, 39, 45, 48, 140, 143, 78, 529, 81, 61, 66, 94, 135, 137, 253, 257])
 
 const LiveFixturesDisplay = ({ matches }) => {
 	const theme = useTheme();
@@ -57,7 +58,6 @@ const LiveFixturesDisplay = ({ matches }) => {
 		);
 	}
 
-
 	const displayLiveMatches = (matches) => {
 		if (!matches?.length) return (
 			<Typography align='center' variant='subtitle1' sx={{ p: 2, color: theme.palette.text.disabled}}>
@@ -79,16 +79,27 @@ const LiveFixturesDisplay = ({ matches }) => {
 
 		for (let competition in matchesByCompetition) {
 			let competitionMatches = [];
+			let competition_id;
 			for (let match of matchesByCompetition[competition]) {
+				if (competition_id === undefined) competition_id = match?.league?.id;
 				competitionMatches.push(
 					displayMatch(match)
 				)
 			}
-			result.push(
-		 		<List sx={{padding: '0px'}} key={competition}>
-					{competitionMatches}
-				</List>
-			)
+
+			if (top_leagues.has(competition_id)) {
+				result.unshift(
+					 <List sx={{padding: '0px'}} key={competition}>
+						{competitionMatches}
+					</List>
+				)
+			} else {
+				result.push(
+					 <List sx={{padding: '0px'}} key={competition}>
+						{competitionMatches}
+					</List>
+				)
+			}
 		}
 		return result;
 	}
