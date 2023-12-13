@@ -14,39 +14,36 @@ const UserShowPage = () => {
 	const { username } = useParams();
 	const posts = useSelector(state => state.users.users?.user?.posts);
 	const reposts = useSelector(state => state.users.users?.user?.reposts);
+	const likes = useSelector(state => state.users.users?.user?.likes);
 	const isLoading = useSelector(state => state.users.isLoading);
 	const [selectedTab, setSelectedTab] = useState(0);
 	useEffect(() => {dispatch(fetchUserInfo(username))}, [username])
 
-	const noPostsMessage = (
-		<Container >
-			<Typography textAlign='center' variant='h6' sx={{ color: theme.palette.text.disabled, padding: 5 }}>
-				{username} hasn't posted yet.
-			</Typography>
-		</Container>
-	)
+	const noResultMessage = () => {
+		const type = selectedTab === 0 ? 'posts' : selectedTab === 1 ? 'reposts' : 'likes';
+		return (
+			<Container >
+				<Typography textAlign='center' variant='h6' sx={{ color: theme.palette.text.disabled, padding: 5 }}>
+					{username} has no {type} yet.
+				</Typography>
+			</Container>
+		)
+	}
 
 	const displayPosts = () => {
-		let result = [];
-
 		if (isLoading) return;
-
-		if (selectedTab === 0) {
-			if (!posts?.length) return noPostsMessage;
-			const sortedPosts = posts?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-			for (let post of sortedPosts) {
-				result.push(
-					<PostContainer post={post} />
-				)	
-			}
-		} else {
-			if (!reposts?.length) return noPostsMessage;
-			const sortedReposts = reposts?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-			for (let i = 0; i < sortedReposts.length; i++) {
-				result.push(<RepostContainer post={reposts[i]} idx={i} />)
+		const items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
+		if (!items?.length) return noResultMessage();
+		let result = []
+		const sortedItems = items?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+		for (let i = 0; i < sortedItems?.length || 0; i++) {
+			if (selectedTab !== 1) {
+				result.push(<PostContainer post={sortedItems[i]} />)
+			} else {
+				result.push(<RepostContainer post={sortedItems[i]} idx={i} />)
 			}
 		}
-
+		
 		return (
 			<Stack spacing={2} sx={{paddingTop: 2}} >
 				{result}
@@ -75,6 +72,7 @@ const UserShowPage = () => {
 							<Tabs onChange={handleChange} value={selectedTab} variant='fullWidth'>
 								<Tab label={'Posts'} />
 								<Tab label={'Reposts'} />
+								<Tab label={'Likes'} />
 							</Tabs>
 							<Divider/>
 						</Paper>

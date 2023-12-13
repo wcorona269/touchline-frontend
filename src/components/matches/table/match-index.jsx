@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MatchFeedItem from './match-timeline-table';
+import MatchFeedItem from './match-index-list-item';
 import TimelineSelect from '../nav-bar/timeline-select';
 import { Box, Tabs,Tab, Paper, Stack } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -10,7 +10,7 @@ import Title from '../../util/title-util';
 
 export const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const MatchFeed = ({matches, selectedNation, setSelectedNation, date, setDate, nations, nationsSet, onTabSelect }) => {
+const MatchIndex = ({matches, selectedNation, setSelectedNation, date, setDate, nations, nationsSet, onTabSelect }) => {
 	const [showAll, setShowAll] = useState(true);
 	let matchesList;
 
@@ -44,7 +44,6 @@ const MatchFeed = ({matches, selectedNation, setSelectedNation, date, setDate, n
 		for (let key in matchesList) {
 			result.push(<MatchFeedItem nation={key} matches={matchesList[key]}/>)
 		}
-
 		return result;
 	}
 
@@ -91,4 +90,4 @@ const MatchFeed = ({matches, selectedNation, setSelectedNation, date, setDate, n
 	)
 }
 
-export default MatchFeed;
+export default MatchIndex;

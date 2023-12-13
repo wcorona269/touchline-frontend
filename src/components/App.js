@@ -10,7 +10,7 @@ import Footer from './footer/footer'
 import ModalContainer from './modal/modal';
 import Welcome from './home/welcome'
 import LeagueIndex from './home/league-index';
-import MatchFeed from './matches/match-feed';
+import MatchIndexContainer from './matches/match-index-container';
 import ClubShowPage from './club/club-show-page';
 import LeagueShowPage from './league/league-show-page';
 import PlayerProfile from './player/player-profile';
@@ -62,7 +62,7 @@ function App() {
             <Route path='/' element={<ProtectedRoute/>} >
               <Route path='/home' element={<PostsTimeline/>} />
               <Route path='/notifications' element={<Notifications/>} />
-              <Route path='/matches' element={<MatchFeed/>} />
+              <Route path='/matches' element={<MatchIndexContainer/>} />
               <Route path='/explore' element={<LeagueIndex/>} />
               <Route path='/news' element={<NewsIndexContainer/>} />
               <Route path='/match/:id' element={<MatchShowPage/>} />

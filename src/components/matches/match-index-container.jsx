@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import TimelineMatchDisplay from './table/timeline-match-display';
+import TimelineMatchDisplay from './table/match-index';
 import LoadingMessage from '../util/loading/loading-screen';
 import { fetchMatches } from '../../actions/api_actions';
 import NoDataMessage from '../util/no-data/no-data-message';
 import { Grid } from '@mui/material';
 import TopStories from '../home/top-stories';
 
-const MatchFeedContainer = () => {
+const MatchIndexContainer = () => {
 	const dispatch = useDispatch();
 	const matches = useSelector(state => state.matches.matches);
 	const competitions = new Set();
@@ -94,4 +94,4 @@ const MatchFeedContainer = () => {
 	)
 }
 
-export default MatchFeedContainer;
+export default MatchIndexContainer;

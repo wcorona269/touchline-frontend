@@ -1,18 +1,25 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
+import { top_leagues } from '../../home/live-fixtures-display';
 import Title from '../../util/title-util';
 import MatchCard from '../../league/match-card';
 
-const MatchFeedItem = ({nation, matches}) => {
+const MatchIndexListItem = ({nation, matches}) => {
 	let flag;
 
 	const displayMatches = (matches) => {
 		let result = [];
 		for (let match of matches) {
 			if (flag === undefined) flag = match?.league?.flag;
-			result.push(
-				<MatchCard  fixture={match} league={true} />
-			)
+			if (top_leagues.has(match?.league?.id)) {
+				result.unshift(
+					<MatchCard fixture={match} league={true} />
+				)
+			} else {
+				result.push(
+					<MatchCard fixture={match} league={true} />
+				)
+			}
 		}
 			
 		return (
@@ -32,4 +39,4 @@ const MatchFeedItem = ({nation, matches}) => {
 	)
 }
 
-export default MatchFeedItem;
+export default MatchIndexListItem;
