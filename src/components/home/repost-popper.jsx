@@ -61,7 +61,7 @@ const RepostButton = ({ handleRepost, reposts, isReposted, setIsReposted, user_i
 
 	return (
 		<div>
-			<Button aria-describedby={id} type="button" onClick={handleClick} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isReposted ? theme.palette.primary.main : theme.palette.grey['700'] }} >
+			<Button aria-describedby={id} type="button" onClick={handleClick} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isReposted ? theme.palette.primary.main : theme.palette.text.disabled }} >
 				<RepeatIcon sx={{ marginRight: '.25rem' }} fontSize='medium' />
 				{reposts}
 			</Button>

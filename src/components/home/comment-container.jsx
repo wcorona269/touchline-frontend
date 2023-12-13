@@ -16,6 +16,7 @@ const CommentContainer = ({ comment, idx }) => {
 	const [isLiked, setIsLiked] = useState(0);
 	const [commentLikes, setCommentLikes] = useState(comment?.likes?.length || 0);
 	const user_id = useSelector(state => state.session?.user?.id);
+	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const theme = useTheme();
 
 	useEffect(() => {
@@ -65,7 +66,7 @@ const CommentContainer = ({ comment, idx }) => {
 								</Typography>
 							</Link>
 							<Typography variant='caption' sx={{ color: theme.palette.text.disabled, marginLeft: 1 }} >
-								{moment(comment.created_at).fromNow()}
+								{moment(comment.created_at).tz(userTimeZone).fromNow()}
 							</Typography>
 						</Box>
 						<Box onDoubleClick={() => handleLike()} sx={{ padding: '.5rem', paddingTop: 0, paddingLeft: 0, width: '95%' }} >

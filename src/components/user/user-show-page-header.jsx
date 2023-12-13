@@ -18,6 +18,7 @@ const UserShowPageHeader = () => {
 	const bio = useSelector(state => state.users.users?.user?.bio);
 	const avatar_url = useSelector(state => state.users.users?.user?.avatar_url);
 	const isCurrentUser = username === currentUser;
+	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	const handleClick = () => {
 		navigate(`/edit-profile/${currentUser}`)
@@ -58,7 +59,7 @@ const UserShowPageHeader = () => {
 						{username}
 					</Typography>
 					<Typography variant='body2' sx={{ color: theme.palette.text.secondary }} >
-						Joined {moment(created_at).fromNow()}
+						Joined {moment(created_at).tz(userTimeZone).fromNow()}
 					</Typography>
 				</Box>
 				{

@@ -17,6 +17,8 @@ const UserShowPage = () => {
 	const likes = useSelector(state => state.users.users?.user?.likes);
 	const isLoading = useSelector(state => state.users.isLoading);
 	const [selectedTab, setSelectedTab] = useState(0);
+	
+
 	useEffect(() => {dispatch(fetchUserInfo(username))}, [username])
 
 	const noResultMessage = () => {

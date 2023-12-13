@@ -23,14 +23,14 @@ const UserUpdatePage = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const isMatching = password === confirmPassword;
-	const isValidLength = (password.length === 0 || password.length > 7);
-	const isValidBio = bio.length > 0 && bio.length < 200
+	const isValidPassword = (password?.length === 0 || password?.length > 7);
+	const isValidBio = bio?.length < 200;
 	let password_error;
 	let bio_error;
 
-	if (!isValidLength) password_error = 'Password must be at least 8 characters'
+	if (!isValidPassword) password_error = 'Password must be at least 8 characters'
 	if (!isMatching) password_error = 'Passwords Must Match';
-	if (isValidLength && isMatching) password_error=''
+	if (isValidPassword && isMatching) password_error=''
 	!isValidBio ? bio_error = 'Bio must be between 1 and 200 characters' : bio_error = ''
 
 	const handleChange = (event) => {
@@ -57,6 +57,16 @@ const UserUpdatePage = () => {
 	const handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
+
+	const isDisabled = () => {
+		if (bio === '') {
+			if (password === '' && isMatching) return true;
+			if (!isMatching || !isValidPassword) return true;
+			return false;
+		}
+		if (isValidBio && isValidPassword && isMatching) return false;
+		return true;
+	}
 
 	return (
 		<>
@@ -133,7 +143,7 @@ const UserUpdatePage = () => {
 										<Box sx={{margin: 5, height: 10, color: theme.palette.error.main, fontFamily: theme.typography.bold }}>
 											{password_error}
 										</Box>
-										<Button variant='contained' disabled={!isMatching || !isValidLength || !isValidBio} onClick={handleSubmit} >
+										<Button variant='contained' disabled={isDisabled()} onClick={handleSubmit} >
 											Update Profile
 										</Button>
 									</Stack>

@@ -22,7 +22,8 @@ const PostContainer = ({ post, repost }) => {
 	const [reposts, setReposts] = useState(0);
 	const [isLiked, setIsLiked] = useState(false);
 	const [isReposted, setIsReposted] = useState(false);
-	const avatar = post?.avatar_url
+	const avatar = post?.avatar_url;
+	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	useEffect(() => {
 		for (let like of post.likes) {
@@ -97,12 +98,12 @@ const PostContainer = ({ post, repost }) => {
 	}
 
 	const buttons = [
-		<Button key={0} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: theme.palette.grey['700'] }} onClick={() => showPost()}>
+		<Button key={0} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: theme.palette.text.disabled }} onClick={() => showPost()}>
 			<ChatBubbleOutlineIcon sx={{ marginRight: '.25rem' }} fontSize='medium'/>
 			{post.comments.length}
 		</Button>,
 		<RepostButton key={1} handleRepost={handleRepost} reposts={reposts} isReposted={isReposted} setIsReposted={setIsReposted} post={post} user_id={user_id}  />,
-		<Button key={2} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isLiked ? theme.palette.primary.main : theme.palette.grey['700'] }} onClick={handleLike} >
+		<Button key={2} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isLiked ? theme.palette.primary.main : theme.palette.text.disabled }} onClick={handleLike} >
 			{isLiked ? <FavoriteIcon sx={{ marginRight: '.25rem' }} fontSize='medium' /> : <FavoriteBorderIcon sx={{ marginRight: '.25rem' }} />  }
 			{postLikes}
 		</Button>,
@@ -125,8 +126,8 @@ const PostContainer = ({ post, repost }) => {
 								{post.username}
 							</Link>
 						</Typography>
-						<Typography variant='caption' sx={{ color: 'var(--darkgray)' }}>
-							{moment(post.created_at).tz('America/New_York').fromNow()}
+						<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
+							{moment(post.created_at).tz(userTimeZone).fromNow()}
 						</Typography>
 					</Box>
 					<Typography variant='body1' onClick={() => showPost()} sx={{width: '100%'}} >
