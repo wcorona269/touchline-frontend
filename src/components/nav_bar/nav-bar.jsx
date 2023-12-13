@@ -1,8 +1,9 @@
 import React from 'react';
-import { AppBar, Container, Typography, useTheme } from '@mui/material';
+import { AppBar, Box, Container, Typography, useTheme } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../actions/session_actions';
 import AccountMenu from './account-menu';
+import AboutMenu from './about-menu';
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({ lightMode, setLightMode }) => {
@@ -22,7 +23,10 @@ const NavBar = ({ lightMode, setLightMode }) => {
 				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main }} onClick={() => navigate('/home')} >
 					touchline
 				</Typography>
-				<AccountMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
+				<Box display={'flex'} flexDirection='row'>
+					<AccountMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
+					<AboutMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
+				</Box>
 			</Container>
 		</AppBar>
 	)
