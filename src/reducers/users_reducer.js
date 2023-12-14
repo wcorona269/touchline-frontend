@@ -1,4 +1,4 @@
-import { DELETE_POST_REQUEST } from '../actions/post_actions';
+import { DELETE_POST_REQUEST, DELETE_POST_SUCCESS } from '../actions/post_actions';
 import {
 	REMOVE_USER_ERRORS,
 	FETCH_USER_INFO_FAILURE,
@@ -19,10 +19,16 @@ const usersReducer = (state = initialState, action) => {
 	Object.freeze(state);
 	let nextState = Object.assign({}, state);
 	switch (action.type) {
+		// case DELETE_POST_REQUEST:
 		case UPDATE_AVATAR_REQUEST:
-		case DELETE_POST_REQUEST:
 			return { ...nextState, isLoading: true, error: null };
 		// case DELETE_POST_SUCCESS:
+		// 	debugger;
+		// 	return { 
+		// 		...nextState,
+		// 		isLoading:false,
+		// 		error: null
+		// 	}
 		case FETCH_USER_INFO_FAILURE:
 		case UPDATE_AVATAR_FAILURE:
 			return { ...nextState, isLoading: false, error: action.payload };
