@@ -39,8 +39,8 @@ const PostContainer = ({ post, repost }) => {
 			}
 		}
 		
-		setPostLikes(post.likes.length)
-		setReposts(post.reposts.length)
+		setPostLikes(post?.likes?.length)
+		setReposts(post?.reposts?.length)
 	}, [post]);
 
 	const handleLike = () => {
@@ -101,7 +101,7 @@ const PostContainer = ({ post, repost }) => {
 	const buttons = [
 		<Button key={0} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: theme.palette.text.disabled }} onClick={() => showPost()}>
 			<ChatBubbleOutlineIcon sx={{ marginRight: '.25rem' }} fontSize='medium'/>
-			{post.comments.length}
+			{post.comments?.length}
 		</Button>,
 		<RepostButton key={1} handleRepost={handleRepost} reposts={reposts} isReposted={isReposted} setIsReposted={setIsReposted} post={post} user_id={user_id}  />,
 		<Button key={2} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isLiked ? theme.palette.primary.main : theme.palette.text.disabled }} onClick={handleLike} >

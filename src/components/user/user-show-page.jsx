@@ -12,12 +12,12 @@ const UserShowPage = () => {
 	const dispatch = useDispatch();
 	const theme = useTheme();
 	const { username } = useParams();
-	const posts = useSelector(state => state.users.users?.user?.posts);
-	const reposts = useSelector(state => state.users.users?.user?.reposts);
-	const likes = useSelector(state => state.users.users?.user?.likes);
-	const isLoading = useSelector(state => state.users.isLoading);
+	const posts = useSelector(state => state.users?.user?.posts);
+	const reposts = useSelector(state => state.users.user?.reposts);
+	const likes = useSelector(state => state.users?.user?.likes);
+	const isLoading = useSelector(state => state?.users?.isLoading);
 	const [selectedTab, setSelectedTab] = useState(0);
-
+	
 	useEffect(() => {dispatch(fetchUserInfo(username))}, [username])
 	useEffect(() => {}, [posts, reposts, likes])
 
@@ -34,10 +34,13 @@ const UserShowPage = () => {
 
 	const displayPosts = () => {
 		if (isLoading) return;
-		const items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
-		if (!items?.length) return noResultMessage();
+		let items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
+		debugger;
+		if (!items || Object.keys(items).length === 0) {
+			return noResultMessage()
+		}
 		let result = []
-		const sortedItems = items?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+		const sortedItems = Object.values(items)?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 		for (let i = 0; i < sortedItems?.length || 0; i++) {
 			if (selectedTab !== 1) {
 				result.push(<PostContainer post={sortedItems[i]} />)
@@ -52,27 +55,6 @@ const UserShowPage = () => {
 			</Stack>
 		)
 	}
-
-	// const displayPosts = useMemo(() => {
-	// 	if (isLoading) return;
-	// 	const items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
-	// 	if (!items?.length) return noResultMessage();
-	// 	let result = [];
-	// 	const sortedItems = items?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-	// 	for (let i = 0; i < sortedItems?.length || 0; i++) {
-	// 		if (selectedTab !== 1) {
-	// 			result.push(<PostContainer post={sortedItems[i]} key={sortedItems[i].id} />);
-	// 		} else {
-	// 			result.push(<RepostContainer post={sortedItems[i]} idx={i} key={sortedItems[i].id} />);
-	// 		}
-	// 	}
-
-	// 	return (
-	// 		<Stack spacing={2} sx={{ paddingTop: 2 }}>
-	// 			{result}
-	// 		</Stack>
-	// 	);
-	// }, [isLoading, selectedTab, posts, reposts, likes]); 
 
 	const handleChange = (event, newValue) => {
 		setSelectedTab(newValue);

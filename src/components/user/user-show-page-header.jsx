@@ -14,9 +14,9 @@ const UserShowPageHeader = () => {
 	const theme = useTheme();
 	const { username } = useParams();
 	const currentUser = useSelector(state => state.session.user?.username);
-	const created_at = useSelector(state => state.users.users?.user?.created_at);
-	const bio = useSelector(state => state.users.users?.user?.bio);
-	const avatar_url = useSelector(state => state.users.users?.user?.avatar_url);
+	const created_at = useSelector(state => state.users?.user?.created_at);
+	const bio = useSelector(state => state.users?.user?.bio);
+	const avatar_url = useSelector(state => state.users?.user?.avatar_url);
 	const isCurrentUser = username === currentUser;
 	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 

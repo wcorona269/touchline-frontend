@@ -14,6 +14,7 @@ import CommentContainer from '../home/comment-container';
 import HomeFixturesColumn from '../home/home-fixtures-column';
 import Title from '../util/title-util';
 import moment from 'moment';
+import PostShowPageError from './post-error-page';
 
 const PostShowPage = () => {
 	const dispatch = useDispatch();
@@ -23,17 +24,17 @@ const PostShowPage = () => {
 	const post = useSelector(state => state.posts?.post);
 	const user_id = useSelector(state => state.session?.user?.id);
 	const isLoading = useSelector(state => state.posts.isLoading);
-	const [postLikes, setPostLikes] = useState(post?.likes?.length);
-	const [reposts, setReposts] = useState(post?.reposts?.length);
+	const [postLikes, setPostLikes] = useState(post?.likes?.length) || 0;
+	const [reposts, setReposts] = useState(post?.reposts?.length) || 0;
 	const [createComment, setCreateComment] = useState(true);
 	const [isLiked, setIsLiked] = useState(false);
 	const [isReposted, setIsReposted] = useState(false);
 
 	useEffect(() => {
-		if (post.likes || !post.reposts) return;
-		for (let i = 0; i < post.likes.length; i++) {
-			const like = post.likes[i]
-			if (like.user_id === user_id) {
+		if (post?.likes || !post?.reposts) return;
+		for (let i = 0; i < post?.likes?.length; i++) {
+			const like = post?.likes?.[i] ?? false;
+			if (like && like.user_id === user_id) {
 				setIsLiked(true)
 			}
 		}
@@ -43,7 +44,7 @@ const PostShowPage = () => {
 				setIsReposted(true)
 			}
 		}
-	}, [post, reposts, post.likes, post.reposts, user_id]);
+	}, [post, reposts, post?.likes, post?.reposts, user_id]);
 
 	const fetchPostCallback = useCallback(() => {
 		if (!isLoading) {
@@ -135,17 +136,36 @@ const PostShowPage = () => {
 		</Button>,
 	];
 
+	const displayAlternatives = () => {
+		if (isLoading) {
+			return (
+				<Box height={150} display='flex' alignItems='center' width='100%'>
+					<CircularProgress />
+				</Box>
+			)
+		} else {
+			return (
+				<PostShowPageError/>
+			)
+		}
+	}
+
+	const determineHeaderContent = () => {
+		if (!isLoading && !!post) {
+			return `Post by ${post?.username}`
+		}
+		if (isLoading) return ''
+		if (!post) return 'Post not found'
+	}
 
 	return (
 		<>
 			<Grid item xs={6}>
 				<Paper elevation={1}>
-					<Title variant='h6' content={`Post by ${post?.username}`} back={true} />
+					<Title variant='h6' content={determineHeaderContent()} back={true} />
 					<Box display='flex' flexDirection='column' justifyContent={'center'} padding={2} >
 						{ isLoading || !post ? 
-							<Box height={150} display='flex' alignItems='center' width='100%'>
-								<CircularProgress/>
-							</Box> :
+							displayAlternatives() :
 							[<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'left', width: '100%' }} >
 								<Avatar sx={{ marginRight: '.5rem', width: 50, height: 50 }} src={post.avatar_url}/>
 								<Box sx={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
