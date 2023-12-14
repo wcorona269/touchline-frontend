@@ -62,7 +62,6 @@ export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 
 export const createPost = (postData) => {
 	return (dispatch) => {
-		debugger;
 		dispatch({ type: CREATE_POST_REQUEST });
 		return axiosInstance.post('/posts/create', postData)
 			.then((response) => {
@@ -152,6 +151,24 @@ export const deleteRepost = (repostData) => {
 			})
 			.catch((error) => {
 				dispatch({ type: DELETE_REPOST_FAILURE, payload: error.message });
+			});
+	};
+}
+
+// delete post
+export const DELETE_POST_REQUEST = 'DELETE_POST_REQUEST'
+export const DELETE_POST_SUCCESS =  'DELETE_POST_SUCCESS'
+export const DELETE_POST_FAILURE = 'DELETE_POST_FAILURE'
+
+export const deletePost = (postId) => {
+	return (dispatch) => {
+		dispatch({ type: DELETE_POST_REQUEST, postId: postId });
+			return axiosInstance.delete(`/posts/delete/${postId}`)
+			.then((response) => {
+				dispatch({ type: DELETE_POST_SUCCESS, payload: response.data });
+			})
+			.catch((error) => {
+				dispatch({ type: DELETE_POST_FAILURE, payload: error.message });
 			});
 	};
 }

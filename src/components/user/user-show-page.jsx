@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Paper, Box, Grid, Tabs, Tab, Container, Typography, Divider, useTheme, Skeleton, Stack } from '@mui/material';
 import PostContainer from '../home/post-container';
@@ -17,9 +17,9 @@ const UserShowPage = () => {
 	const likes = useSelector(state => state.users.users?.user?.likes);
 	const isLoading = useSelector(state => state.users.isLoading);
 	const [selectedTab, setSelectedTab] = useState(0);
-	
 
 	useEffect(() => {dispatch(fetchUserInfo(username))}, [username])
+	useEffect(() => {}, [posts, reposts, likes])
 
 	const noResultMessage = () => {
 		const type = selectedTab === 0 ? 'posts' : selectedTab === 1 ? 'reposts' : 'likes';
@@ -52,6 +52,27 @@ const UserShowPage = () => {
 			</Stack>
 		)
 	}
+
+	// const displayPosts = useMemo(() => {
+	// 	if (isLoading) return;
+	// 	const items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
+	// 	if (!items?.length) return noResultMessage();
+	// 	let result = [];
+	// 	const sortedItems = items?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+	// 	for (let i = 0; i < sortedItems?.length || 0; i++) {
+	// 		if (selectedTab !== 1) {
+	// 			result.push(<PostContainer post={sortedItems[i]} key={sortedItems[i].id} />);
+	// 		} else {
+	// 			result.push(<RepostContainer post={sortedItems[i]} idx={i} key={sortedItems[i].id} />);
+	// 		}
+	// 	}
+
+	// 	return (
+	// 		<Stack spacing={2} sx={{ paddingTop: 2 }}>
+	// 			{result}
+	// 		</Stack>
+	// 	);
+	// }, [isLoading, selectedTab, posts, reposts, likes]); 
 
 	const handleChange = (event, newValue) => {
 		setSelectedTab(newValue);

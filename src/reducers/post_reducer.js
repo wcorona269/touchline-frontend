@@ -10,7 +10,10 @@ import {
 	FETCH_POST_FAILURE,
 	CREATE_POST_REQUEST,
 	CREATE_POST_SUCCESS,
-	CREATE_POST_FAILURE
+	CREATE_POST_FAILURE,
+	DELETE_POST_FAILURE,
+	DELETE_POST_REQUEST,
+	DELETE_POST_SUCCESS
 } from '../actions/post_actions'
 
 import {
@@ -34,6 +37,7 @@ const postsReducer = (state = initialState, action) => {
 		case FETCH_ALL_POSTS_REQUEST:
 		case FETCH_POST_REQUEST:
 		case CREATE_POST_REQUEST:
+		case DELETE_POST_REQUEST:
 			return { ...nextState, isLoading: true, error: null };
 		case FETCH_ALL_POSTS_SUCCESS:
 			const newPosts = action.payload['posts']
@@ -72,6 +76,11 @@ const postsReducer = (state = initialState, action) => {
 					]
 				}
 			}
+		case DELETE_POST_SUCCESS:
+			const postId = action.payload['postId'];
+			const updatedPosts = { ...nextState.posts };
+			delete updatedPosts[Number(postId)];
+			return { ...nextState, isLoading: false, error: null, posts: updatedPosts, post: null};
 		case FETCH_ALL_POSTS_FAILURE:
 			return { ...nextState, isLoading: false, error: action.payload, posts: null };
 		case FETCH_USER_POSTS_REQUEST:

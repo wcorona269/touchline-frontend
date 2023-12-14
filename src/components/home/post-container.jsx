@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import RepostButton from './repost-popper';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import moment from 'moment-timezone';
+import PostMenu from './post-menu';
 
 const PostContainer = ({ post, repost }) => {
 	const dispatch = useDispatch();
@@ -117,18 +118,25 @@ const PostContainer = ({ post, repost }) => {
 					Reposted by {repost.user.username}
 				</Link>
 			}
-			<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
+			<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start'}}>
 				<Avatar sx={{ marginRight: '.5rem' }} src={avatar} onClick={() => navigate(`/user/${post.username}`)} />
-				<Box sx={{ display: 'flex', flexDirection: 'column'}}>
-					<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: '.5rem'}}>
-						<Typography variant='body1' sx={{ fontFamily: theme.typography.bold }}>
-							<Link underline='hover' onClick={() => navigate(`/user/${post.username}`)} >
-								{post.username}
-							</Link>
-						</Typography>
-						<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
-							{moment(post.created_at).tz(userTimeZone).fromNow()}
-						</Typography>
+				<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+					<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', gap: '.5rem'}}>
+						<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: '.5rem' }}>
+							<Typography variant='body1' sx={{ fontFamily: theme.typography.bold }}>
+								<Link underline='hover' onClick={() => navigate(`/user/${post.username}`)} >
+									{post.username}
+								</Link>
+							</Typography>
+							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
+								{moment(post.created_at).tz(userTimeZone).fromNow()}
+							</Typography>
+						</Box>
+						<Box>
+							{ post.user_id === user_id &&
+								<PostMenu postId={post.id} />
+							}
+						</Box>
 					</Box>
 					<Typography variant='body1' onClick={() => showPost()} sx={{width: '100%'}} >
 						{post.text}
