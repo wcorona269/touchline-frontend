@@ -1,7 +1,7 @@
 # Touchline Soccer
 
 ## Introduction
-Touchline Soccer is a comprehensive soccer platform that provides a Twitter-style posts timeline, along with features such as commenting, reposts, and likes. Additionally, the platform includes profile pages for leagues, clubs, and players. Users can also create a 'Favorite' list, adding their preferred clubs, players, or leagues to receive personalized news based on their favorites.
+Touchline Soccer is a social app for soccer discussion, statistics, news, and more. Users can also create a 'Favorite' list, adding their preferred clubs, players, or leagues to personalize their news feed based on their favorites. This repo is for the Frontend component of the application. Check out the backend repo [here](https://github.com/wcorona269/touchline-backend)!
 
 ## Technologies Used
 - Python3 Flask backend
@@ -25,10 +25,10 @@ Touchline Soccer is a comprehensive soccer platform that provides a Twitter-styl
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/user%20update.gif)
 
 ### Light & Dark Themes
-![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/user%20update.gif)
+![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/theme.gif)
 
-### Posts
-- Twitter-style posts timeline
+### Posts, Comments, Likes & Reposts.
+- Social media posts timeline
 - Users can create, destroy, like, repost, and comment on posts.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/post%20crud.gif)
 
