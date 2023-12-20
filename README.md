@@ -4,54 +4,63 @@
 Touchline Soccer is a social app for soccer discussion, statistics, news, and more. Users can also create a 'Favorite' list, adding their preferred clubs, players, or leagues to personalize their news feed based on their favorites. This repo is for the Frontend component of the application. Check out the backend repo [here](https://github.com/wcorona269/touchline-backend)!
 
 ## Technologies Used
-- Python3 Flask backend
-- Flask-SQLAlchemy
+- Python3 Flask backend.
+- Flask-SQLAlchemy.
 - PostgreSQL database
-- React frontend (w/ React Hooks)
-- [Material UI (open-source React component library)](https://mui.com/material-ui/)
+- React frontend (w/ React Hooks).
+- [Material UI (open-source React component library)](https://mui.com/material-ui/).
 - [Microsoft Azure](https://azure.microsoft.com/en-us/free/search/?&ef_id=_k_CjwKCAiAvoqsBhB9EiwA9XTWGWVAR1v-vuXLENa1sVdRTF6c_nJk6PMWjKZ8j7xN2FZD5aGZMGdFnhoCFMAQAvD_BwE_k_&OCID=AIDcmm5edswduu_SEM__k_CjwKCAiAvoqsBhB9EiwA9XTWGWVAR1v-vuXLENa1sVdRTF6c_nJk6PMWjKZ8j7xN2FZD5aGZMGdFnhoCFMAQAvD_BwE_k_&gad_source=1&gclid=CjwKCAiAvoqsBhB9EiwA9XTWGWVAR1v-vuXLENa1sVdRTF6c_nJk6PMWjKZ8j7xN2FZD5aGZMGdFnhoCFMAQAvD_BwE)
 	- Frontend - Azure Web App
 	- Backend - Azure Web App + Database
-	- Photo Storage - Azure Container Blobs
+	- Photo Storage - Azure Container Blobs.
 - [API-SPORTS FOOTBALL-API](https://api-sports.io/).
 - [Google News Python Package](https://pypi.org/project/GoogleNews/)
 
 ## Features
 
-### User Authentication
-- Sign up & Log in functionality
-- Update user by changing profile picture, bio, and password.
+### Splash Page - User Authentication
+- Sign up & Log in functionality.
+![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/auth.gif)
+
+### Update User
+- Logged in users can change their profile picture, bio, and password.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/auth.gif)
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/user%20update.gif)
 
 ### Light & Dark Themes
+- Logged in users can choose between light or dark mode.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/theme.gif)
 
 ### Posts, Comments, Likes & Reposts.
-- Social media posts timeline
-- Users can create, destroy, like, repost, and comment on posts.
+- Logged in users can access CRUD funtionality for posts, comments, likes, and reposts.
+- Twitter-style social media timeline.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/post%20crud.gif)
 
 ### Match Show Page
-- Detailed profile pages for games across the world
-- Match stats, events, lineups, and more!
+- Detailed profile pages for games across the world.
+- Match stats, events, lineups, and more.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/match%20show%20page.gif)
 
 ### League Show Page
-- Detailed profile pages for soccer leagues
-- Statistics, match information, and league-specific data
+- Detailed profile pages for soccer leagues.
+- Statistics, match information, and league-specific data.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/league%20show%20page.gif)
 
+### Matches Index
+- Search for all football matches globally.
+- Filter by date and country.
+![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/matches%20index.gif)
+
 ### Club & Player Show Pages
-- Profile pages for soccer clubs & Players
-- Club-specific information, achievements, and player roster
-- Individual player profile pages
-- Player statistics, performance history, and achievements
+- Profile pages for soccer clubs & Players.
+- Club-specific information, achievements, and player roster.
+- Individual player profile pages.
+- Player statistics, performance history, and achievements.
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/club%20and%20player%20show.gif)
 
 ### Favorite Model
-- Users can add their favorite clubs, players, or leagues to their profiles
-- Personalized news feed based on the user's favorites
+- Users can add their favorite clubs, players, or leagues to their profiles.
+- Personalized news feed based on the user's favorites.
 
 ## Code Sample
 ### Home Page
