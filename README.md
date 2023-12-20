@@ -1,7 +1,7 @@
 # Touchline Soccer
 
 ## Introduction
-Touchline Soccer is a social app for soccer discussion, statistics, news, and more. Users can also create a 'Favorite' list, adding their preferred clubs, players, or leagues to personalize their news feed based on their favorites. This repo is for the Frontend component of the application. Check out the backend repo [here](https://github.com/wcorona269/touchline-backend)!
+Touchline Soccer is a social app for soccer discussion, statistics, news, and more. Users can also create a 'Favorite' list, adding their preferred clubs, players, or leagues to personalize their news feed based on their favorites. This repo is for the Frontend component of the application. Check out the [live site](https://touchline-soccer.azurewebsites.net/) or the [backend repo](https://github.com/wcorona269/touchline-backend)!
 
 ## Technologies Used
 - Python3 Flask backend
@@ -48,7 +48,8 @@ Touchline Soccer is a social app for soccer discussion, statistics, news, and mo
 
 ### Matches Index
 - Search for all football matches globally
-- Filter by date and country
+- Filter by date and country.
+
 ![](https://github.com/wcorona269/touchline-frontend/blob/main/public/gifs/matches%20index.gif)
 
 ### Club & Player Show Pages
