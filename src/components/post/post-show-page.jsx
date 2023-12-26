@@ -24,11 +24,12 @@ const PostShowPage = () => {
 	const post = useSelector(state => state.posts?.post);
 	const user_id = useSelector(state => state.session?.user?.id);
 	const isLoading = useSelector(state => state.posts.isLoading);
-	const [postLikes, setPostLikes] = useState(post?.likes?.length) || 0;
-	const [reposts, setReposts] = useState(post?.reposts?.length) || 0;
+	const [postLikes, setPostLikes] = useState(post?.likes?.length)
+	const [reposts, setReposts] = useState(post?.reposts?.length)
 	const [createComment, setCreateComment] = useState(true);
 	const [isLiked, setIsLiked] = useState(false);
 	const [isReposted, setIsReposted] = useState(false);
+	debugger;
 
 	useEffect(() => {
 		if (post?.likes || !post?.reposts) return;
@@ -71,13 +72,13 @@ const PostShowPage = () => {
 			'sender_id': user_id,
 			'target_id': post.id,
 			'target_type': 'POST_LIKE',
-			'read': false,
-			'created_at': new Date(),
 		}
 
 		if (isLiked === true) {
 			dispatch(deleteLike(like_info))
-			setPostLikes(postLikes - 1)
+			if (postLikes > 0) {
+				setPostLikes(postLikes - 1)
+			}
 		} else {
 			dispatch(createLike(like_info))
 			dispatch(createNotification(notif_info))
@@ -101,8 +102,6 @@ const PostShowPage = () => {
 				'sender_id': user_id,
 				'target_id': post.id,
 				'target_type': 'REPOST',
-				'read': false,
-				'created_at': new Date(),
 			}
 			dispatch(createRepost(repost_info));
 			dispatch(createNotification(notif_info));
@@ -127,12 +126,12 @@ const PostShowPage = () => {
 	const buttons = [
 		<Button key={0} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: createComment ? theme.palette.primary.main : theme.palette.grey['700'] }} onClick={() => setCreateComment(!createComment)}>
 			<ChatBubbleOutlineIcon sx={{ marginRight: '.25rem' }} fontSize='medium' />
-			{post?.comments?.length}
+			{post?.comments?.length || 0}
 		</Button>,
-		<RepostButton key={1} handleRepost={handleRepost} reposts={reposts} isReposted={isReposted} setIsReposted={setIsReposted} post={post} user_id={user_id} />,
+		<RepostButton key={1} handleRepost={handleRepost} reposts={reposts || 0} isReposted={isReposted} setIsReposted={setIsReposted} post={post} user_id={user_id} />,
 		<Button key={2} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isLiked ? theme.palette.primary.main : theme.palette.grey['700'] }} onClick={handleLike} >
 			{isLiked ? <FavoriteIcon sx={{ marginRight: '.25rem' }} fontSize='medium' /> : <FavoriteBorderIcon sx={{ marginRight: '.25rem' }} />}
-			{postLikes}
+			{postLikes || 0}
 		</Button>,
 	];
 

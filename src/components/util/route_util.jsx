@@ -20,7 +20,8 @@ const ProtectedRoute = () => {
 			});
 	}, [dispatch]);
 
-	useEffect(() => { }, [currentUser])
+	useEffect(() => {
+	}, [currentUser])
 
 	if (isLoading || !isFetched) {
 		return null;

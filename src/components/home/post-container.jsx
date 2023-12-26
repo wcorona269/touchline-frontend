@@ -25,6 +25,7 @@ const PostContainer = ({ post, repost }) => {
 	const [isReposted, setIsReposted] = useState(false);
 	const avatar = post?.avatar_url;
 	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	
 
 	useEffect(() => {
 		for (let like of post.likes) {
@@ -54,8 +55,6 @@ const PostContainer = ({ post, repost }) => {
 			'sender_id': user_id,
 			'target_id': post.id,
 			'target_type': 'POST_LIKE',
-			'read': false,
-			'created_at': new Date(),
 		}
 
 		if (isLiked === true) {
@@ -84,8 +83,6 @@ const PostContainer = ({ post, repost }) => {
 				'sender_id': user_id,
 				'target_id': post.id,
 				'target_type': 'REPOST',
-				'read': false,
-				'created_at': new Date(),
 			}
 			dispatch(createRepost(repost_info));
 			dispatch(createNotification(notif_info));

@@ -37,8 +37,6 @@ const CommentContainer = ({ comment, idx }) => {
 			'sender_id': user_id,
 			'target_id': comment.id,
 			'target_type': 'COMMENT_LIKE',
-			'read': false, // Initial read status, can be set to false for unread notifications
-			'created_at': new Date(),
 		}
 		
 		if (isLiked === true) {

@@ -38,8 +38,6 @@ const CreateComment = ({ post }) => {
 			'sender_id': user_id,
 			'target_id': post.id,
 			'target_type': 'POST_COMMENT',
-			'read': false,
-			'created_at': new Date(),
 		}
 
 		dispatch(createComment(comment_data));
