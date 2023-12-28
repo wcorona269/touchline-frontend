@@ -12,7 +12,7 @@ const Welcome = () => {
 
 	useEffect(() => {
 		if (currentUser !== null) {
-			navigate('/')
+			navigate('/home')
 		}
 	}, [currentUser])
 

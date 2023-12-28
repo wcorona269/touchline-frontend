@@ -1,13 +1,14 @@
 import React, { useEffect, useState }from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Home from '../home/home';
 import { fetchCurrentUser } from '../../actions/session_actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ProtectedRoute = () => {
 	const dispatch = useDispatch();
-	const currentUser = useSelector(state => state.session.user);
-	const isLoading = useSelector(state => state.session.isLoading);
+	const navigate = useNavigate();
+	const currentUser = useSelector(state => state?.session?.user);
+	const isLoading = useSelector(state => state?.session?.isLoading);
 	const [isFetched, setIsFetched] = useState(false);
 
 	useEffect(() => {
@@ -24,10 +25,10 @@ const ProtectedRoute = () => {
 	}, [currentUser])
 
 	if (isLoading || !isFetched) {
-		return null;
+		return null; // or a loading spinner or any loading indicator
 	}
 	
-	if (currentUser === null) {
+	if (!currentUser) {
 		return <Navigate to={'/welcome'} replace />;
 	}
 	return <Home/>

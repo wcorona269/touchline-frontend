@@ -34,7 +34,7 @@ const Home = () => {
 	}, [])
 
 	useEffect(() => {
-		if (location.pathname === ('/')) {
+		if (location.pathname === ('/home')) {
 			setSelectedTab(0)
 		} else if (location.pathname.includes('notifications')) {
 			setSelectedTab(1)
@@ -65,7 +65,7 @@ const Home = () => {
 
 	const handleTabSelect = (value, location) => {
 		setSelectedTab(value);
-		return (location === 'home') ? navigate('/') : navigate(`/${location}`);
+		navigate(`/${location}`);
 	}
 
 	return (

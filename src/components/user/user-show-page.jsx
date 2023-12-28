@@ -35,7 +35,6 @@ const UserShowPage = () => {
 	const displayPosts = () => {
 		if (isLoading) return;
 		let items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
-		debugger;
 		if (!items || Object.keys(items).length === 0) {
 			return noResultMessage()
 		}

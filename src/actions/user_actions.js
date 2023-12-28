@@ -17,7 +17,6 @@ export const fetchUserInfo = (username) => {
 		dispatch({ type: FETCH_USER_INFO_REQUEST });
 		axiosInstance.get(`/users/info/${username}`)
 			.then((response) => {
-				debugger;
 				dispatch({ type: FETCH_USER_INFO_SUCCESS, payload: response.data });
 			})
 			.catch((error) => {

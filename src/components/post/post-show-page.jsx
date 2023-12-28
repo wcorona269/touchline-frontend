@@ -29,7 +29,6 @@ const PostShowPage = () => {
 	const [createComment, setCreateComment] = useState(true);
 	const [isLiked, setIsLiked] = useState(false);
 	const [isReposted, setIsReposted] = useState(false);
-	debugger;
 
 	useEffect(() => {
 		if (post?.likes || !post?.reposts) return;
