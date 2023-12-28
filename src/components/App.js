@@ -59,8 +59,8 @@ function App() {
         <ModalContainer/>
         <Container sx={{paddingTop: '6rem'}} fixed >
           <Routes>
-            <Route path='/' element={<ProtectedRoute/>} >
-              <Route path='/home' element={<PostsTimeline/>} />
+            <Route path={'/'} element={<ProtectedRoute />} >
+              <Route path={'/'} element={<PostsTimeline/>} />
               <Route path='/notifications' element={<Notifications/>} />
               <Route path='/matches' element={<MatchIndexContainer/>} />
               <Route path='/explore' element={<LeagueIndex/>} />

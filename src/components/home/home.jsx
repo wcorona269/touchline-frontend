@@ -11,13 +11,13 @@ import UserFavorites from './my-favorites';
 const Home = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const [selectedTab, setSelectedTab] = useState(0);
 	const isFavoritesLoading = useSelector(state => state.favorites.isLoading)
 	const username = useSelector(state => state.session.user?.username);
 	const user_id = useSelector(state => state.session?.user?.id);	
-	const isNotificationsLoading = useSelector(state => state.notifications.isLoading)
-	const notifications = useSelector(state => state.notifications?.notifications)
+	const isNotificationsLoading = useSelector(state => state.notifications.isLoading);
+	const notifications = useSelector(state => state.notifications?.notifications);
 	const [unreadCount, setUnreadCount] = useState();
 	
 	useEffect(() => {
@@ -34,7 +34,7 @@ const Home = () => {
 	}, [])
 
 	useEffect(() => {
-		if (location.pathname.includes('home')) {
+		if (location.pathname === ('/')) {
 			setSelectedTab(0)
 		} else if (location.pathname.includes('notifications')) {
 			setSelectedTab(1)
@@ -65,7 +65,7 @@ const Home = () => {
 
 	const handleTabSelect = (value, location) => {
 		setSelectedTab(value);
-		navigate(`/${location}`)
+		return (location === 'home') ? navigate('/') : navigate(`/${location}`);
 	}
 
 	return (

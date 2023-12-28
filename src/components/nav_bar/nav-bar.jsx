@@ -20,7 +20,7 @@ const NavBar = ({ lightMode, setLightMode }) => {
 	return (
 		<AppBar  >
 			<Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main }} onClick={() => navigate('/home')} >
+				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main }} onClick={() => navigate('/')} >
 					touchline
 				</Typography>
 				<Box display={'flex'} flexDirection='row'>
