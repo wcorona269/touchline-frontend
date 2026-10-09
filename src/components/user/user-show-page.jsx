@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Paper, Box, Grid, Tabs, Tab, Container, Typography, Divider, useTheme, Skeleton, Stack } from '@mui/material';
+import { Button, Paper, Box, Grid, Tabs, Tab, Container, Typography, Divider, useTheme, Skeleton, Stack } from '@mui/material';
 import PostContainer from '../home/post-container';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserInfo } from '../../actions/user_actions';
+import { fetchUserInfo, fetchMoreUserPosts, fetchMoreUserReposts, fetchMoreUserLikes } from '../../actions/user_actions';
 import RepostContainer from '../home/repost-container';
 import HomeFixturesColumn from '../home/home-fixtures-column';
 import UserShowPageHeader from './user-show-page-header';
@@ -15,11 +15,31 @@ const UserShowPage = () => {
 	const posts = useSelector(state => state.users?.user?.posts);
 	const reposts = useSelector(state => state.users.user?.reposts);
 	const likes = useSelector(state => state.users?.user?.likes);
+	const postsCurrentPage = useSelector(state => state.users?.user?.posts_current_page) || 1;
+	const postsTotalPages = useSelector(state => state.users?.user?.posts_total_pages) || 1;
+	const repostsCurrentPage = useSelector(state => state.users?.user?.reposts_current_page) || 1;
+	const repostsTotalPages = useSelector(state => state.users?.user?.reposts_total_pages) || 1;
+	const likesCurrentPage = useSelector(state => state.users?.user?.likes_current_page) || 1;
+	const likesTotalPages = useSelector(state => state.users?.user?.likes_total_pages) || 1;
 	const isLoading = useSelector(state => state?.users?.isLoading);
 	const [selectedTab, setSelectedTab] = useState(0);
-	
+
 	useEffect(() => {dispatch(fetchUserInfo(username))}, [username])
 	useEffect(() => {}, [posts, reposts, likes])
+
+	const loadMore = () => {
+		if (selectedTab === 0) {
+			dispatch(fetchMoreUserPosts(username, postsCurrentPage + 1));
+		} else if (selectedTab === 1) {
+			dispatch(fetchMoreUserReposts(username, repostsCurrentPage + 1));
+		} else {
+			dispatch(fetchMoreUserLikes(username, likesCurrentPage + 1));
+		}
+	};
+
+	const hasMore = selectedTab === 0 ? postsCurrentPage < postsTotalPages
+		: selectedTab === 1 ? repostsCurrentPage < repostsTotalPages
+		: likesCurrentPage < likesTotalPages;
 
 	const noResultMessage = () => {
 		const type = selectedTab === 0 ? 'posts' : selectedTab === 1 ? 'reposts' : 'likes';
@@ -81,6 +101,13 @@ const UserShowPage = () => {
 							<Divider/>
 						</Paper>
 						{displayPosts()}
+						{!isLoading && hasMore &&
+							<Button onClick={loadMore} variant="outlined" sx={{ height: '3rem', width: '100%', marginTop: '.5rem' }}>
+								<Typography variant='subtitle1'>
+									See More
+								</Typography>
+							</Button>
+						}
 					</Box>
 				}
 			</Grid>
