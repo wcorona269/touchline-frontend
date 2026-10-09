@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from './store/store'
 import App from './components/App';
 import './index.css';
+import 'flag-icons/css/flag-icons.min.css';
 import "@fontsource/nova-round"
 import reportWebVitals from './reportWebVitals';
 import TimeAgo from 'javascript-time-ago'

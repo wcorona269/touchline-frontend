@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import leaguesByCountry from './leaguesByCountry';
 import { Container, useTheme, Grid, Link, Stack, Typography, Button, ListItem, ListItemButton, List, ButtonGroup, Skeleton } from '@mui/material';
-import Flag from 'react-world-flags';
+import Flag from '../util/country-flag';
 import { Box, Table, TableCell, TableHead, TableRow, Paper, TableContainer, TableBody } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Title from '../util/title-util';

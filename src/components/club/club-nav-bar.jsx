@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Tab, Tabs, Divider, Typography, useTheme } from '@mui/material';
-import Flag from 'react-world-flags';
+import Flag from '../util/country-flag';
 
 const ClubNavBar = ({club, selectedTab, setSelectedTab}) => {
 	const clubInfo = club[0];
