@@ -27,7 +27,7 @@ const HomeFixturesComponent = ({fixtures}) => {
 			result.unshift(
 				<Grid container className={winner === true ? 'winning team' : ''}>
 					<Grid item xs={2}>
-							<img alt='' src={team_logo} />
+							<img alt='' src={team_logo} loading='lazy' />
 					</Grid>
 					<Grid item xs={9}>
 						<Link sx={{color: theme.palette.text.primary}} underline='hover' onClick={() => navigate(`/club/${team_id}`)}>

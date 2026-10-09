@@ -46,7 +46,7 @@ const MultiTableDashboard = ({ standings, name, logo }) => {
 								<TableCell align='left' >
 									<Link onClick={() => navigate(`/club/${clubId}`)} sx={{ color: theme.palette.info.main }} >
 										<Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }} >
-											<img src={clubLogo} style={{height: '1.5rem', width: '1.5rem', marginRight: '.25rem'}} alt=''/>
+											<img src={clubLogo} loading='lazy' style={{height: '1.5rem', width: '1.5rem', marginRight: '.25rem'}} alt=''/>
 											{clubName}
 										</Typography>
 									</Link>

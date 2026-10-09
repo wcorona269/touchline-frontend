@@ -96,7 +96,7 @@ const LeagueTableDashboard = ({table, name, logo }) => {
 								<TableCell sx={{ paddingRight: 0, color: theme.palette.text.secondary}}>{rank}</TableCell>
 								<TableCell sx={{ paddingLeft: 1 }} >
 									<Link underline='hover' sx={{ color: theme.palette.secondary.main, display: 'flex', flexDirection: 'row' }} onClick={() => navigate(`/club/${clubId}`)} >
-										<img src={clubLogo} style={{ height: '1.5rem', width: '1.5rem', marginRight: '.5rem' }} alt=''/>
+										<img src={clubLogo} loading='lazy' style={{ height: '1.5rem', width: '1.5rem', marginRight: '.5rem' }} alt=''/>
 										<Typography sx={{ fontFamily: theme.typography.bold }}  variant='body1'>{clubName}</Typography>
 									</Link>
 								</TableCell>

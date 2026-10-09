@@ -42,7 +42,7 @@ const MatchCard = ({fixture, key, league}) => {
 			result.unshift(
 				<Grid container className={winner === true ? 'winning team' : ''}>
 					<Grid item xs={10} align='left' sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-						<img alt='' src={team_logo} style={{height: '2rem', width: '2rem', marginRight: '.25rem'}} />
+						<img alt='' src={team_logo} loading='lazy' style={{height: '2rem', width: '2rem', marginRight: '.25rem'}} />
 						<Typography variant='body2' sx={{ flexShrink: 1, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}} >
 							{team_name}
 						</Typography>

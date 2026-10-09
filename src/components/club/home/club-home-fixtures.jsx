@@ -31,7 +31,7 @@ export const displayTeams = (fixture) => {
 		result.unshift(
 			<Grid container className={winner === true ? 'winning team' : ''}>
 				<Grid item xs={2}>
-					<img src={team_logo} />
+					<img src={team_logo} alt='' loading='lazy' />
 				</Grid>
 				<Grid item xs={9}>
 					<Link to={`/club/${team_id}`}>

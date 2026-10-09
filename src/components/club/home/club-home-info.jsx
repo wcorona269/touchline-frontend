@@ -53,7 +53,7 @@ const ClubHomeInfo = ({ club }) => {
 					{clubDetails['Stadium']}
 				</Typography>
 			</Box>
-			<img alt='' src={clubDetails['Image']} style={{width: '90%', height: '90%', objectFit: 'cover', margin: 'auto', display: 'flex'}} />
+			<img alt='' src={clubDetails['Image']} loading='lazy' style={{width: '90%', height: '90%', objectFit: 'cover', margin: 'auto', display: 'flex'}} />
 			<TableContainer >
 				<Table size='small' aria-label='a dense table'>
 					<TableHead>

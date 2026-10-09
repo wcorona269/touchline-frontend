@@ -39,7 +39,7 @@ const LeagueHomeTable = ({table}) => {
 					<TableCell component="th" scope="row">
 						<Typography variant='body2' id='team-name'>
 							<Link to={`/club/${team_id}`}>
-								<img alt='' src={logo} />
+								<img alt='' src={logo} loading='lazy' />
 								{team}
 							</Link>
 						</Typography>

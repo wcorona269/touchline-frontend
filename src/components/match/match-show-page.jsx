@@ -33,12 +33,12 @@ const MatchShowPage = () => {
 	const header = (
 		<Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 1 }}>
 			<Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }} >
-				<img alt='' src={homeLogo} style={{ width: '2rem', height: '2rem', marginRight: '.25rem' }} />
+				<img alt='' src={homeLogo} loading='lazy' style={{ width: '2rem', height: '2rem', marginRight: '.25rem' }} />
 				{homeTeam}
 			</Typography>
 			<Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }} >
 				{awayTeam}
-				<img alt='' src={awayLogo} style={{ width: '2rem', height: '2rem', marginLeft: '.25rem' }} />
+				<img alt='' src={awayLogo} loading='lazy' style={{ width: '2rem', height: '2rem', marginLeft: '.25rem' }} />
 			</Typography>
 		</Box>
 	)

@@ -24,7 +24,7 @@ const LiveFixturesDisplay = ({ matches }) => {
 			result.unshift(
 				<Grid container className={winner === true ? 'winning team' : ''} sx={{marginTop: '8px', marginBottom: '8px'}} key={team_id}>
 					<Grid item xs={2}>
-						<img alt='' src={team_logo} style={{display: 'flex', alignItems: 'center', justifyContent: 'left', height: '1.25rem', width: '1.25rem'}}/>
+						<img alt='' src={team_logo} loading='lazy' style={{display: 'flex', alignItems: 'center', justifyContent: 'left', height: '1.25rem', width: '1.25rem'}}/>
 					</Grid>
 					<Grid item xs={9}>
 						<Typography variant='body2' className={winner === true ? 'winning-team' : ''}>
@@ -42,7 +42,7 @@ const LiveFixturesDisplay = ({ matches }) => {
 			<ListItem disablePadding divider key={fixture.fixture.id}>
 				<ListItemButton onClick={() => handleClick(fixture.fixture.id)} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '6rem', justifyContent: 'space-around'}}>
 					<Typography variant='caption' sx={{color: theme.palette.text.disabled, width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center' }}>
-						<img alt='' src={fixture.league.flag} style={{ height: '.75rem', width: '1.25rem', marginRight: '.25rem' }} />
+						<img alt='' src={fixture.league.flag} loading='lazy' style={{ height: '.75rem', width: '1.25rem', marginRight: '.25rem' }} />
 						{fixture.league.name}
 					</Typography>
 					<Grid container>

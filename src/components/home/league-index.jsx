@@ -110,7 +110,7 @@ const LeagueIndex = () =>  {
 						}}
 					>
 						<Paper sx={{height: '4rem', width: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', p: 2}} >
-							<img alt='' style={{ height: '2.5rem', width: '2.5rem', marginBottom: '.5rem' }} src={logo} title={name} />
+							<img alt='' style={{ height: '2.5rem', width: '2.5rem', marginBottom: '.5rem' }} src={logo} title={name} loading='lazy' />
 							<Typography align='center' variant='subtitle2' sx={{ fontSize: 12, fontFamily: theme.typography.light, whiteSpace: 'nowrap' }}>
 								{name}
 							</Typography>

@@ -59,7 +59,7 @@ const ClubStatsDashboard = ({ name, logo, stats }) => {
 			result.push(
 				<TableRow key={competition}>
 					<TableCell sx={{ display: 'flex', alignItems: 'center'}}>
-						<img alt='' src={logo} style={{ width: '1rem', height: '1rem', marginRight: '.5rem'}}/>
+						<img alt='' src={logo} loading='lazy' style={{ width: '1rem', height: '1rem', marginRight: '.5rem'}}/>
 						{competition}
 					</TableCell>
 					<TableCell>{played}</TableCell>

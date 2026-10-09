@@ -35,7 +35,7 @@ const Article = ({article, idx}) => {
 						</Box>
 					</Grid>
 					{/* <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<img alt='' src={article.img} style={{ width: '60%', margin: 'auto' }} />
+						<img alt='' src={article.img} loading='lazy' style={{ width: '60%', margin: 'auto' }} />
 					</Grid> */}
 				</Grid>
 			</ListItemButton>
