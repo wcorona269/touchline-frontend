@@ -19,11 +19,11 @@ const NavBar = ({ lightMode, setLightMode }) => {
 	if (currentUser === null) return null;
 	return (
 		<AppBar  >
-			<Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main }} onClick={() => navigate('/home')} >
+			<Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
+				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main, fontSize: { xs: '1.5rem', sm: '2.125rem' }, flexShrink: 0 }} onClick={() => navigate('/home')} >
 					touchline
 				</Typography>
-				<Box display={'flex'} flexDirection='row'>
+				<Box display={'flex'} flexDirection='row' sx={{ minWidth: 0 }}>
 					<AccountMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
 					<AboutMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
 				</Box>

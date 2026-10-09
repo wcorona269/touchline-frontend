@@ -39,8 +39,8 @@ const AccountMenu = ({ lightMode, setLightMode }) => {
 
 	return (
 		<>
-			<Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'right' }}>
-				<Typography sx={{ minWidth: 100 }}>{username}</Typography>
+			<Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'right', minWidth: 0 }}>
+				<Typography noWrap sx={{ maxWidth: { xs: 70, sm: 150 }, overflow: 'hidden', textOverflow: 'ellipsis' }}>{username}</Typography>
 				<Tooltip title="Account settings">
 					<IconButton
 						onClick={handleClick}
