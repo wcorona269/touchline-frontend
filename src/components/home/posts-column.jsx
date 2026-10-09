@@ -1,6 +1,7 @@
 // import './posts-column.scss'
 import React, { useEffect, useMemo } from 'react'
 import { Button, Grid, Paper, Stack, Typography, CircularProgress } from '@mui/material'
+import { Virtuoso } from 'react-virtuoso';
 import { fetchPosts, fetchReposts } from '../../actions/post_actions';
 import LoadingMessage from '../util/loading/loading-screen';
 import CreatePost from './create-post';
@@ -43,6 +44,28 @@ const PostsTimeline = () => {
 		return <LoadingMessage/>
 	}
 
+	const renderPost = (index, item) => (
+		<Stack spacing={2} sx={{ paddingBottom: 2 }}>
+			{item.post ? (
+				<PostContainer repost={item} post={item.post} />
+			) : (
+				<PostContainer post={item} />
+			)}
+		</Stack>
+	);
+
+	const loadMoreFooter = () => (
+		!isPostsLoading && !isRepostsLoading ?
+			<Button onClick={loadMorePosts} variant="outlined" sx={{ height: '3rem', width: '100%' }}>
+				<Typography variant='subtitle1'>
+					See More
+				</Typography>
+			</Button> :
+			<Button variant="outlined" sx={{ height: '3rem', width: '100%' }} >
+				<CircularProgress size='2rem' />
+			</Button>
+	);
+
 	return (
 		<>
 			<Grid item xs={6}>
@@ -51,28 +74,12 @@ const PostsTimeline = () => {
 						<Title variant='h5' content='Home'/>
 						<CreatePost/>
 					</Paper>
-					{combinedPosts.map((item) => {
-						if (item.post) {
-							return (
-								<PostContainer key={`repost-${item.id}`} repost={item} post={item.post} />
-							)
-						} else {
-							return (
-								<PostContainer key={`post-${item.id}`} post={item} />
-							)
-						}
-					})}
-					{
-						!isPostsLoading && !isRepostsLoading ?
-							<Button onClick={loadMorePosts} variant="outlined" sx={{ height: '3rem', width: '100%' }}>
-								<Typography variant='subtitle1'>
-									See More
-								</Typography>
-							</Button> :
-							<Button variant="outlined" sx={{ height: '3rem', width: '100%' }} >
-								<CircularProgress size='2rem' />
-							</Button>
-					}
+					<Virtuoso
+						useWindowScroll
+						data={combinedPosts}
+						itemContent={renderPost}
+						components={{ Footer: loadMoreFooter }}
+					/>
 				</Stack>
 			</Grid>
 			<Grid item xs={3} sx={{ position: 'sticky', top: -450 }}  >

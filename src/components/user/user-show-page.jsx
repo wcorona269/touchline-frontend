@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Button, Paper, Box, Grid, Tabs, Tab, Container, Typography, Divider, useTheme, Skeleton, Stack } from '@mui/material';
+import { Virtuoso } from 'react-virtuoso';
 import PostContainer from '../home/post-container';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserInfo, fetchMoreUserPosts, fetchMoreUserReposts, fetchMoreUserLikes } from '../../actions/user_actions';
@@ -52,26 +53,40 @@ const UserShowPage = () => {
 		)
 	}
 
+	const sortedItems = useMemo(() => {
+		const items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
+		if (!items) return [];
+		return Object.values(items).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+	}, [selectedTab, posts, reposts, likes]);
+
+	const renderItem = (index, item) => (
+		<Stack spacing={2} sx={{ paddingTop: index === 0 ? 2 : 0, paddingBottom: 2 }}>
+			{selectedTab !== 1 ? <PostContainer post={item} /> : <RepostContainer post={item} />}
+		</Stack>
+	);
+
+	const loadMoreFooter = () => (
+		!isLoading && hasMore &&
+			<Button onClick={loadMore} variant="outlined" sx={{ height: '3rem', width: '100%', marginTop: '.5rem' }}>
+				<Typography variant='subtitle1'>
+					See More
+				</Typography>
+			</Button>
+	);
+
 	const displayPosts = () => {
 		if (isLoading) return;
-		let items = selectedTab === 0 ? posts : selectedTab === 1 ? reposts : likes;
-		if (!items || Object.keys(items).length === 0) {
+		if (sortedItems.length === 0) {
 			return noResultMessage()
 		}
-		let result = []
-		const sortedItems = Object.values(items)?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-		for (let i = 0; i < sortedItems?.length || 0; i++) {
-			if (selectedTab !== 1) {
-				result.push(<PostContainer post={sortedItems[i]} />)
-			} else {
-				result.push(<RepostContainer post={sortedItems[i]} idx={i} />)
-			}
-		}
-		
+
 		return (
-			<Stack spacing={2} sx={{paddingTop: 2}} >
-				{result}
-			</Stack>
+			<Virtuoso
+				useWindowScroll
+				data={sortedItems}
+				itemContent={renderItem}
+				components={{ Footer: loadMoreFooter }}
+			/>
 		)
 	}
 
@@ -101,13 +116,6 @@ const UserShowPage = () => {
 							<Divider/>
 						</Paper>
 						{displayPosts()}
-						{!isLoading && hasMore &&
-							<Button onClick={loadMore} variant="outlined" sx={{ height: '3rem', width: '100%', marginTop: '.5rem' }}>
-								<Typography variant='subtitle1'>
-									See More
-								</Typography>
-							</Button>
-						}
 					</Box>
 				}
 			</Grid>
