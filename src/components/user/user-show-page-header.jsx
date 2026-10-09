@@ -52,7 +52,7 @@ const UserShowPageHeader = () => {
 	return (
 		<Paper elevation={1}>
 			<Title variant='h6' content={username} back={true} />
-			<Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'flex-end', padding: 2, gap: 1 }} >
+			<Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'left', alignItems: 'flex-end', padding: 2, gap: 1 }} >
 				{displayAvatar()}
 				<Box display='flex' flexDirection='column'>
 					<Typography variant='h6'>
