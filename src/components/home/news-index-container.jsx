@@ -23,10 +23,10 @@ const NewsIndexContainer = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
-				<NewsIndex news={news} title='News' /> 
+			<Grid item xs={12} md={6}>
+				<NewsIndex news={news} title='News' />
 			</Grid>
-			<Grid item xs={3} sx={{ position: 'sticky', top: '3rem' }}>
+			<Grid item xs={12} md={3} sx={{ position: {md: 'sticky'}, top: '3rem' }}>
 				<HomeFixturesColumn/>
 			</Grid>
 		</>

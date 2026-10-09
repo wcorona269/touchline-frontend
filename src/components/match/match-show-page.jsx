@@ -45,7 +45,7 @@ const MatchShowPage = () => {
 	
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Box>
 					<Paper elevation={1}>
 						<Title variant='h6' content='Match Summary' back={true} />
@@ -58,7 +58,7 @@ const MatchShowPage = () => {
 					</Stack>
 				</Box>
 			</Grid>
-			<Grid item xs={3} sx={{ position: 'sticky', top: '-20rem' }}>
+			<Grid item xs={12} md={3} sx={{ position: {md: 'sticky'}, top: '-20rem' }}>
 				<Stack spacing={2}>
 					<MatchInfoTable match={match[0]} />
 					<MiniLeagueTable match={match[0]} homeTeam={homeTeam} awayTeam={awayTeam} />

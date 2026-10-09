@@ -64,7 +64,7 @@ const LeagueShowPage = () => {
 	const name = leagueInfo?.name;
 
 	return (
-		<Grid item xs={9}>
+		<Grid item xs={12} md={9}>
 			<Box>
 				<Paper elevation={1} sx={{marginBottom: '1rem'}}>
 					<Title variant='h5' content={name} img={logo} back={true} button={true} />

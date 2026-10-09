@@ -40,7 +40,7 @@ const ClubShowPage = () => {
 	const logo = clubInfo?.team?.logo
 
 	return (
-		<Grid item xs={9}>
+		<Grid item xs={12} md={9}>
 			<Paper sx={{ marginBottom: '1rem' }} elevation={1}>
 				<Title variant='h5' content={name} img={logo} back={true} button={true} />
 				<ClubNavBar  club={club} selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>

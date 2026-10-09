@@ -39,7 +39,7 @@ const Notifications = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Paper elevation={1} sx={{minHeight: '20rem'}}>
 					<Title variant='h5' content='Notifications' notifs={true} />
 					<List>
@@ -47,7 +47,7 @@ const Notifications = () => {
 					</List>
 				</Paper>
 			</Grid>
-			<Grid item xs={3}>
+			<Grid item xs={12} md={3}>
 				<HomeFixturesColumn/>
 			</Grid>
 			<ScrollToTopOnLoad/>

@@ -68,7 +68,7 @@ const PostsTimeline = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Stack spacing={2}>
 					<Paper elevation={1}>
 						<Title variant='h5' content='Home'/>
@@ -82,7 +82,7 @@ const PostsTimeline = () => {
 					/>
 				</Stack>
 			</Grid>
-			<Grid item xs={3} sx={{ position: 'sticky', top: -450 }}  >
+			<Grid item xs={12} md={3} sx={{ position: {md: 'sticky'}, top: -450 }}  >
 				<Stack spacing={2}>
 					<TopStories/>
 					<HomeFixturesColumn />

@@ -33,13 +33,13 @@ const PlayerProfile = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Stack spacing={2}>
 					<PlayerOverview player={player} />
 					<PlayerStats statistics={statistics} />
 				</Stack>
 			</Grid>
-			<Grid item xs={3}>
+			<Grid item xs={12} md={3}>
 				<HomeFixturesColumn />
 			</Grid>
 		</>

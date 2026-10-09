@@ -131,7 +131,7 @@ const LeagueIndex = () =>  {
 	}
 
 	return (
-		<Grid item xs={9}>
+		<Grid item xs={12} md={9}>
 			<Box>
 				<Paper elevation={0}>
 					<Title variant='h5' content='Explore' />

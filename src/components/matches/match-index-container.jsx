@@ -74,8 +74,8 @@ const MatchIndexContainer = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
-				<TimelineMatchDisplay 
+			<Grid item xs={12} md={6}>
+				<TimelineMatchDisplay
 					matches={sortedMatches} 
 					competitions={competitions}
 					selectedNation={selectedNation}
@@ -87,7 +87,7 @@ const MatchIndexContainer = () => {
 					date={date}
 					/>
 			</Grid>
-			<Grid item xs={3} sx={{ position: 'sticky', top: '3rem' }}>
+			<Grid item xs={12} md={3} sx={{ position: {md: 'sticky'}, top: '3rem' }}>
 				<TopStories/>
 			</Grid>
 		</>

@@ -40,10 +40,10 @@ const Welcome = () => {
 	return (
 		<Container>
 			<Stack spacing={2} alignItems='center'>
-				<Typography variant='h1' sx={{ color: theme.palette.primary.main }}>
+				<Typography variant='h1' sx={{ color: theme.palette.primary.main, fontSize: { xs: '3rem', sm: '4rem', md: '6rem' } }}>
 					touchline
 				</Typography>
-				<Typography variant='h4' sx={{ color: theme.palette.primary.main }} >
+				<Typography variant='h4' sx={{ color: theme.palette.primary.main, fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2.125rem' } }} >
 					The everything app for soccer.
 				</Typography>
 				<Divider/>

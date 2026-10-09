@@ -96,9 +96,9 @@ const UserShowPage = () => {
 	
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				{
-					isLoading ? 
+					isLoading ?
 						<Skeleton
 							animation="wave"
 							height={500}
@@ -119,7 +119,7 @@ const UserShowPage = () => {
 					</Box>
 				}
 			</Grid>
-			<Grid item xs={3} sx={{position: 'sticky', top: '3rem'}} >
+			<Grid item xs={12} md={3} sx={{position: {md: 'sticky'}, top: '3rem'}} >
 				<HomeFixturesColumn/>
 			</Grid>
 		</>

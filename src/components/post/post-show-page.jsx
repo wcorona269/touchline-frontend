@@ -158,7 +158,7 @@ const PostShowPage = () => {
 
 	return (
 		<>
-			<Grid item xs={6}>
+			<Grid item xs={12} md={6}>
 				<Paper elevation={1}>
 					<Title variant='h6' content={determineHeaderContent()} back={true} />
 					<Box display='flex' flexDirection='column' justifyContent={'center'} padding={2} >
@@ -196,7 +196,7 @@ const PostShowPage = () => {
 					</Box>
 				</Paper>
 			</Grid>
-			<Grid item xs={3}>
+			<Grid item xs={12} md={3}>
 				<HomeFixturesColumn />
 			</Grid>
 		</>

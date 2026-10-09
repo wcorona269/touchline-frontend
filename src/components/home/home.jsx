@@ -71,7 +71,7 @@ const Home = () => {
 	return (
 		<Container className='home-container' sx={{paddingBottom: '5rem'}}>
 			<Grid container alignItems='flex-start' spacing={2}>
-				<Grid item xs={3} sx={{position: 'sticky', top: '2rem'}}>
+				<Grid item xs={12} md={3} sx={{position: {md: 'sticky'}, top: '2rem'}}>
 					<Stack spacing={2}>
 						<Box>
 							<HomeMenu 
