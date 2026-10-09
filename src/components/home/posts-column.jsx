@@ -1,5 +1,5 @@
 // import './posts-column.scss'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Button, Grid, Paper, Stack, Typography, CircularProgress } from '@mui/material'
 import { fetchPosts, fetchReposts } from '../../actions/post_actions';
 import LoadingMessage from '../util/loading/loading-screen';
@@ -18,7 +18,6 @@ const PostsTimeline = () => {
 	const isPostsLoading = useSelector(state => state.posts.isLoading);
 	const isRepostsLoading = useSelector(state => state.reposts.isLoading);
 	const reposts = useSelector(state => state.reposts?.reposts || []);
-	const [combinedPosts, setCombinedPosts] = useState();
 
 	useEffect(() => {
 		if (!isPostsLoading) {
@@ -29,11 +28,10 @@ const PostsTimeline = () => {
 		}
 	}, []);
 
-	useEffect(() => {
+	const combinedPosts = useMemo(() => {
 		const postsArray = Object.values(posts);
 		const repostsArray = Object.values(reposts);
-		const sortedPosts = [...postsArray, ...repostsArray].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-		setCombinedPosts(sortedPosts);
+		return [...postsArray, ...repostsArray].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 	}, [posts, reposts]);
 
 	const loadMorePosts = () => {
@@ -41,7 +39,7 @@ const PostsTimeline = () => {
 		dispatch(fetchReposts(current_page + 1));
 	};
 
-	if (!combinedPosts) {
+	if (combinedPosts.length === 0 && (isPostsLoading || isRepostsLoading)) {
 		return <LoadingMessage/>
 	}
 
@@ -53,14 +51,14 @@ const PostsTimeline = () => {
 						<Title variant='h5' content='Home'/>
 						<CreatePost/>
 					</Paper>
-					{combinedPosts.map((item, idx) => {
+					{combinedPosts.map((item) => {
 						if (item.post) {
 							return (
-								<PostContainer repost={item} post={item.post} idx={idx} />
-							) 
+								<PostContainer key={`repost-${item.id}`} repost={item} post={item.post} />
+							)
 						} else {
 							return (
-								<PostContainer post={item} key={idx} />
+								<PostContainer key={`post-${item.id}`} post={item} />
 							)
 						}
 					})}

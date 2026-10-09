@@ -14,7 +14,7 @@ import RepeatIcon from '@mui/icons-material/Repeat';
 import moment from 'moment-timezone';
 import PostMenu from './post-menu';
 
-const PostContainer = ({ post, repost }) => {
+const PostContainer = React.memo(({ post, repost }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const theme = useTheme();
@@ -145,6 +145,6 @@ const PostContainer = ({ post, repost }) => {
 			</Box>
 		</Paper>
 	)
-}
+});
 
 export default PostContainer;
