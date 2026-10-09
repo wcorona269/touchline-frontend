@@ -120,8 +120,8 @@ const LeagueIndex = () =>  {
 			});
 		}
 		return (
-			<Container sx={{display: 'flex', flexDirection: 'column', padding: '1rem', gap: '1rem'}}> 
-				<Box sx={{display: 'flex', flexDirection: 'row', gap: '.5rem' }}>
+			<Container sx={{display: 'flex', flexDirection: 'column', padding: '1rem', gap: '1rem'}}>
+				<Box sx={{display: 'flex', flexDirection: 'row', gap: '.5rem', overflowX: 'auto', maxWidth: '100%' }}>
 					<ButtonGroup>
 						{result}
 					</ButtonGroup>
@@ -143,7 +143,7 @@ const LeagueIndex = () =>  {
 					</Paper>
 					<Paper elevation={1}>
 						<Title variant='h6' content='All Leagues' />
-						<TableContainer component={Paper}>
+						<TableContainer component={Paper} sx={{ maxWidth: '100%', overflowX: 'auto' }}>
 							<Table sx={{ minWidth: 700 }} size='small' >
 								<TableHead>
 									<TableRow sx={{backgroundColor: theme.palette.action.hover }}>
