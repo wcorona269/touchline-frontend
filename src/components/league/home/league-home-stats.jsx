@@ -68,8 +68,8 @@ const LeagueHomeStats = ({top_scorers}) => {
 							// sx={{backgroundColor: theme.palette.action.hover}} 
 						>
 							<TableRow>
-								<TableCell sx={{color: theme.palette.text.secondary, fontFamily: theme.typography.bold}} align='left'>Name</TableCell>
-								<TableCell sx={{color: theme.palette.text.secondary, fontFamily: theme.typography.bold}} align='center'>Goals</TableCell>
+								<TableCell sx={{color: theme.palette.text.secondary, fontWeight: 700}} align='left'>Name</TableCell>
+								<TableCell sx={{color: theme.palette.text.secondary, fontWeight: 700}} align='center'>Goals</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>

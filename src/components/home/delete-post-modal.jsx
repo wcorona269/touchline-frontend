@@ -39,7 +39,7 @@ const DeletePostModal = ({postId, open, handleClose}) => {
 				aria-describedby="modal-modal-description"
 			>
 				<Box sx={style}>
-					<Typography variant="h5"  sx={{fontFamily: theme.typography.bold, color: theme.palette.text.primary}}>
+					<Typography variant="h5"  sx={{fontWeight: 700, color: theme.palette.text.primary}}>
 						Delete post?
 					</Typography>
 					<Typography variant='body2' sx={{color: theme.palette.text.secondary}} >

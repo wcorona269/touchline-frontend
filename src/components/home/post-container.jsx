@@ -11,7 +11,7 @@ import { createNotification } from '../../actions/notification_actions';
 import { useNavigate } from 'react-router-dom';
 import RepostButton from './repost-popper';
 import RepeatIcon from '@mui/icons-material/Repeat';
-import moment from 'moment-timezone';
+import { timeAgo } from '../util/time-ago';
 import PostMenu from './post-menu';
 import { postActionSx } from './post-action-sx';
 
@@ -27,7 +27,6 @@ const PostContainer = React.memo(({ post, repost }) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [isReposted, setIsReposted] = useState(false);
 	const avatar = post?.avatar_url;
-	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	
 
 	useEffect(() => {
@@ -127,7 +126,7 @@ const PostContainer = React.memo(({ post, repost }) => {
 								{post.username}
 							</Link>
 							<Typography variant='caption' noWrap sx={{ color: theme.palette.text.disabled, fontSize: 13 }}>
-								{moment(post.created_at).tz(userTimeZone).fromNow()}
+								{timeAgo(post.created_at)}
 							</Typography>
 						</Box>
 						<Box>

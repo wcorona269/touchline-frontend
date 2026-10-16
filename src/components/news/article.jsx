@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, ListItem, ListItemButton, Typography, useTheme } from '@mui/material';
-import moment from 'moment';
+import { timeAgo } from '../util/time-ago';
 
 // Older scraped articles stored links without a scheme; RSS articles have full URLs.
 export const articleUrl = (link = '') => (/^https?:\/\//.test(link) ? link : `https://${link}`);
@@ -29,7 +29,7 @@ const Article = ({ article }) => {
 							{article.media}
 						</Typography>
 						{(article.published || article.date) && (
-							<Typography variant='caption'>· {article.published ? moment(article.published).fromNow() : article.date}</Typography>
+							<Typography variant='caption'>· {article.published ? timeAgo(article.published) : article.date}</Typography>
 						)}
 					</Box>
 					<Typography

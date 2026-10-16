@@ -24,7 +24,7 @@ const LeagueStatsTable = ({data, category}) => {
 							return (
 								<TableCell sx={{ width: width }} align={idx === 1 || idx === 3 ? 'left' : 'center'  } key={idx} >
 									<Typography variant='body1' sx={{ 
-										fontFamily: theme.typography.bold,
+										fontWeight: 700,
 										color: theme.palette.text.secondary
 										}}>
 										{column}
@@ -47,11 +47,11 @@ const LeagueStatsTable = ({data, category}) => {
 
 						return (
 							<TableRow key={idx} >
-								<TableCell sx={{ fontFamily: theme.typography.bold }} align='center' >
+								<TableCell sx={{ fontWeight: 700 }} align='center' >
 									{idx + 1}
 								</TableCell>
 								<TableCell sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} ><Avatar sx={{ marginRight: '.25rem', height: '1.5rem', width: '1.5rem' }} src={icon} />
-									<Link underline='hover' onClick={() => navigate(`/player/${id}`)} sx={{color: theme.palette.secondary.main, fontFamily: theme.typography.bold }} >
+									<Link underline='hover' onClick={() => navigate(`/player/${id}`)} sx={{color: theme.palette.secondary.main, fontWeight: 700 }} >
 										{name}
 									</Link>
 								</TableCell>
@@ -61,7 +61,7 @@ const LeagueStatsTable = ({data, category}) => {
 								<TableCell>
 									{nation}
 								</TableCell>
-								<TableCell align='center' sx={{fontFamily: theme.typography.bold}}>
+								<TableCell align='center' sx={{fontWeight: 700}}>
 									{category === 'Goals' ? goals : assists}
 								</TableCell>
 							</TableRow>

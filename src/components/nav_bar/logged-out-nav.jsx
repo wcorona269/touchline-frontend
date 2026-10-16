@@ -19,10 +19,10 @@ const LoggedOutNav = () => {
 	return (
 		<div className='logged-out-nav' >
 			<Stack spacing={1} direction='row'>
-				<Button variant='contained' size='small' sx={{ fontFamily: theme.typography.bold }} onClick={() => loginModal()}>
+				<Button variant='contained' size='small' sx={{ fontWeight: 700 }} onClick={() => loginModal()}>
 					log in
 				</Button>
-				<Button variant='outlined' size='small' sx={{ fontFamily: theme.typography.bold }} onClick={() => signupModal()}>
+				<Button variant='outlined' size='small' sx={{ fontWeight: 700 }} onClick={() => signupModal()}>
 					Sign up
 				</Button>
 			</Stack>

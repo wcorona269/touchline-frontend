@@ -75,29 +75,29 @@ const AboutMenu = ({ lightMode, setLightMode }) => {
 				<Paper elevation={0} sx={{padding: 2, maxWidth: 250, height: 'fit-content', border: `1px solid ${theme.palette.divider}`}} >
 					<Typography variant='body2' sx={{lineHeight: '1.5'}}>
 						My name is Will Corona and I am a graduate of the full-stack software engineering program at 
-						<span style={{color: theme.palette.error.main, fontFamily: theme.typography.bold, marginLeft: '4px'}}>
+						<span style={{color: theme.palette.error.main, fontWeight: 700, marginLeft: '4px'}}>
 							App Academy.
 						</span>
 						<br/>
 						<br/>
-						<span style={{ marginRight: '4px', color: theme.palette.primary.main, fontFamily: theme.typography.bold}}>
+						<span style={{ marginRight: '4px', color: theme.palette.primary.main, fontWeight: 700}}>
 							touchline 
 						</span>
 						is a web app for soccer discussion, stats, and news.
 						This project uses 
-						<span style={{color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontFamily: theme.typography.bold}}>
+						<span style={{color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontWeight: 700}}>
 							React, Redux, Material-UI, CSS and SASS
 						</span>
 						for frontend configuration, and
-						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontFamily: theme.typography.bold}}>
+						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontWeight: 700}}>
 							Flask & SQLAlchemy
 						</span>
 						for the backend. This project also uses the
-						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontFamily: theme.typography.bold }}>
+						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontWeight: 700 }}>
 							API-Football by API-SPORTS
 						</span> 
 						for soccer data and the
-						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontFamily: theme.typography.bold }}>
+						<span style={{ color: theme.palette.secondary.main, marginLeft: '4px', marginRight: '4px', fontWeight: 700 }}>
 							Python GoogleNews
 						</span> 
 						web scraping package for news.

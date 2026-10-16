@@ -1,37 +1,15 @@
-/*
-	Legacy family names. Components reference these via theme.typography.bold / .light / .regular
-	as a font-family, so each one aliases a single static Inter weight.
-*/
-@font-face {
-	font-family: 'Ubuntu-Bold';
-	font-display: swap;
-	src: url('@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'Ubuntu-Regular';
-	font-display: swap;
-	src: url('@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'Ubuntu-Light';
-	font-display: swap;
-	src: url('@fontsource/inter/files/inter-latin-300-normal.woff2') format('woff2');
-}
-
 body {
-	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-feature-settings: 'cv11', 'ss01';
 }
 
 .inner-body {
-	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 button {
-	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
 	font-weight: 600;
 }

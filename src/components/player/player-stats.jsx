@@ -79,7 +79,7 @@ const PlayerStats = ({statistics}) => {
 		result.push(
 			<TableRow key='totals' sx={{ backgroundColor: theme.palette.action.hover, '& td': { fontWeight: 800, color: theme.palette.text.primary, borderBottom: 'none' } }}>
 				<TableCell sx={{ pl: 2 }} id='competition'>All competitions</TableCell>
-				{/* <TableCell sx={{ padding: 1, fontFamily: theme.typography.bold }} id='team'>-</TableCell> */}
+				{/* <TableCell sx={{ padding: 1, fontWeight: 700 }} id='team'>-</TableCell> */}
 				<TableCell align='center'>{totals['apps']}</TableCell>
 				<TableCell align='center' >{totals['goals']}</TableCell>
 				<TableCell align='center' >{totals['assists']}</TableCell>
@@ -104,7 +104,7 @@ const PlayerStats = ({statistics}) => {
 				<TableHead>
 					<TableRow>
 						<TableCell sx={headCell} component='th' id='competition'>Competition</TableCell>
-						{/* <TableCell sx={{ padding: 1, fontFamily: theme.typography.bold }} component='th' id='team'>Team</TableCell> */}
+						{/* <TableCell sx={{ padding: 1, fontWeight: 700 }} component='th' id='team'>Team</TableCell> */}
 						<TableCell sx={headCell} component='th' align='center' >App.</TableCell>
 						<TableCell sx={headCell} component='th' align='center' >G</TableCell>
 						<TableCell sx={headCell} component='th' align='center' >A</TableCell>

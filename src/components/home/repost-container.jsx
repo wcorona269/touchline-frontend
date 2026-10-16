@@ -10,7 +10,7 @@ const RepostContainer = ({post, idx}) => {
 
 	return (
 		<Paper elevation={1} key={idx} style={{paddingTop: '1rem'}}>
-			<Typography sx={{ fontFamily: theme.typography.bold, marginLeft: '1rem', display: 'flex', alignItems: 'center' }} variant='caption'>
+			<Typography sx={{ fontWeight: 700, marginLeft: '1rem', display: 'flex', alignItems: 'center' }} variant='caption'>
 				<Link onClick={() => navigate(`/user/${post.user.username}`)} underline='hover' sx={{ color: theme.palette.text.disabled, display: 'flex', alignItems: 'center' }}>
 					<RepeatIcon sx={{ marginRight: '.25rem' }} fontSize='small' />
 					Reposted by {post.user.username}

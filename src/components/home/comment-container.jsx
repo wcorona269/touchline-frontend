@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createLike, deleteLike } from '../../actions/post_actions';
 import { createNotification } from '../../actions/notification_actions';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
+import { timeAgo } from '../util/time-ago';
 
 const CommentContainer = ({ comment, idx }) => {
 	const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const CommentContainer = ({ comment, idx }) => {
 	const [isLiked, setIsLiked] = useState(0);
 	const [commentLikes, setCommentLikes] = useState(comment?.likes?.length || 0);
 	const user_id = useSelector(state => state.session?.user?.id);
-	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const theme = useTheme();
 
 	useEffect(() => {
@@ -59,12 +58,12 @@ const CommentContainer = ({ comment, idx }) => {
 					<Grid item xs sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', paddingLeft: '.5rem !important'}}>
 						<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 							<Link underline='hover' onClick={() => navigate(`/user/${comment.username}`)} >
-								<Typography variant='body2' sx={{ marginBottom: '.25rem', fontFamily: theme.typography.bold }}>
+								<Typography variant='body2' sx={{ marginBottom: '.25rem', fontWeight: 700 }}>
 									{comment.username}
 								</Typography>
 							</Link>
 							<Typography variant='caption' sx={{ color: theme.palette.text.disabled, marginLeft: 1 }} >
-								{moment(comment.created_at).tz(userTimeZone).fromNow()}
+								{timeAgo(comment.created_at)}
 							</Typography>
 						</Box>
 						<Box onDoubleClick={() => handleLike()} sx={{ padding: '.5rem', paddingTop: 0, paddingLeft: 0, width: '95%' }} >

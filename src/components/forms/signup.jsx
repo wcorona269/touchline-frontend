@@ -26,7 +26,7 @@ const SignupForm = () => {
 
 	return (
 		<Box sx={boxCss}>
-			<Typography variant='h5' sx={{ color: theme.palette.primary.main, margin: 'auto', marginBottom: 2, fontFamily: theme.typography.bold }}>
+			<Typography variant='h5' sx={{ color: theme.palette.primary.main, margin: 'auto', marginBottom: 2, fontWeight: 700 }}>
 				Sign up
 			</Typography>
 			<AuthForm

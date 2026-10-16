@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Title from '../util/title-util';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
+import { timeAgo } from '../util/time-ago';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { showModal } from '../../actions/modal_actions';
 
@@ -18,7 +18,6 @@ const UserShowPageHeader = () => {
 	const bio = useSelector(state => state.users?.user?.bio);
 	const avatar_url = useSelector(state => state.users?.user?.avatar_url);
 	const isCurrentUser = username === currentUser;
-	const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	const handleClick = () => {
 		navigate(`/edit-profile/${currentUser}`)
@@ -59,7 +58,7 @@ const UserShowPageHeader = () => {
 						{username}
 					</Typography>
 					<Typography variant='body2' sx={{ color: theme.palette.text.secondary }} >
-						Joined {moment(created_at).tz(userTimeZone).fromNow()}
+						Joined {timeAgo(created_at)}
 					</Typography>
 				</Box>
 				{

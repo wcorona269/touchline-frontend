@@ -24,7 +24,7 @@ const UploadPhoto = () => {
 
   return (
 		<Box>
-			<Typography variant='subtitle1' align='center' fontFamily={theme.typography.bold} sx={{color: theme.palette.text.primary, marginBottom: 2}} id="toast">Update Avatar Photo</Typography>
+			<Typography variant='subtitle1' align='center' fontWeight={700} sx={{color: theme.palette.text.primary, marginBottom: 2}} id="toast">Update Avatar Photo</Typography>
 			<Dropzone
 				accept={acceptedImageTypes.join(',')}
 				maxFiles={1}

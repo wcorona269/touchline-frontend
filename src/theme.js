@@ -1,6 +1,6 @@
 import { alpha, createTheme } from '@mui/material';
 
-const FONT = "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif";
+const FONT = "'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif";
 
 const buildTheme = (lightMode) => {
 	const mode = lightMode ? 'light' : 'dark';
@@ -48,9 +48,6 @@ const buildTheme = (lightMode) => {
 		},
 		typography: {
 			fontFamily: FONT,
-			bold: 'Ubuntu-Bold',
-			light: 'Ubuntu-Light',
-			regular: 'Ubuntu-Regular',
 			h1: { fontWeight: 800, letterSpacing: '-0.04em' },
 			h2: { fontWeight: 800, letterSpacing: '-0.035em' },
 			h3: { fontWeight: 700, letterSpacing: '-0.03em' },

@@ -95,7 +95,7 @@ const UserUpdatePage = () => {
 											onChange={handleChange}
 											helperText="Tell users about yourself"
 										/>
-										<Box sx={{ margin: 5, height: 10, color: theme.palette.error.main, fontFamily: theme.typography.bold }}>
+										<Box sx={{ margin: 5, height: 10, color: theme.palette.error.main, fontWeight: 700 }}>
 											{bio_error}
 										</Box>
 										<InputLabel>New Password</InputLabel>
@@ -140,7 +140,7 @@ const UserUpdatePage = () => {
 												</InputAdornment>
 											}
 										/>
-										<Box sx={{margin: 5, height: 10, color: theme.palette.error.main, fontFamily: theme.typography.bold }}>
+										<Box sx={{margin: 5, height: 10, color: theme.palette.error.main, fontWeight: 700 }}>
 											{password_error}
 										</Box>
 										<Button variant='contained' disabled={isDisabled()} onClick={handleSubmit} >

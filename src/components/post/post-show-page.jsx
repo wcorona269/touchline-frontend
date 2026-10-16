@@ -13,7 +13,7 @@ import CreateComment from '../home/create-comment';
 import CommentContainer from '../home/comment-container';
 import HomeFixturesColumn from '../home/home-fixtures-column';
 import Title from '../util/title-util';
-import moment from 'moment';
+import { timeAgo } from '../util/time-ago';
 import PostShowPageError from './post-error-page';
 
 const PostShowPage = () => {
@@ -168,12 +168,12 @@ const PostShowPage = () => {
 								<Avatar sx={{ marginRight: '.5rem', width: 50, height: 50 }} src={post.avatar_url}/>
 								<Box sx={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
 									<Link underline='hover' onClick={() => navigate(`/user/${post?.username}`)} >
-										<Typography variant='subtitle1' sx={{fontFamily: theme.typography.bold}} >
+										<Typography variant='subtitle1' sx={{fontWeight: 700}} >
 											{post?.username}
 										</Typography>
 									</Link>
 									<Typography variant='caption' sx={{color: theme.palette.text.disabled}}>
-										{moment(post.created_at).fromNow()}
+										{timeAgo(post.created_at)}
 									</Typography>
 								</Box>
 							</Box>,

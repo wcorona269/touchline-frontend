@@ -44,7 +44,7 @@ const ClubFixturesDashboard = ({fixtures, name, logo}) => {
 				return (
 					<Box sx={{ p: 1 }}>
 						<Box sx={{width: '100%'}}>
-							<Typography variant='h6' sx={{py: 1, fontFamily: theme.typography.bold}}>
+							<Typography variant='h6' sx={{py: 1, fontWeight: 700}}>
 								{month}
 							</Typography>
 						</Box>

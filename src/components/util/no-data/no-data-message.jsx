@@ -5,7 +5,7 @@ const NoDataMessage = () => {
 	const theme = useTheme();
 
 	return (
-		<Typography sx={{ textAlign: 'center', fontFamily: theme.typography.bold, color: theme.palette.text.disabled, my: 5 }}>
+		<Typography sx={{ textAlign: 'center', fontWeight: 700, color: theme.palette.text.disabled, my: 5 }}>
 			Not Found
 			<br/>
 			<br/>

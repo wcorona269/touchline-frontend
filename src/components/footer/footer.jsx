@@ -1,10 +1,13 @@
 import { Box, Container, Link, Typography, useTheme } from '@mui/material';
 import React from 'react';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const links = [
-	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/william-corona/', icon: 'fa-brands fa-linkedin' },
-	{ label: 'GitHub', href: 'https://github.com/wcorona269', icon: 'fa-brands fa-github' },
-	{ label: 'Website', href: 'https://will-corona.info/', icon: 'fa-solid fa-globe' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/william-corona/', icon: LinkedInIcon },
+	{ label: 'GitHub', href: 'https://github.com/wcorona269', icon: GitHubIcon },
+	{ label: 'Website', href: 'https://will-corona.info/', icon: LanguageIcon },
 ];
 
 const Footer = () => {
@@ -31,7 +34,7 @@ const Footer = () => {
 					</Typography>
 				</Box>
 				<Box sx={{ display: 'flex', gap: 2.5 }}>
-					{links.map(({ label, href, icon }) => (
+					{links.map(({ label, href, icon: Icon }) => (
 						<Link
 							key={label}
 							href={href}
@@ -40,7 +43,7 @@ const Footer = () => {
 							underline='none'
 							sx={{ display: 'flex', alignItems: 'center', gap: 0.75, fontSize: '0.9rem', fontWeight: 500, color: theme.palette.text.secondary, '&:hover': { color: theme.palette.primary.main } }}
 						>
-							<i className={icon} />
+							<Icon sx={{ fontSize: 18 }} />
 							{label}
 						</Link>
 					))}

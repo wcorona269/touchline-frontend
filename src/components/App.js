@@ -1,9 +1,4 @@
-import '@fontsource/inter/300';
-import '@fontsource/inter/400';
-import '@fontsource/inter/500';
-import '@fontsource/inter/600';
-import '@fontsource/inter/700';
-import '@fontsource/inter/800';
+import '@fontsource-variable/inter';
 import React, { Suspense, lazy, useMemo, useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './util/route_util';

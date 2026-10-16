@@ -155,14 +155,14 @@ const AuthForm = ({fields, type, onSubmit}) => {
 		}
 		<Box className='auth-error-message'>
 			{errors.map((error) => (
-				<Typography variant='body2' sx={{ width: 250, color: theme.palette.error.main, typography: theme.typography.bold }} key={error}>
+				<Typography variant='body2' sx={{ width: 250, color: theme.palette.error.main, fontWeight: 700 }} key={error}>
 					{error}
 				</Typography>
 			))}	
 		</Box>
 		{flask_error &&
 			<Box className='auth-error-message'>
-				<Typography variant='body2' sx={{ width: 250, color: theme.palette.error.main, typography: theme.typography.bold }} key={'error'}>
+				<Typography variant='body2' sx={{ width: 250, color: theme.palette.error.main, fontWeight: 700 }} key={'error'}>
 					{flask_error}
 				</Typography>
 			</Box>
