@@ -1,6 +1,6 @@
 // import './posts-column.scss'
 import React, { useEffect, useMemo } from 'react'
-import { Button, Grid, Paper, Stack, Typography, CircularProgress } from '@mui/material'
+import { Button, Grid, Paper, Stack, CircularProgress } from '@mui/material'
 import { Virtuoso } from 'react-virtuoso';
 import { fetchPosts, fetchReposts } from '../../actions/post_actions';
 import LoadingMessage from '../util/loading/loading-screen';
@@ -45,7 +45,7 @@ const PostsTimeline = () => {
 	}
 
 	const renderPost = (index, item) => (
-		<Stack spacing={2} sx={{ paddingBottom: 2 }}>
+		<Stack spacing={2} sx={{ paddingBottom: 1.5 }}>
 			{item.post ? (
 				<PostContainer repost={item} post={item.post} />
 			) : (
@@ -57,12 +57,10 @@ const PostsTimeline = () => {
 	const loadMoreFooter = () => (
 		!isPostsLoading && !isRepostsLoading ?
 			<Button onClick={loadMorePosts} variant="outlined" sx={{ height: '3rem', width: '100%' }}>
-				<Typography variant='subtitle1'>
-					See More
-				</Typography>
+				Load more posts
 			</Button> :
 			<Button variant="outlined" sx={{ height: '3rem', width: '100%' }} >
-				<CircularProgress size='2rem' />
+				<CircularProgress size='1.25rem' />
 			</Button>
 	);
 
@@ -70,7 +68,7 @@ const PostsTimeline = () => {
 		<>
 			<Grid item xs={12} md={6}>
 				<Stack spacing={2}>
-					<Paper elevation={1}>
+					<Paper>
 						<Title variant='h5' content='Home'/>
 						<CreatePost/>
 					</Paper>

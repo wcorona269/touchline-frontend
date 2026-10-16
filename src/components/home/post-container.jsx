@@ -1,5 +1,5 @@
 //  import './post-container.scss';
-import { Avatar, Box, Button, Link, Paper, Typography } from '@mui/material';
+import { alpha, Avatar, Box, Button, Link, Paper, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -13,6 +13,9 @@ import RepostButton from './repost-popper';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import moment from 'moment-timezone';
 import PostMenu from './post-menu';
+import { postActionSx } from './post-action-sx';
+
+const LIKE_COLOR = '#F43F5E';
 
 const PostContainer = React.memo(({ post, repost }) => {
 	const dispatch = useDispatch();
@@ -96,36 +99,34 @@ const PostContainer = React.memo(({ post, repost }) => {
 	}
 
 	const buttons = [
-		<Button key={0} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: theme.palette.text.disabled }} onClick={() => showPost()}>
-			<ChatBubbleOutlineIcon sx={{ marginRight: '.25rem' }} fontSize='medium'/>
+		<Button key={0} aria-label="comments" sx={postActionSx(theme, theme.palette.secondary.main)} onClick={() => showPost()}>
+			<ChatBubbleOutlineIcon />
 			{post.comments?.length}
 		</Button>,
 		<RepostButton key={1} handleRepost={handleRepost} reposts={reposts} isReposted={isReposted} setIsReposted={setIsReposted} post={post} user_id={user_id}  />,
-		<Button key={2} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isLiked ? theme.palette.primary.main : theme.palette.text.disabled }} onClick={handleLike} >
-			{isLiked ? <FavoriteIcon sx={{ marginRight: '.25rem' }} fontSize='medium' /> : <FavoriteBorderIcon sx={{ marginRight: '.25rem' }} />  }
+		<Button key={2} aria-label="like" sx={postActionSx(theme, LIKE_COLOR, isLiked)} onClick={handleLike} >
+			{isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
 			{postLikes}
 		</Button>,
 	];
 
 	return (
-		<Paper elevation={1} key={post.id} sx={{ padding: 2, paddingBottom: 0, borderBottom: 'none !important'}}>
+		<Paper key={post.id} sx={{ px: 2, pt: 2, pb: 1, transition: 'background-color .15s', '&:hover': { backgroundColor: alpha(theme.palette.text.primary, 0.015) } }}>
 			{repost &&
-				<Link onClick={() => navigate(`/user/${repost.user.username}`)} underline='hover' sx={{ color: theme.palette.grey['500'], display: 'flex', alignItems: 'center', marginBottom: 1 }} variant='caption'>
-					<RepeatIcon sx={{ marginRight: '.25rem' }} fontSize='small' />
-					Reposted by {repost.user.username}
+				<Link onClick={() => navigate(`/user/${repost.user.username}`)} underline='hover' sx={{ color: theme.palette.text.secondary, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 0.5, marginBottom: 1, marginLeft: '28px', cursor: 'pointer' }} variant='caption'>
+					<RepeatIcon sx={{ fontSize: 15 }} />
+					{repost.user.username} reposted
 				</Link>
 			}
-			<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start'}}>
-				<Avatar sx={{ marginRight: '.5rem' }} src={avatar} onClick={() => navigate(`/user/${post.username}`)} />
-				<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-					<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', gap: '.5rem'}}>
-						<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: '.5rem' }}>
-							<Typography variant='body1' sx={{ fontFamily: theme.typography.bold }}>
-								<Link underline='hover' onClick={() => navigate(`/user/${post.username}`)} >
-									{post.username}
-								</Link>
-							</Typography>
-							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
+			<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 1.5 }}>
+				<Avatar sx={{ width: 42, height: 42, cursor: 'pointer' }} src={avatar} onClick={() => navigate(`/user/${post.username}`)} />
+				<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', minWidth: 0 }}>
+					<Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: '.5rem', minHeight: 24}}>
+						<Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '.5rem', minWidth: 0 }}>
+							<Link underline='hover' noWrap onClick={() => navigate(`/user/${post.username}`)} sx={{ fontWeight: 700, fontSize: '0.95rem', color: theme.palette.text.primary, cursor: 'pointer' }}>
+								{post.username}
+							</Link>
+							<Typography variant='caption' noWrap sx={{ color: theme.palette.text.disabled, fontSize: 13 }}>
 								{moment(post.created_at).tz(userTimeZone).fromNow()}
 							</Typography>
 						</Box>
@@ -135,13 +136,13 @@ const PostContainer = React.memo(({ post, repost }) => {
 							}
 						</Box>
 					</Box>
-					<Typography variant='body1' onClick={() => showPost()} sx={{width: '100%'}} >
+					<Typography variant='body1' onClick={() => showPost()} sx={{ width: '100%', mt: 0.25, cursor: 'pointer', overflowWrap: 'anywhere' }} >
 						{post.text}
 					</Typography>
+					<Box sx={{ display: 'flex', flexDirection: 'row', gap: { xs: 2, sm: 4 }, mt: 1, ml: -1.25 }}>
+						{buttons}
+					</Box>
 				</Box>
-			</Box>
-			<Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '.5rem'}}>
-				{buttons}
 			</Box>
 		</Paper>
 	)

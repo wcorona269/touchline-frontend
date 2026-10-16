@@ -37,10 +37,10 @@ describe('PostContainer', () => {
 		expect(screen.getByText('hello world')).toBeInTheDocument();
 	});
 
-	it('shows the "Reposted by" banner when a repost is passed', () => {
+	it('shows the repost banner when a repost is passed', () => {
 		const repost = { user: { username: 'bob' } };
 		renderWithProviders(<PostContainer post={basePost} repost={repost} />);
-		expect(screen.getByText(/Reposted by bob/)).toBeInTheDocument();
+		expect(screen.getByText(/bob reposted/)).toBeInTheDocument();
 	});
 
 	it('shows comment and like counts from the post', () => {

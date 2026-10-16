@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Popper from '@mui/material/Popper';
 import { useSpring, animated } from '@react-spring/web';
 import { Button, useTheme } from '@mui/material';
+import { postActionSx } from './post-action-sx';
 
 const Fade = forwardRef(function Fade(props, ref) {
 	const { in: open, children, onEnter, onExited, ...other } = props;
@@ -61,15 +62,15 @@ const RepostButton = ({ handleRepost, reposts, isReposted, setIsReposted, user_i
 
 	return (
 		<div>
-			<Button aria-describedby={id} type="button" onClick={handleClick} aria-label="favorite" size="large" sx={{ borderRadius: '1rem', width: 'fit-content', color: isReposted ? theme.palette.primary.main : theme.palette.text.disabled }} >
-				<RepeatIcon sx={{ marginRight: '.25rem' }} fontSize='medium' />
+			<Button aria-describedby={id} type="button" onClick={handleClick} aria-label="repost" sx={postActionSx(theme, theme.palette.primary.main, isReposted)} >
+				<RepeatIcon />
 				{reposts}
 			</Button>
 			<Popper id={id} open={open} anchorEl={anchorEl} transition onMouseLeave={() => setOpen(false)}>
 				{({ TransitionProps }) => (
 					<Fade {...TransitionProps}>
 						<Box>
-							<Button onClick={() => handleRepost()} sx={{ border: 1, p: 1, px: 2, bgcolor: 'background.paper' }}>
+							<Button onClick={() => handleRepost()} sx={{ border: `1px solid ${theme.palette.divider}`, borderRadius: '12px', p: 1, px: 2, bgcolor: 'background.paper', boxShadow: '0 8px 24px rgba(0,0,0,.3)' }}>
 								{ isReposted ? 'Undo Repost' : 'Repost' }
 							</Button>
 						</Box>
