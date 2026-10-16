@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {  Typography, Container, useTheme, Divider, Button, Stack } from '@mui/material';
+import { Typography, Container, useTheme, Button, Stack, Box, alpha } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '../../actions/modal_actions';
 import { useNavigate } from 'react-router-dom';
@@ -35,34 +35,37 @@ const Welcome = () => {
 		// };
 	}, []);
 
-	const buttonCss = { width: 150, fontFamily: theme.typography.bold, margin: 'auto' }
+	const buttonCss = { width: { xs: '100%', sm: 160 }, height: 48, fontSize: '1rem' }
 
 	return (
-		<Container>
-			<Stack spacing={2} alignItems='center'>
-				<Typography variant='h1' sx={{ color: theme.palette.primary.main, fontSize: { xs: '3rem', sm: '4rem', md: '6rem' } }}>
-					touchline
-				</Typography>
-				<Typography variant='h4' sx={{ color: theme.palette.primary.main, fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2.125rem' } }} >
-					The everything app for soccer.
-				</Typography>
-				<Divider/>
-				<Button 
-					variant='contained' 
-					onClick={loginModal}
-					sx={buttonCss}
-				>
-					Log in
-				</Button>
-				<Button 
-					variant='outlined' 
-					onClick={signupModal}
-					sx={buttonCss}
-				>
-					Sign up
-				</Button>
-			</Stack>
-		</Container>
+		<Box
+			sx={{
+				position: 'fixed',
+				inset: 0,
+				display: 'grid',
+				placeItems: 'center',
+				background: `radial-gradient(60% 50% at 50% 35%, ${alpha(theme.palette.primary.main, 0.16)} 0%, transparent 70%), ${theme.palette.background.default}`,
+			}}
+		>
+			<Container maxWidth='sm'>
+				<Stack spacing={3} alignItems='center' textAlign='center'>
+					<Typography variant='h1' sx={{ fontWeight: 800, letterSpacing: '-0.055em', lineHeight: 1, fontSize: { xs: '3.5rem', sm: '5rem', md: '6.5rem' } }}>
+						touchline<Box component='span' sx={{ color: theme.palette.primary.main }}>.</Box>
+					</Typography>
+					<Typography sx={{ color: theme.palette.text.secondary, fontSize: { xs: '1.1rem', md: '1.35rem' }, maxWidth: 440 }}>
+						The everything app for soccer. Live scores, tables, and the conversation, all in one place.
+					</Typography>
+					<Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ width: { xs: '100%', sm: 'auto' }, pt: 1 }}>
+						<Button variant='contained' onClick={signupModal} sx={buttonCss}>
+							Get started
+						</Button>
+						<Button variant='outlined' color='inherit' onClick={loginModal} sx={buttonCss}>
+							Log in
+						</Button>
+					</Stack>
+				</Stack>
+			</Container>
+		</Box>
 	)
 }
 

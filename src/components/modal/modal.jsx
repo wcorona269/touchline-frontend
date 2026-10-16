@@ -49,7 +49,7 @@ const ModalContainer = () => {
 				aria-labelledby="modal-modal-title"
 				aria-describedby="modal-modal-description"
 			>
-				<Box sx={{ padding: 4, borderRadius: '1rem', border: `2px solid ${theme.palette.primary.main}`, margin: 'auto', marginTop: 20, width: 'fit-content', background: theme.palette.background.paper }}>
+				<Box sx={{ padding: { xs: 3, sm: 4 }, borderRadius: '20px', border: `1px solid ${theme.palette.divider}`, boxShadow: '0 24px 64px rgba(0,0,0,.45)', margin: 'auto', marginTop: { xs: 12, sm: 20 }, width: 'fit-content', maxWidth: 'calc(100vw - 32px)', background: theme.palette.background.paper, outline: 'none' }}>
 					{component}
 				</Box>
 			</Modal>

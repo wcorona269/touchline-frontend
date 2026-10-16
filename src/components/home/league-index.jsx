@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import leaguesByCountry from './leaguesByCountry';
-import { Container, useTheme, Grid, Link, Stack, Typography, Button, ListItem, ListItemButton, List, ButtonGroup, Skeleton } from '@mui/material';
+import { useTheme, Grid, Link, Stack, Typography, ButtonBase, Skeleton } from '@mui/material';
 import Flag from '../util/country-flag';
 import { Box, Table, TableCell, TableHead, TableRow, Paper, TableContainer, TableBody } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,8 @@ const sortedLeaguesByCountry = Object.entries(leaguesByCountry)
 		acc[key] = value;
 			return acc;
 	}, {})
+
+const SHORT_NAMES = { 2: 'UCL', 3: 'UEL', 39: 'EPL', 253: 'MLS' };
 
 const LeagueIndex = () =>  {
 	const navigate = useNavigate();
@@ -33,14 +35,18 @@ const LeagueIndex = () =>  {
 	const displayTableRow = (country, idx) => {
 		const [name, info] = country;
 		const result = [
-			<TableCell sx={{display: 'flex', alignItems: 'center'}}><Flag code={info['countryCode']} height='14' width='20' style={{marginRight: '.25rem'}} />{name} </TableCell>
+			<TableCell key='nation' sx={{ fontWeight: 600, whiteSpace: 'nowrap' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+					<Flag code={info['countryCode']} height='14' width='20' style={{ borderRadius: 3 }} />{name}
+				</Box>
+			</TableCell>
 		];
 
 		{
 			Object.entries(info['leagues']).forEach(([league, id]) => {
 				result.push(
-					<TableCell>
-						<Link underline='hover' onClick={() => navigate(`/league/${id}`)} sx={{ color: theme.palette.secondary.main }} >
+					<TableCell key={id}>
+						<Link underline='none' onClick={() => navigate(`/league/${id}`)} sx={{ color: theme.palette.text.secondary, fontWeight: 500, cursor: 'pointer', '&:hover': { color: theme.palette.primary.main } }} >
 							{league}
 						</Link>
 					</TableCell>
@@ -50,12 +56,12 @@ const LeagueIndex = () =>  {
 
 		while (result.length < 4) {
 			result.push(
-				<TableCell>-</TableCell>
+				<TableCell key={result.length} sx={{ color: theme.palette.text.disabled }}>—</TableCell>
 			)
 		}
 
 		return (
-			<TableRow>
+			<TableRow key={name} hover>
 				{result}
 			</TableRow>
 		)
@@ -66,91 +72,59 @@ const LeagueIndex = () =>  {
 	}
 
 	const listTopLeagues = () => {
-		let result = [];
-		if (!top_leagues || isLoading) {
-			for (let i = 0; i < 8; i++) {
-				result.push(
-					<Button variant='text' disablePadding elevation={3}
-						sx={{
-							mx: 2,
-							backgroundColor: theme.palette.background.paper,
-							borderColor: theme.palette.background.paper,
-							color: theme.palette.text.secondary,
-							padding: 0
-						}}
-					>
-						<Skeleton variant="rectangular" height={80} width={75} />
-					</Button>
-				)
-			}
-		} else {
-			const leagues = Object.values(top_leagues)
-			leagues.forEach((league) => {
-				const id = league['league']['id'];
-				let name = league['league']['name'];
-				const logo = league['league']['logo'];
-				if (name === 'Premier League') name = 'EPL'
-				if (name.split(' ').length > 2) {
-					let words = name.split(' ')
-					let name_str = '';
-					for (let word of words) {
-						name_str += word[0]
-					}
-					name = name_str
-				}
-	
-	
-				result.push(
-					<Button variant='text' disablePadding onClick={() => handleClick(id)} elevation={3}
-						sx={{
-							backgroundColor: theme.palette.background.paper,
-							borderColor: theme.palette.background.paper,
-							color: theme.palette.text.secondary,
-							padding: 0
-						}}
-					>
-						<Paper sx={{height: '4rem', width: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', p: 2}} >
-							<img alt='' style={{ height: '2.5rem', width: '2.5rem', marginBottom: '.5rem' }} src={logo} title={name} loading='lazy' />
-							<Typography align='center' variant='subtitle2' sx={{ fontSize: 12, fontFamily: theme.typography.light, whiteSpace: 'nowrap' }}>
-								{name}
-							</Typography>
-						</Paper>
-					</Button>
-				)
-			});
-		}
+		const tiles = (!top_leagues || isLoading) ?
+			Array.from({ length: 8 }, (_, i) => <Skeleton key={i} variant='rounded' height={104} />) :
+			Object.values(top_leagues).map(({ league: { id, name, logo } }) => (
+				<ButtonBase
+					key={id}
+					onClick={() => handleClick(id)}
+					sx={{
+						flexDirection: 'column',
+						gap: 1.25,
+						py: 2,
+						px: 1,
+						borderRadius: '14px',
+						border: `1px solid ${theme.palette.divider}`,
+						transition: 'border-color .15s, background-color .15s, transform .15s',
+						'&:hover': { borderColor: theme.palette.primary.main, backgroundColor: theme.palette.action.hover, transform: 'translateY(-2px)' },
+					}}
+				>
+					<Box sx={{ width: 52, height: 52, borderRadius: '12px', backgroundColor: '#fff', display: 'grid', placeItems: 'center', p: 1 }}>
+						<img alt='' src={logo} loading='lazy' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+					</Box>
+					<Typography noWrap sx={{ fontSize: 12.5, fontWeight: 600, maxWidth: '100%', color: theme.palette.text.secondary }}>
+						{SHORT_NAMES[id] || name}
+					</Typography>
+				</ButtonBase>
+			));
+
 		return (
-			<Container sx={{display: 'flex', flexDirection: 'column', padding: '1rem', gap: '1rem'}}>
-				<Box sx={{display: 'flex', flexDirection: 'row', gap: '.5rem', overflowX: 'auto', maxWidth: '100%' }}>
-					<ButtonGroup>
-						{result}
-					</ButtonGroup>
-				</Box>
-			</Container>
+			<Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(4, 1fr)', md: 'repeat(8, 1fr)' }, gap: { xs: 1, sm: 1.5 }, p: 2 }}>
+				{tiles}
+			</Box>
 		)
 	}
+
+	const headCell = { fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: theme.palette.text.disabled };
 
 	return (
 		<Grid item xs={12} md={9}>
 			<Box>
-				<Paper elevation={0}>
-					<Title variant='h5' content='Explore' />
-				</Paper>
 				<Stack spacing={2}>
-					<Paper elevation={1}>
-						<Title variant='h6' content='Top Leagues' />
+					<Paper>
+						<Title variant='h5' content='Top Leagues' />
 						{listTopLeagues()}
 					</Paper>
-					<Paper elevation={1}>
+					<Paper>
 						<Title variant='h6' content='All Leagues' />
-						<TableContainer component={Paper} sx={{ maxWidth: '100%', overflowX: 'auto' }}>
-							<Table sx={{ minWidth: 700 }} size='small' >
+						<TableContainer sx={{ maxWidth: '100%', overflowX: 'auto' }}>
+							<Table sx={{ minWidth: 700, '& td, & th': { py: 1.25 }, '& tr:last-of-type td': { borderBottom: 'none' } }} size='small' >
 								<TableHead>
-									<TableRow sx={{backgroundColor: theme.palette.action.hover }}>
-										<TableCell>Nation</TableCell>
-										<TableCell align="left">1st Division</TableCell>
-										<TableCell align="left">2nd Division</TableCell>
-										<TableCell align="left">3rd Division</TableCell>
+									<TableRow>
+										<TableCell sx={headCell}>Nation</TableCell>
+										<TableCell sx={headCell} align="left">1st Division</TableCell>
+										<TableCell sx={headCell} align="left">2nd Division</TableCell>
+										<TableCell sx={headCell} align="left">3rd Division</TableCell>
 									</TableRow>
 								</TableHead>
 								<TableBody>
