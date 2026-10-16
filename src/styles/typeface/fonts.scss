@@ -1,39 +1,37 @@
-@font-face {
-	font-family: 'Ubuntu';
-	/* Give your font a name */
-	src: url('./Ubuntu/Ubuntu-Regular.ttf') format('truetype');
-	/* Add other font formats here if needed */
-}
-
+/*
+	Legacy family names. Components reference these via theme.typography.bold / .light / .regular
+	as a font-family, so each one aliases a single static Inter weight.
+*/
 @font-face {
 	font-family: 'Ubuntu-Bold';
-	/* Give your font a name */
-	src: url('./Ubuntu/Ubuntu-Bold.ttf') format('truetype');
-	/* Add other font formats here if needed */
+	font-display: swap;
+	src: url('@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'Ubuntu-Regular';
-	/* Give your font a name */
-	src: url('./Ubuntu/Ubuntu-Regular.ttf') format('truetype');
-	/* Add other font formats here if needed */
+	font-display: swap;
+	src: url('@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'Ubuntu-Light';
-	/* Give your font a name */
-	src: url('./Ubuntu/Ubuntu-Light.ttf') format('truetype');
-	/* Add other font formats here if needed */
+	font-display: swap;
+	src: url('@fontsource/inter/files/inter-latin-300-normal.woff2') format('woff2');
 }
 
 body {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'cv11', 'ss01';
 }
 
 .inner-body {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 button {
-	font-family: 'Ubuntu-Bold', sans-serif;
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	font-weight: 600;
 }

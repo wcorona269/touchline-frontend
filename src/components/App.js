@@ -1,15 +1,18 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import React, { Suspense, lazy, useState } from 'react'
+import '@fontsource/inter/300';
+import '@fontsource/inter/400';
+import '@fontsource/inter/500';
+import '@fontsource/inter/600';
+import '@fontsource/inter/700';
+import '@fontsource/inter/800';
+import React, { Suspense, lazy, useMemo, useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './util/route_util';
 import NavBar from './nav_bar/nav-bar';
 import Footer from './footer/footer'
 import ModalContainer from './modal/modal';
 import Welcome from './home/welcome'
-import { createTheme, ThemeProvider, Container, Box } from '@mui/material';
+import { ThemeProvider, Container, Box, CssBaseline } from '@mui/material';
+import buildTheme from '../theme';
 import LoadingMessage from './util/loading/loading-screen';
 
 const LeagueIndex = lazy(() => import('./home/league-index'));
@@ -28,35 +31,12 @@ const UserUpdatePage = lazy(() => import('./user/user-update-page'));
 function App() {
   const [lightMode, setLightMode] = useState(false);
 
-  const theme = createTheme({
-    palette: {
-      mode: lightMode ? 'light' : 'dark',
-      primary: {
-        main: '#00a672',
-        light: '#00c49a',
-        dark: '#005a2c',
-        darker: '#182C25',
-      },
-      secondary: {
-        main: '#18ade5',
-        light: '#84d6f0',
-        dark: '#005c8f'
-      },
-      background: {
-        standard: lightMode ? '#f5f5f5' : '#121212'
-      }
-    },
-    typography: {
-      fontFamily: 'Ubuntu',
-      bold: 'Ubuntu-Bold',
-      light: 'Ubuntu-Light',
-      regular: 'Ubuntu-Regular'
-    }
-  })
+  const theme = useMemo(() => buildTheme(lightMode), [lightMode]);
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ backgroundColor: theme.palette.background.standard, color: theme.palette.text.primary, borderRadius: '0px', minHeight: '100vw' }} >
+      <CssBaseline enableColorScheme />
+      <Box sx={{ backgroundColor: theme.palette.background.standard, color: theme.palette.text.primary, borderRadius: '0px', minHeight: '100vh' }} >
         <NavBar lightMode={lightMode} setLightMode={setLightMode} />
         <ModalContainer/>
         <Container sx={{paddingTop: '6rem'}} fixed >
