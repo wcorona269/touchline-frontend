@@ -8,12 +8,12 @@ const ClubHomeDashboard = ({ name, logo, club, fixtures, squad, news }) => {
 	return (
 		<Box>
 			<Grid spacing={2} container>
-				<Grid item xs={8} >
+				<Grid item xs={12} md={7} >
 					<NewsIndex news={news} title={`${name} News`} logo={logo} variant='h6' />
 				</Grid>
-				<Grid item xs={4} >
+				<Grid item xs={12} md={5} >
 					<ClubHomeInfo club={club}  />
-					<HomeFixturesComponent fixtures={fixtures} />
+					<HomeFixturesComponent fixtures={fixtures} limit={5} />
 				</Grid>
 			</Grid>
 		</Box>

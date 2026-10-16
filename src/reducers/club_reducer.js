@@ -22,7 +22,6 @@ const clubReducer = (state = initialState, action) => {
 				club: action.payload['club'],
 				squad: action.payload['squad'],
 				fixtures: action.payload['fixtures'],
-				seasons: action.payload['seasons'],
 				stats: action.payload['stats'],
 				news: action.payload['news'],
 				isLoading: false,

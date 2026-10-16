@@ -1,12 +1,13 @@
 
 import React from 'react';
-import { TableContainer, Table, TableHead, TableCell, TableRow, useTheme, Paper } from '@mui/material';
+import { Box, TableContainer, Table, TableHead, TableCell, TableRow, useTheme, Paper } from '@mui/material';
 import YellowCard from '../../images/yellow.png';
 import RedCard from '../../images/red.png';
 import Title from '../util/title-util';
 
 const ClubStatsDashboard = ({ name, logo, stats }) => {
 	const theme = useTheme(); 
+	const headCell = { fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: theme.palette.text.disabled, textAlign: 'center', whiteSpace: 'nowrap' };
 	
 	const displayTeamStats = (stats) => {
 		let result = [];
@@ -22,7 +23,7 @@ const ClubStatsDashboard = ({ name, logo, stats }) => {
 			'clean_sheets': 0,
 		}
 
-		for (let league of stats) {
+		for (let league of stats.filter(entry => entry?.league)) {
 			const competition = league.league.name || 'N/A';
 			const played = league.fixtures.played.total || 0;
 			const wins = league.fixtures.wins.total || 0
@@ -58,9 +59,13 @@ const ClubStatsDashboard = ({ name, logo, stats }) => {
 
 			result.push(
 				<TableRow key={competition}>
-					<TableCell sx={{ display: 'flex', alignItems: 'center'}}>
-						<img alt='' src={logo} loading='lazy' style={{ width: '1rem', height: '1rem', marginRight: '.5rem'}}/>
-						{competition}
+					<TableCell sx={{ pl: 2, fontWeight: 600, whiteSpace: 'nowrap' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
+							<Box sx={{ width: 22, height: 22, borderRadius: '6px', backgroundColor: '#fff', p: '2px', flexShrink: 0 }}>
+								<img alt='' src={logo} loading='lazy' style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}/>
+							</Box>
+							{competition}
+						</Box>
 					</TableCell>
 					<TableCell>{played}</TableCell>
 					<TableCell>{wins}</TableCell>
@@ -77,8 +82,8 @@ const ClubStatsDashboard = ({ name, logo, stats }) => {
 		}
 
 		result.push(
-			<TableRow key={totals} id='totals' sx={{ backgroundColor: theme.palette.primary.main }}>
-				<TableCell>All</TableCell>
+			<TableRow key='totals' id='totals' sx={{ backgroundColor: theme.palette.action.hover, '& td': { fontWeight: 800, color: theme.palette.text.primary, borderBottom: 'none' } }}>
+				<TableCell sx={{ pl: 2 }}>All competitions</TableCell>
 				<TableCell>{totals['played']}</TableCell>
 				<TableCell>{totals['wins']}</TableCell>
 				<TableCell>{totals['draws']}</TableCell>
@@ -96,24 +101,24 @@ const ClubStatsDashboard = ({ name, logo, stats }) => {
 
 
 	return (
-		<Paper elevation={1} sx={{marginTop: '1rem'}}>
+		<Paper sx={{marginTop: '1rem'}}>
 			<Title variant='h6' content={`${name} Stats`} img={logo} />
 
-			<TableContainer>
-			<Table>
+			<TableContainer sx={{ overflowX: 'auto' }}>
+			<Table size='small' sx={{ '& td': { py: 1.5, textAlign: 'center', fontVariantNumeric: 'tabular-nums', color: theme.palette.text.secondary }, '& td:first-of-type': { textAlign: 'left', color: theme.palette.text.primary } }}>
 				<TableHead>
-					<TableRow sx={{backgroundColor: theme.palette.action.hover}}>
-						<TableCell sx={{ padding: '16px !important' }}>Competition</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>MP</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>W</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>D</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>L</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>GF</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>GC</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>GD</TableCell>
-						<TableCell sx={{ padding: '16px !important' }}><img alt='yellow cards' src={YellowCard} style={{ width: '1rem', height: '1rem'}}/></TableCell>
-							<TableCell sx={{ padding: '16px !important' }}><img alt='red cards' src={RedCard} style={{ width: '1rem', height: '1rem' }} /></TableCell>
-						<TableCell sx={{ padding: '16px !important' }}>Clean Sheets</TableCell>
+					<TableRow>
+						<TableCell sx={{ ...headCell, pl: 2, textAlign: 'left' }}>Competition</TableCell>
+						<TableCell sx={headCell}>MP</TableCell>
+						<TableCell sx={headCell}>W</TableCell>
+						<TableCell sx={headCell}>D</TableCell>
+						<TableCell sx={headCell}>L</TableCell>
+						<TableCell sx={headCell}>GF</TableCell>
+						<TableCell sx={headCell}>GC</TableCell>
+						<TableCell sx={headCell}>GD</TableCell>
+						<TableCell sx={headCell}><img alt='yellow cards' src={YellowCard} style={{ width: '1rem', height: '1rem'}}/></TableCell>
+							<TableCell sx={headCell}><img alt='red cards' src={RedCard} style={{ width: '1rem', height: '1rem' }} /></TableCell>
+						<TableCell sx={headCell}>CS</TableCell>
 					</TableRow>
 				</TableHead>
 				<tbody>

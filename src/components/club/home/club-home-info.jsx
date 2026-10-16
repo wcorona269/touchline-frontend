@@ -1,68 +1,56 @@
-import React from 'react';
-import { Typography, Paper, Box, Table, TableRow, TableCell, TableHead, TableContainer, TableBody } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Paper, Box, Table, TableRow, TableCell, TableContainer, TableBody, useTheme } from '@mui/material';
 import Title from '../../util/title-util';
 
+// The API serves a small generic shield when it has no photo of a venue; real stadium photos are much larger.
+const PLACEHOLDER_MAX_WIDTH = 200;
+
 const ClubHomeInfo = ({ club }) => {
+	const theme = useTheme();
 	const clubInfo = club[0];
-	let city = clubInfo.venue.city || 'N/A';
-	let country = clubInfo.team.country || 'N/A';
+	const { team, venue } = clubInfo;
+	const [showPhoto, setShowPhoto] = useState(false);
 
-	let clubDetails = {
-		'Logo': clubInfo.team.logo || 'N/A',
-		'Name': clubInfo.team.name || 'N/A',
-		'Location': `${city}, ${country}`,
-		'Founded': clubInfo.team.founded || 'N/A',
-		'National': clubInfo.team.national || 'false',
-		'Stadium': clubInfo.venue.name || 'N/A',
-		'Capacity': clubInfo.venue.capacity || 'N/A',
-		'Address': clubInfo.venue.address || 'N/A',
-		'Image': clubInfo.venue.image || 'N/A',
-		'Surface': clubInfo.venue.surface || 'N/A'
-	}
+	const details = [
+		['Founded', team.founded],
+		['Location', [venue.city, team.country].filter(Boolean).join(', ')],
+		['Stadium', venue.name],
+		['Capacity', venue.capacity?.toLocaleString()],
+		['Surface', venue.surface && venue.surface[0].toUpperCase() + venue.surface.slice(1)],
+		['Address', venue.address],
+	].filter(([, value]) => value);
 
-	const displayTable = (clubDetails) => {
-		let result = [];
-
-		for (let key in clubDetails) {
-			if (key === 'Image' || key === 'Logo') {
-			} else {
-				result.push(
-					<TableRow key={key}>
-						<TableCell component='th' align='left'>
-							<Typography variant='body2' className='table-key' >
-								{key}
-							</Typography>
-						</TableCell>
-						<TableCell align='left'>
-							<Typography variant='body2'>
-								{clubDetails[key]}
-							</Typography>
-						</TableCell>
-					</TableRow>
-				)
-			}
-		}
-
-		return result;
-	}
 	return (
-		<Paper elevation={1}  sx={{paddingBottom: 1, marginBottom: 1}} >
+		<Paper sx={{ marginBottom: 2 }}>
 			<Title variant='h6' content='Club Info' />
-			<Box sx={{ display: 'flex', justifyContent: 'center', padding: '.5rem' }}>
-				<Typography variant='caption' className='table-key'>
-					{clubDetails['Stadium']}
-				</Typography>
-			</Box>
-			<img alt='' src={clubDetails['Image']} loading='lazy' style={{width: '90%', height: '90%', objectFit: 'cover', margin: 'auto', display: 'flex'}} />
-			<TableContainer >
-				<Table size='small' aria-label='a dense table'>
-					<TableHead>
-						<TableRow>
-							<TableCell align='left' colSpan={2}>{clubDetails['name']}</TableCell>
-						</TableRow>
-					</TableHead>
+			{venue.image && (
+				<Box sx={{ position: 'relative', display: showPhoto ? 'block' : 'none' }}>
+					<Box
+						component='img'
+						alt=''
+						src={venue.image}
+						loading='lazy'
+						onLoad={(e) => setShowPhoto(e.currentTarget.naturalWidth > PLACEHOLDER_MAX_WIDTH)}
+						sx={{ width: '100%', height: 150, objectFit: 'cover', display: 'block' }}
+					/>
+					<Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,.75), transparent 60%)', display: 'flex', alignItems: 'flex-end', p: 1.5 }}>
+						<Typography sx={{ color: '#fff', fontWeight: 700 }}>{venue.name}</Typography>
+					</Box>
+				</Box>
+			)}
+			<TableContainer>
+				<Table size='small'>
 					<TableBody>
-						{displayTable(clubDetails)}
+						{details.map(([label, value]) => (
+							<TableRow key={label} sx={{ '&:last-of-type td': { borderBottom: 'none' } }}>
+								<TableCell sx={{ pl: 2, py: 1.25, width: 96, verticalAlign: 'top' }}>
+									<Typography variant='body2' sx={{ color: theme.palette.text.secondary }}>{label}</Typography>
+								</TableCell>
+								<TableCell sx={{ pr: 2, py: 1.25 }}>
+									<Typography variant='body2' sx={{ fontWeight: 600 }}>{value}</Typography>
+								</TableCell>
+							</TableRow>
+						))}
 					</TableBody>
 				</Table>
 			</TableContainer>

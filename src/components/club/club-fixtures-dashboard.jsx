@@ -6,7 +6,7 @@ import Title from '../util/title-util';
 
 const ClubFixturesDashboard = ({fixtures, name, logo}) => {
 	const theme = useTheme()
-	const fixturesSortedByDate = fixtures.sort((a, b) => new Date(a.fixture.date) - new Date(b.fixture.date));
+	const fixturesSortedByDate = [...fixtures].sort((a, b) => new Date(a.fixture.date) - new Date(b.fixture.date));
 	const monthsOfFixtures = new Set();
 	let fixturesByDate = [];
 
