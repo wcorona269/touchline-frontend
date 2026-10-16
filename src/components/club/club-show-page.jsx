@@ -10,6 +10,7 @@ import ClubStatsDashboard from './club-stats-dashboard';
 import ClubHomeDashboard from './home/club-home-dashboard';
 import { Grid, Paper } from '@mui/material';
 import Title from '../util/title-util';
+import { currentSeason } from '../util/season-select/seasons';
 
 const ClubShowPage = () => {
 	const { id } = useParams();
@@ -23,10 +24,8 @@ const ClubShowPage = () => {
 	const news = useSelector(state => state.club.news);
 
 	useEffect(() => {
-		let season = '2023/24'
-		let formattedSeason = season.split('/')[0]
 		if (!isLoading) {
-			dispatch(fetchClub(id, formattedSeason));
+			dispatch(fetchClub(id, currentSeason()));
 		}
 		window.scrollTo(0, 0)
 	}, [id]);
