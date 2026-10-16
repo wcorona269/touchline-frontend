@@ -24,7 +24,6 @@ const leaguesReducer = (state = initialState, action) => {
 				...nextState,
 				isLoading: false,
 				error: null,
-				index: action.payload['all_leagues'],
 				top_leagues: action.payload['top_leagues']
 			}
 		case FETCH_LEAGUE_SUCCESS:
