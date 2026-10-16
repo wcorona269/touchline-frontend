@@ -61,7 +61,7 @@ function App() {
           </Suspense>
         </Container>
       </Box>
-      <Footer lightMode={lightMode} />
+      <Footer />
     </ThemeProvider>
   )
 }
