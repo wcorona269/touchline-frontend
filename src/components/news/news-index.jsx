@@ -1,4 +1,5 @@
  import { Box, Button, CircularProgress, List, Paper, Typography } from '@mui/material'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import React, { useEffect, useState } from 'react'
 import Title from '../util/title-util'
 import Article from './article'
@@ -22,10 +23,10 @@ import { useSelector } from 'react-redux'
 		 let max = Math.min(articles.length, articleCount)
 
 		 for (let i = 0; i < max; i++) {
-			 result.push(<Article article={articles[i]} idx={i} />);
+			 result.push(<Article key={articles[i].link || i} article={articles[i]} />);
 		 }
 		 return (
-			 <List sx={{ width: '100%' }}>
+			 <List disablePadding sx={{ width: '100%' }}>
 				 {result}
 			 </List>
 		 )
@@ -40,25 +41,25 @@ import { useSelector } from 'react-redux'
 	 }
 
 	 return (
-		 <Paper elevation={1} sx={{ display: 'flex', flexDirection: 'column', minHeight: '40rem' }}>
+		 <Paper sx={{ display: 'flex', flexDirection: 'column' }}>
 			 <Title variant={variant ? variant : 'h5'} content={title} img={logo} />
-			 <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', width: '100%', minHeight: '40rem' }}>
-				 {isLoading ?
-					 <CircularProgress color='primary' sx={{ marginTop: '3rem', margin: 'auto' }} /> :
-					 displayNews(news)
-				 }
-				 {isLoading || !showButton ? <></> :
-					 !isLoadingMore ?
-						 <Button onClick={handleClick} variant="outlined" sx={{ height: '3rem', width: '100%' }}>
-							 <Typography variant='subtitle1'>
-								 See More
-							 </Typography>
-						 </Button> :
-						 <Button variant="outlined" sx={{ height: '3rem', width: '100%' }} >
-							 <CircularProgress size='2rem' />
-						 </Button>
-				 }
-			 </Box>
+			 {isLoading ?
+				 <CircularProgress color='primary' sx={{ my: 6, mx: 'auto' }} /> :
+				 !news?.length ?
+					 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, py: 6, px: 3, textAlign: 'center', color: 'text.secondary' }}>
+						 <NewspaperIcon sx={{ fontSize: 40, opacity: 0.5 }} />
+						 <Typography sx={{ fontWeight: 600, color: 'text.primary' }}>No stories right now</Typography>
+						 <Typography variant='body2'>Check back soon for the latest headlines.</Typography>
+					 </Box> :
+					 <>
+						 {displayNews(news)}
+						 {showButton && (
+							 <Button onClick={handleClick} disabled={isLoadingMore} sx={{ borderRadius: 0, py: 1.5 }}>
+								 {isLoadingMore ? <CircularProgress size='1.25rem' /> : 'Load more stories'}
+							 </Button>
+						 )}
+					 </>
+			 }
 			 <ScrollToTopOnLoad />
 		 </Paper>
 	 )

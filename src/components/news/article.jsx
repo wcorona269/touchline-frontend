@@ -1,47 +1,58 @@
-import { useTheme } from '@mui/material';
-import React from 'react';
-import { ListItem, ListItemButton, Grid, Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, ListItem, ListItemButton, Typography, useTheme } from '@mui/material';
 
-const Article = ({article, idx}) => {
-	const theme = useTheme()
-	
+const Article = ({ article }) => {
+	const theme = useTheme();
+	const [showImage, setShowImage] = useState(!!article.img);
+
 	const displayTitle = (title) => {
 		let error_words = title.split('More')?.[1]
 		return !!error_words ? error_words : title
 	}
 
 	return (
-		<ListItem divider disablePadding key={idx}>
+		<ListItem divider disablePadding>
 			<ListItemButton
-				sx={{height: 125}}
-				component="a"  // Set the component prop to 'a' to make it act like an anchor tag
-				href={`https://${article.link}`} // URL for when using 'search' in backend
-				// href={`${article.link}`} // URL for using 'search' in backend
-				target="_blank" // Open the link in a new tab
-				rel="noopener noreferrer" // Recommended for security to add rel attribute
+				component='a'
+				href={`https://${article.link}`}
+				target='_blank'
+				rel='noopener noreferrer'
+				sx={{ borderRadius: 0, px: 2, py: 1.75, gap: 2, alignItems: 'flex-start' }}
 			>
-				<Grid container>
-					<Grid item xs={12}>
-						<Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
-							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
-								{article.media}
-							</Typography>
-							<Typography variant='subtitle1' className='home-article-title'>
-								{displayTitle(article.title)}
-							</Typography>
-							<Typography variant='caption' sx={{ color: theme.palette.text.disabled }}>
-								{article.date}
-							</Typography>
-						</Box>
-					</Grid>
-					{/* <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<img alt='' src={article.img} loading='lazy' style={{ width: '60%', margin: 'auto' }} />
-					</Grid> */}
-				</Grid>
+				<Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.75, minWidth: 0, flex: 1 }}>
+					<Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: theme.palette.text.secondary }}>
+						<Typography variant='caption' sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
+							{article.media}
+						</Typography>
+						{article.date && <Typography variant='caption'>· {article.date}</Typography>}
+					</Box>
+					<Typography
+						sx={{
+							fontWeight: 600,
+							fontSize: '1rem',
+							lineHeight: 1.35,
+							display: '-webkit-box',
+							WebkitLineClamp: 2,
+							WebkitBoxOrient: 'vertical',
+							overflow: 'hidden',
+						}}
+					>
+						{displayTitle(article.title)}
+					</Typography>
+				</Box>
+				{showImage && (
+					<Box
+						component='img'
+						src={article.img}
+						alt=''
+						loading='lazy'
+						onError={() => setShowImage(false)}
+						sx={{ width: 96, height: 72, objectFit: 'cover', borderRadius: '10px', flexShrink: 0 }}
+					/>
+				)}
 			</ListItemButton>
 		</ListItem>
 	)
 }
-
 
 export default Article;

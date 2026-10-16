@@ -25,8 +25,9 @@ const TopStories = () => {
 			const story = top_stories?.[i] ?? undefined
 			const story_list_item = [];
 			if (story === undefined) {
+				if (!isLoading) break;
 				story_list_item.push(
-					<Skeleton height={75} width={"100%"}/>
+					<Skeleton key='skeleton' height={75} width={"100%"}/>
 				)
 			} else {
 				let title = story?.title;
@@ -40,10 +41,10 @@ const TopStories = () => {
 				}
 				story_list_item.push(
 					<Box sx={{display: 'flex', flexDirection: 'column', gap: 1, justifyContent: 'center'}}>
-						<Typography underline='hover' sx={{ fontFamily: theme.typography.bold, fontSize: 13, lineHeight: '1.2', color: theme.palette.primary.main }}>
+						<Typography sx={{ fontWeight: 600, fontSize: 13.5, lineHeight: 1.35, color: theme.palette.text.primary }}>
 							{title}
 						</Typography>
-						<Typography sx={{color: theme.palette.text.secondary, fontSize: 10}} variant='caption'>
+						<Typography sx={{ color: theme.palette.primary.main, fontSize: 11, fontWeight: 700 }} variant='caption'>
 							{story.media}
 						</Typography>
 					</Box>
@@ -68,6 +69,8 @@ const TopStories = () => {
 		}
 		return result;
 	}
+
+	if (!isLoading && !top_stories.length) return null;
 
 	return (
 		<Paper>
