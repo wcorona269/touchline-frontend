@@ -19,11 +19,23 @@ const NavBar = ({ lightMode, setLightMode }) => {
 	if (currentUser === null) return null;
 	return (
 		<AppBar  >
-			<Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
-				<Typography variant='h4' sx={{color: lightMode ? theme.palette.text.primary : theme.palette.primary.main, fontSize: { xs: '1.5rem', sm: '2.125rem' }, flexShrink: 0 }} onClick={() => navigate('/home')} >
-					touchline
+			<Container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 1, height: 64 }}>
+				<Typography
+					component='div'
+					onClick={() => navigate('/home')}
+					sx={{
+						cursor: 'pointer',
+						flexShrink: 0,
+						fontWeight: 800,
+						letterSpacing: '-0.045em',
+						fontSize: { xs: '1.5rem', sm: '1.75rem' },
+						color: theme.palette.text.primary,
+						userSelect: 'none',
+					}}
+				>
+					touchline<Box component='span' sx={{ color: theme.palette.primary.main }}>.</Box>
 				</Typography>
-				<Box display={'flex'} flexDirection='row' sx={{ minWidth: 0 }}>
+				<Box display={'flex'} flexDirection='row' alignItems='center' gap={0.5} sx={{ minWidth: 0 }}>
 					<AccountMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
 					<AboutMenu lightMode={lightMode} setLightMode={setLightMode} handleClick={handleClick} />
 				</Box>

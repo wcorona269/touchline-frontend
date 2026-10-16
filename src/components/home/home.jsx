@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import {  Box, Container, Grid, Paper, SpeedDial, Stack } from '@mui/material';
-import HomeMenu from './home-menu';
+import { Container, Grid, Paper, Stack } from '@mui/material';
+import HomeMenu, { MobileTabBar } from './home-menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNotifications } from '../../actions/notification_actions';
 import { fetchFavorites } from '../../actions/favorite_actions';
@@ -69,24 +68,27 @@ const Home = () => {
 	}
 
 	return (
-		<Container className='home-container' sx={{paddingBottom: '5rem'}}>
+		<Container className='home-container' disableGutters sx={{ paddingBottom: { xs: '7rem', md: '5rem' } }}>
 			<Grid container alignItems='flex-start' spacing={2}>
-				<Grid item xs={12} md={3} sx={{position: {md: 'sticky'}, top: '2rem'}}>
+				<Grid item xs={12} md={3} sx={{ position: { md: 'sticky' }, top: '5.5rem', order: { xs: 1, md: 0 } }}>
 					<Stack spacing={2}>
-						<Box>
-							<HomeMenu 
-								unreadCount={unreadCount}
-								selectedTab={selectedTab}
-								handleTabSelect={handleTabSelect}
-							/>
-						</Box>
-						<Paper elevation={1}>
+						<HomeMenu
+							unreadCount={unreadCount}
+							selectedTab={selectedTab}
+							handleTabSelect={handleTabSelect}
+						/>
+						<Paper>
 							<UserFavorites/>
 						</Paper>
 					</Stack>
 				</Grid>
 				<Outlet/>
 			</Grid>
+			<MobileTabBar
+				unreadCount={unreadCount}
+				selectedTab={selectedTab}
+				handleTabSelect={handleTabSelect}
+			/>
 		</Container>
 	)
 }

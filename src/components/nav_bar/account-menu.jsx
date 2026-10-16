@@ -40,12 +40,12 @@ const AccountMenu = ({ lightMode, setLightMode }) => {
 	return (
 		<>
 			<Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'right', minWidth: 0 }}>
-				<Typography noWrap sx={{ maxWidth: { xs: 70, sm: 150 }, overflow: 'hidden', textOverflow: 'ellipsis' }}>{username}</Typography>
+				<Typography noWrap sx={{ display: { xs: 'none', sm: 'block' }, maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '0.9rem', fontWeight: 600, color: 'text.secondary' }}>{username}</Typography>
 				<Tooltip title="Account settings">
 					<IconButton
 						onClick={handleClick}
 						size="small"
-						sx={{ ml: 2 }}
+						sx={{ ml: 1, borderRadius: '50%' }}
 						aria-controls={open ? 'account-menu' : undefined}
 						aria-haspopup="true"
 						aria-expanded={open ? 'true' : undefined}
