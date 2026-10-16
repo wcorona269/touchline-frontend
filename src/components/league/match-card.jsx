@@ -27,7 +27,7 @@ const MatchCard = ({fixture, key, league}) => {
 		let result = [];
 		let teams = fixture.teams;
 
-		for (let team of Object.keys(teams)) {
+		for (let team of ['home', 'away']) {
 			const team_name = teams[team].name;
 			const team_logo = teams[team].logo;
 			const winner = teams[team].winner;
@@ -39,7 +39,7 @@ const MatchCard = ({fixture, key, league}) => {
 				num_goals = '-'
 			}
 
-			result.unshift(
+			result.push(
 				<Grid container className={winner === true ? 'winning team' : ''}>
 					<Grid item xs={10} align='left' sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
 						<img alt='' src={team_logo} loading='lazy' style={{height: '2rem', width: '2rem', marginRight: '.25rem'}} />

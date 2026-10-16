@@ -31,14 +31,12 @@ const LeagueShowPage = () => {
 	const table = leagues['standings'];
 	const top_scorers = leagues['top_scorers'];
 	const top_assists = leagues['top_assists']; 
-	const fixtures = leagues['fixtures'];
+	// Sort a copy: sorting the array from the store in place mutates Redux state.
+	const fixtures = leagues['fixtures'] && [...leagues['fixtures']].sort((a, b) => (
+		new Date(a?.fixture?.date ?? 0) - new Date(b?.fixture?.date ?? 0)
+	));
 	const news = leagues['news'];
 
-	fixtures?.sort((a, b) => {
-		const dateA = new Date(a?.fixture?.date ?? 0);
-		const dateB = new Date(b?.fixture?.date ?? 0);
-		return dateA - dateB;
-	});
 	const uniqueDates = [...new Set(fixtures?.map(fixture => fixture.fixture.date.split('T')[0]))];
 
 	useEffect(() => {

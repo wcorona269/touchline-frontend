@@ -15,13 +15,13 @@ const LiveFixturesDisplay = ({ matches }) => {
 	const displayMatch = (fixture) => {
 		let result = [];
 		let teams = fixture.teams;
-		for (let team of Object.keys(teams)) {
+		for (let team of ['home', 'away']) {
 			const team_name = teams[team].name;
 			const team_logo = teams[team].logo;
 			const team_id = teams[team].id;
 			const winner = teams[team].winner;
 			const num_goals = fixture.goals[team] || 0;
-			result.unshift(
+			result.push(
 				<Grid container className={winner === true ? 'winning team' : ''} sx={{marginTop: '8px', marginBottom: '8px'}} key={team_id}>
 					<Grid item xs={2}>
 						<img alt='' src={team_logo} loading='lazy' style={{display: 'flex', alignItems: 'center', justifyContent: 'left', height: '1.25rem', width: '1.25rem'}}/>
