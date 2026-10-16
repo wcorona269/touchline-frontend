@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Box, ListItem, ListItemButton, Typography, useTheme } from '@mui/material';
+import moment from 'moment';
+
+// Older scraped articles stored links without a scheme; RSS articles have full URLs.
+export const articleUrl = (link = '') => (/^https?:\/\//.test(link) ? link : `https://${link}`);
 
 const Article = ({ article }) => {
 	const theme = useTheme();
@@ -14,7 +18,7 @@ const Article = ({ article }) => {
 		<ListItem divider disablePadding>
 			<ListItemButton
 				component='a'
-				href={`https://${article.link}`}
+				href={articleUrl(article.link)}
 				target='_blank'
 				rel='noopener noreferrer'
 				sx={{ borderRadius: 0, px: 2, py: 1.75, gap: 2, alignItems: 'flex-start' }}
@@ -24,7 +28,9 @@ const Article = ({ article }) => {
 						<Typography variant='caption' sx={{ fontWeight: 700, color: theme.palette.primary.main }}>
 							{article.media}
 						</Typography>
-						{article.date && <Typography variant='caption'>· {article.date}</Typography>}
+						{(article.published || article.date) && (
+							<Typography variant='caption'>· {article.published ? moment(article.published).fromNow() : article.date}</Typography>
+						)}
 					</Box>
 					<Typography
 						sx={{

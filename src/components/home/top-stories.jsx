@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Title from '../util/title-util';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTopStories } from '../../actions/news_actions';
+import { articleUrl } from '../news/article';
 
 const TopStories = () => {
 	const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const TopStories = () => {
 						<ListItemButton
 							sx={{ m: 0, maxHeight: 75 }}
 							component='a'
-							href={`https://${story?.link}`}
+							href={articleUrl(story?.link)}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
