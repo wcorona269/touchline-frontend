@@ -1,6 +1,6 @@
 import React from 'react'
 import NoDataMessage from '../../util/no-data/no-data-message';
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableRow, useTheme } from '@mui/material';
+import { Box, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableRow, useTheme } from '@mui/material';
 import Title from '../../util/title-util';
 
 const Lineups = ({ lineups, header }) => {
@@ -16,32 +16,32 @@ const Lineups = ({ lineups, header }) => {
 				<Table size='small' aria-label='a dense table'>
 					<TableBody>
 						<TableRow>
-							<TableCell sx={{ fontFamily: theme.typography.bold, backgroundColor: theme.palette.action.hover, p: 1 }} >
+							<TableCell sx={{ px: 2, py: 1, fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: theme.palette.text.secondary, backgroundColor: theme.palette.action.hover }} >
 								Coach
 							</TableCell>
 						</TableRow>
 						<TableRow>
-							<TableCell sx={{p: 1}}>
+							<TableCell sx={{ px: 2, py: 1 }}>
 								{coach}
 							</TableCell>
 						</TableRow>
 						<TableRow>
-							<TableCell sx={{ fontFamily: theme.typography.bold, backgroundColor: theme.palette.action.hover, p: 1 }} >   
+							<TableCell sx={{ px: 2, py: 1, fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: theme.palette.text.secondary, backgroundColor: theme.palette.action.hover }} >   
 								Starting XI
 							</TableCell>
 						</TableRow>
 						{eleven.map((player, idx) => (
-							<TableRow key={idx}><TableCell sx={{p: 1}} >{player.player.name}</TableCell></TableRow>
+							<TableRow key={idx}><TableCell sx={{ px: 2, py: 1 }} ><Box component='span' sx={{ display: 'inline-block', width: 26, color: theme.palette.text.disabled, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>{player.player.number}</Box>{player.player.name}</TableCell></TableRow>
 						))}
 						<TableRow>
-							<TableCell sx={{ p: 1, fontFamily: theme.typography.bold, backgroundColor: theme.palette.action.hover }} >
+							<TableCell sx={{ px: 2, py: 1, fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: theme.palette.text.secondary, backgroundColor: theme.palette.action.hover }} >
 								Bench
 							</TableCell>
 						</TableRow>
 						{subs.map((sub, idx) => (
 							<TableRow key={idx} >
-								<TableCell sx={{ p: 1 }}>
-									{sub.player.name}
+								<TableCell sx={{ px: 2, py: 1 }}>
+									<Box component='span' sx={{ display: 'inline-block', width: 26, color: theme.palette.text.disabled, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>{sub.player.number}</Box>{sub.player.name}
 								</TableCell>
 							</TableRow>
 						))}
@@ -52,7 +52,7 @@ const Lineups = ({ lineups, header }) => {
 	})
 
 	return (
-		<Paper elevation={1} >
+		<Paper >
 			<Title variant='h6' content='Lineups' />
 			{
 				!lineups.length ? <NoDataMessage/> :

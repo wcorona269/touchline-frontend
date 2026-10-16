@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 import { fetchMatch } from '../../actions/api_actions';
 import MatchShowPageHeader from './match-show-page-header';
 import LoadingMessage from '../util/loading/loading-screen';
-import Title from '../util/title-util';
 import NoDataMessage from '../util/no-data/no-data-message';
-import { Box, Grid, Paper, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import Lineups from './match-info/lineups';
 import MatchStats from './match-info/match-stats';
 import EventsTimeline from './match-info/events-timeline'
@@ -31,14 +30,14 @@ const MatchShowPage = () => {
 	const awayLogo = match[0]?.teams?.away?.logo;
 
 	const header = (
-		<Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', p: 1 }}>
-			<Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }} >
-				<img alt='' src={homeLogo} loading='lazy' style={{ width: '2rem', height: '2rem', marginRight: '.25rem' }} />
+		<Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', px: 2, py: 1.5 }}>
+			<Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700 }} >
+				<img alt='' src={homeLogo} loading='lazy' style={{ width: 22, height: 22, objectFit: 'contain' }} />
 				{homeTeam}
 			</Typography>
-			<Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }} >
+			<Typography variant='body2' sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700 }} >
 				{awayTeam}
-				<img alt='' src={awayLogo} loading='lazy' style={{ width: '2rem', height: '2rem', marginLeft: '.25rem' }} />
+				<img alt='' src={awayLogo} loading='lazy' style={{ width: 22, height: 22, objectFit: 'contain' }} />
 			</Typography>
 		</Box>
 	)
@@ -47,10 +46,7 @@ const MatchShowPage = () => {
 		<>
 			<Grid item xs={12} md={6}>
 				<Box>
-					<Paper elevation={1}>
-						<Title variant='h6' content='Match Summary' back={true} />
-					</Paper>
-					<Stack spacing={2} sx={{marginTop: 1}}>
+					<Stack spacing={2}>
 						<MatchShowPageHeader match={match[0]}/>
 						<MatchStats match={match[0]} header={header} />
 						<EventsTimeline match={match[0]} header={header} />

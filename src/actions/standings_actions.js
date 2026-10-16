@@ -6,10 +6,10 @@ export const FETCH_STANDINGS_SUCCESS = 'FETCH_STANDINGS_SUCCESS';
 export const FETCH_STANDINGS_FAILURE = 'FETCH_STANDINGS_FAILURE';
 
 // Action creators
-export const fetchStandings = (leagueId) => {
+export const fetchStandings = (leagueId, season) => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_STANDINGS_REQUEST, leagueId: leagueId });
-		return axiosInstance.get(`/standings/${leagueId}`)
+		return axiosInstance.get(season ? `/standings/${leagueId}/${season}` : `/standings/${leagueId}`)
 			.then((response) => {
 				dispatch({ type: FETCH_STANDINGS_SUCCESS, payload: response.data });
 			})

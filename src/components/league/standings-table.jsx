@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme } from '@mui/material';
 
 // The API describes qualification/relegation spots in free text, e.g. "Promotion - Champions League (League phase)".
 const ZONES = [
@@ -42,7 +42,7 @@ const FormPills = ({ form }) => (
 );
 
 // `compact` shows just club / played / goal difference / points, for sidebars and dashboards.
-const StandingsTable = ({ rows, compact = false, limit }) => {
+const StandingsTable = ({ rows, compact = false, limit, highlight }) => {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const visibleRows = limit ? rows.slice(0, limit) : rows;
@@ -97,6 +97,7 @@ const StandingsTable = ({ rows, compact = false, limit }) => {
 					<TableBody>
 						{visibleRows.map((row) => {
 							const color = zoneColor(row.description);
+							const highlighted = highlight?.(row);
 							return (
 								<TableRow
 									key={row.team.id}
@@ -104,6 +105,7 @@ const StandingsTable = ({ rows, compact = false, limit }) => {
 									onClick={() => navigate(`/club/${row.team.id}`)}
 									sx={{
 										cursor: 'pointer',
+										...(highlighted && { backgroundColor: alpha(theme.palette.primary.main, 0.1) }),
 										'&:not(:last-of-type) td': { borderBottom: `1px solid ${theme.palette.divider}` },
 									}}
 								>

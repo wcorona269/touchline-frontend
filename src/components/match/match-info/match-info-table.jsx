@@ -8,7 +8,6 @@ const MatchInfoTable = ({ match }) => {
 	const date = match?.fixture?.date;
 	const status = match?.fixture?.status?.long;
 	const referee = match?.fixture?.referee;
-	const time_zone = match?.fixture?.timezone;
 	const venue = match?.fixture?.venue?.name;
 	const country = match?.league?.country;
 	const round = match?.league?.round;
@@ -20,7 +19,6 @@ const MatchInfoTable = ({ match }) => {
 		'Round': round,
 		'Referee': referee,
 		'Status': status,
-		'Timezone': time_zone,
 		'Venue': venue
 	}
 
@@ -29,14 +27,14 @@ const MatchInfoTable = ({ match }) => {
 
 		for (let key in matchInfo) {
 			result.push(
-				<TableRow>
-					<TableCell component='th' sx={{padding: 1}}>
-						<Typography variant='body2' sx={{fontFamily: theme.typography.bold}}>
+				<TableRow key={key} sx={{ '&:last-of-type td, &:last-of-type th': { borderBottom: 'none' } }}>
+					<TableCell component='th' sx={{ pl: 2, py: 1.25, width: 96, verticalAlign: 'top' }}>
+						<Typography variant='body2' sx={{ color: theme.palette.text.secondary }}>
 							{key}
 						</Typography>
 					</TableCell>
-					<TableCell sx={{padding: 0, color: theme.palette.text.secondary }}>
-						<Typography variant='body2'>
+					<TableCell sx={{ pr: 2, py: 1.25 }}>
+						<Typography variant='body2' sx={{ fontWeight: 600 }}>
 							{matchInfo[key]}
 						</Typography>
 					</TableCell>
@@ -48,8 +46,8 @@ const MatchInfoTable = ({ match }) => {
 	}
 
 	return (
-		<Paper elevation={1}>
-			<Title variant='h5' content='Match Info' />
+		<Paper>
+			<Title variant='h6' content='Match Info' />
 			<TableContainer>
 				<Table size="small" aria-label="a dense table">
 					<TableBody>

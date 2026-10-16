@@ -2,7 +2,7 @@ import React from 'react'
 import YellowCard from '../../../images/yellow.png';
 import RedCard from '../../../images/red.png';
 import NoDataMessage from '../../util/no-data/no-data-message';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography, useTheme } from '@mui/material';
+import { alpha, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography, useTheme } from '@mui/material';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
@@ -51,9 +51,9 @@ const EventsTimeline = ({match, header }) => {
 		}
 		
 		return message === undefined ? '' : (
-			<TableRow sx={{ }} >
-				<TableCell sx={{ p: '2px' }}>
-					<Typography variant='body1' sx={{ color: theme.palette.text.disabled, fontFamily: theme.typography.bold, textAlign: 'center' }}>
+			<TableRow>
+				<TableCell sx={{ py: 1, borderBottom: 'none', backgroundColor: theme.palette.action.hover }}>
+					<Typography variant='caption' component='div' sx={{ color: theme.palette.text.secondary, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center' }}>
 						{message}
 					</Typography>
 				</TableCell>
@@ -62,7 +62,7 @@ const EventsTimeline = ({match, header }) => {
 	}
 
 	return (
-		<Paper elevation={1}>
+		<Paper>
 			<Title variant='h6' content='Match Timeline'/>
 			{
 				!events.length ? <NoDataMessage/> :
@@ -77,20 +77,21 @@ const EventsTimeline = ({match, header }) => {
 								const extraTime = event.time.extra;
 								const player = event.player.name || 'N/A';
 								const assist = event.assist.name || '';
+								const isGoal = event.type === 'Goal' && !event.detail.includes('Missed');
 
 								return (
 									<>
 										{determineNewPeriods(elapsed, extraTime)}
-										<TableRow key={idx}>
-											<TableCell sx={{ px: 1, display: 'flex', flexDirection: isHome ? 'row' : 'row-reverse', alignItems: 'flex-end', gap: 1}}>
-												<Typography variant='body1' sx={{fontFamily: theme.typography.bold }}>
-													{extraTime === null ? `${elapsed}'` : `${elapsed} + ${extraTime}`}
+										<TableRow key={idx} sx={{ backgroundColor: isGoal ? alpha(theme.palette.primary.main, 0.07) : 'transparent' }}>
+											<TableCell sx={{ px: 2, py: 1.25, display: 'flex', flexDirection: isHome ? 'row' : 'row-reverse', alignItems: 'center', gap: 1.25, '& svg': { fontSize: 20 } }}>
+												<Typography variant='body2' sx={{ fontWeight: 700, color: theme.palette.text.secondary, minWidth: 40, textAlign: isHome ? 'left' : 'right', fontVariantNumeric: 'tabular-nums' }}>
+													{extraTime === null ? `${elapsed}'` : `${elapsed}+${extraTime}'`}
 												</Typography>
 												{determineEventImage(event)}
-												<Typography variant='body1' sx={{  }} >
+												<Typography variant='body1' sx={{ fontWeight: isGoal ? 700 : 500 }} >
 													{player}
 												</Typography>
-												<Typography variant='body1' sx={{ fontFamily: theme.typography.light, color: theme.palette.text.secondary}}>
+												<Typography variant='body2' sx={{ color: theme.palette.text.secondary }}>
 													{assist}
 												</Typography>
 											</TableCell>
