@@ -34,14 +34,14 @@ const LeagueHomeStats = ({top_scorers}) => {
 					<TableCell component="th" scope="row">
 						<Typography variant='body2' id='team-name'>
 							<Link underline='hover' onClick={() => navigate(`/player/${id}`)} 
-								sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', color: theme.palette.secondary.main, fontFamily: theme.typography.bold }}
+								sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'left', color: theme.palette.text.primary, fontWeight: 600 }}
 							>
 								<Avatar src={photo} sx={{ height: '1.5rem', width: '1.5rem', marginRight: '.25rem' }} />
 								{name}
 							</Link>
 						</Typography>
 					</TableCell>
-					<TableCell align="center">{goals}</TableCell>
+					<TableCell align="center" sx={{ fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}>{goals}</TableCell>
 				</TableRow>
 			)
 		}
