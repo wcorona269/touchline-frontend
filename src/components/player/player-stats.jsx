@@ -1,12 +1,13 @@
 import React from 'react'
 import NoDataMessage from '../util/no-data/no-data-message';
-import { Paper, Table, TableBody, TableCell, TableHead, TableRow, useTheme } from '@mui/material';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material';
 import Title from '../util/title-util';
 import YellowCard from '../../images/yellow.png'
 import RedCard from '../../images/red.png'
 
 const PlayerStats = ({statistics}) => {
 	const theme = useTheme();
+	const headCell = { fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: theme.palette.text.disabled, whiteSpace: 'nowrap' };
 
 	if (!statistics.length) {
 		return <NoDataMessage/>
@@ -28,7 +29,8 @@ const PlayerStats = ({statistics}) => {
 			'red': 0,
 		}
 
-		for (let i of statistics) {
+		const byAppearances = [...statistics].sort((a, b) => (b.games.appearences || 0) - (a.games.appearences || 0));
+		for (let i of byAppearances) {
 			const competition = i.league.name || 0;
 			const apps = i.games.appearences || 0;
 			const goals = i.goals.total || 0;
@@ -51,35 +53,42 @@ const PlayerStats = ({statistics}) => {
 			totals['red'] += red;
 
 			result.push(
-				<TableRow>
-					<TableCell component='th' align='left' sx={{ padding:1 }} id='competition'>{competition}</TableCell>
+				<TableRow key={competition + i.team.id}>
+					<TableCell component='th' align='left' sx={{ pl: 2, fontWeight: 600, whiteSpace: 'nowrap', color: theme.palette.text.primary }} id='competition'>
+						<Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
+							<Box sx={{ width: 22, height: 22, borderRadius: '6px', backgroundColor: '#fff', p: '2px', flexShrink: 0 }}>
+								<img alt='' src={i.league.logo} loading='lazy' style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+							</Box>
+							{competition}
+						</Box>
+					</TableCell>
 					{/* <TableCell sx={{padding: 1}}  align='left' >{team}</TableCell> */}
-					<TableCell sx={{padding: 1}} align='center' >{apps}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{goals}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{assists}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{passes}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{dribbles}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{tackles}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{interceptions}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{yellow}</TableCell>
-					<TableCell sx={{padding: 1}} align='center' >{red}</TableCell>
+					<TableCell align='center' >{apps}</TableCell>
+					<TableCell align='center' >{goals}</TableCell>
+					<TableCell align='center' >{assists}</TableCell>
+					<TableCell align='center' >{passes}</TableCell>
+					<TableCell align='center' >{dribbles}</TableCell>
+					<TableCell align='center' >{tackles}</TableCell>
+					<TableCell align='center' >{interceptions}</TableCell>
+					<TableCell align='center' >{yellow}</TableCell>
+					<TableCell align='center' >{red}</TableCell>
 				</TableRow>
 			)
 		}
 
 		result.push(
-			<TableRow sx={{backgroundColor: theme.palette.primary.main }}>
-				<TableCell sx={{ padding: 1, fontFamily: theme.typography.bold }} id='competition'>Total</TableCell>
+			<TableRow key='totals' sx={{ backgroundColor: theme.palette.action.hover, '& td': { fontWeight: 800, color: theme.palette.text.primary, borderBottom: 'none' } }}>
+				<TableCell sx={{ pl: 2 }} id='competition'>All competitions</TableCell>
 				{/* <TableCell sx={{ padding: 1, fontFamily: theme.typography.bold }} id='team'>-</TableCell> */}
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }}>{totals['apps']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['goals']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['assists']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['passes']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['dribbles']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['tackles']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['interceptions']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['yellow']}</TableCell>
-				<TableCell align='center' sx={{ padding: 1, fontFamily: theme.typography.bold }} >{totals['red']}</TableCell>
+				<TableCell align='center'>{totals['apps']}</TableCell>
+				<TableCell align='center' >{totals['goals']}</TableCell>
+				<TableCell align='center' >{totals['assists']}</TableCell>
+				<TableCell align='center' >{totals['passes']}</TableCell>
+				<TableCell align='center' >{totals['dribbles']}</TableCell>
+				<TableCell align='center' >{totals['tackles']}</TableCell>
+				<TableCell align='center' >{totals['interceptions']}</TableCell>
+				<TableCell align='center' >{totals['yellow']}</TableCell>
+				<TableCell align='center' >{totals['red']}</TableCell>
 			</TableRow>
 		)
 
@@ -88,24 +97,25 @@ const PlayerStats = ({statistics}) => {
 	}
 
 	return (
-		<Paper elevation={1} >
-			<Title variant='h6' content='Player Statistics' />
-			<Table >
-				<TableHead sx={{ backgroundColor: theme.palette.action.hover }}>
+		<Paper>
+			<Title variant='h6' content='Season Statistics' />
+			<TableContainer sx={{ overflowX: 'auto' }}>
+			<Table size='small' sx={{ '& td, & th': { py: 1.25 }, '& td': { fontVariantNumeric: 'tabular-nums', color: theme.palette.text.secondary } }}>
+				<TableHead>
 					<TableRow>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' id='competition'>Competition</TableCell>
+						<TableCell sx={headCell} component='th' id='competition'>Competition</TableCell>
 						{/* <TableCell sx={{ padding: 1, fontFamily: theme.typography.bold }} component='th' id='team'>Team</TableCell> */}
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >App.</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >G</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >A</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >Pas.</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >Drib.</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >Tack.</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >Int.</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >
+						<TableCell sx={headCell} component='th' align='center' >App.</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >G</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >A</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >Pas.</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >Drib.</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >Tack.</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >Int.</TableCell>
+						<TableCell sx={headCell} component='th' align='center' >
 							<img alt='yellow cards' src={YellowCard} style={{ height: '1.25rem', width: '1rem'}}/>
 						</TableCell>
-						<TableCell sx={{ color: theme.palette.text.secondary, padding: 1, fontFamily: theme.typography.bold }} component='th' align='center' >
+						<TableCell sx={headCell} component='th' align='center' >
 							<img alt='red cards' src={RedCard} style={{ height: '1.25rem', width: '1rem'}}/>
 						</TableCell>
 					</TableRow>
@@ -114,6 +124,7 @@ const PlayerStats = ({statistics}) => {
 					{displayStats(statistics)}
 				</TableBody>
 			</Table>
+			</TableContainer>
 		</Paper>
 	)
 }
